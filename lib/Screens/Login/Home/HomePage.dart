@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
+import 'package:food_preorder_app/Screens/Login/LoginScreen.dart';
 import 'package:food_preorder_app/Widgets/HomeScreenCalendarView.dart';
 import 'package:food_preorder_app/Widgets/OrdersWidget.dart';
-import 'package:food_preorder_app/Widgets/SnackBarWidget.dart';
 import 'package:food_preorder_app/Widgets/UserlogButton.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +17,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(title:Image.asset("assets/Icons/IVA_Logo.png",scale: 4,),
+      appBar:AppBar(
+        automaticallyImplyLeading: false,
+        title:Image.asset("assets/Icons/IVA_Logo.png",scale: 4,),
       
       flexibleSpace: Stack(children:[Positioned(
         right: 0,bottom:0,top:0,
@@ -25,11 +27,13 @@ class _HomePageState extends State<HomePage> {
 
       actions: [
         IconButton(onPressed: (){
-          SnackbarHelper.showSnackbar(context,
-          title: "Not implemented!!",
-          message: "Logout function not yet implemented yet ",
-          icon: Icons.dangerous_outlined,
-          color: Colors.red);
+          // SnackbarHelper.showSnackbar(context,
+          // title: "Not implemented!!",
+          // message: "Logout function not yet implemented yet ",
+          // icon: Icons.dangerous_outlined,
+          // color: Colors.red);
+          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Loginscreen()));
         }, icon: Icon(Icons.logout_outlined,color:Kivawhite)),
       ],
 

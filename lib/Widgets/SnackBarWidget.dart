@@ -12,8 +12,8 @@ class SnackbarHelper {
       SnackBar(
         duration: const Duration(seconds: 3),
         behavior: SnackBarBehavior.floating,
-        padding: EdgeInsets.all(0),
-        margin: EdgeInsets.only(left:10, right: 10,bottom: 30),
+        padding: const EdgeInsets.all(0),
+        margin: const EdgeInsets.only(left:10, right: 10,bottom: 30),
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: const Color.fromARGB(255, 131, 131, 131).withOpacity(0.2),
@@ -23,7 +23,7 @@ class SnackbarHelper {
         ),
         backgroundColor: Colors.white,
         content: Padding(
-          padding: EdgeInsets.symmetric(vertical: 18, horizontal: 15),
+          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
