@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_preorder_app/Screens/Login/LoginScreen.dart';
+import 'package:food_preorder_app/bloc/AuthBloc/auth_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,8 +13,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Loginscreen(),
+    return BlocProvider(
+      create: (context) => AuthBloc(),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Loginscreen(),
+      ),
     );
   }
 }

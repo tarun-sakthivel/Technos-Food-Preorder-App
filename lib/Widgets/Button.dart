@@ -1,16 +1,9 @@
-import 'dart:ffi';
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 
 class Button extends StatefulWidget {
-  int height;
-  int width;
+  Size size;
   String text;
   String textStyle;
   Color textColor;
@@ -20,8 +13,7 @@ class Button extends StatefulWidget {
       required this.fontSize,
       required this.textColor,
       required this.textStyle,
-      required this.height,
-      required this.width,
+      required this.size,
       required this.text});
 
   @override
@@ -30,18 +22,17 @@ class Button extends StatefulWidget {
 
 class _ButtonState extends State<Button> {
   String text = "Re";
-  int height = 0;
-  int width = 0;
+  Size size = Size(70, 40);
+
   String textStyle = '';
-  Color textColor = Color(0xFFFFFFFF);
+  Color textColor = const Color(0xFFFFFFFF);
   double fontSize = 16;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     text = widget.text;
-    height = widget.height;
-    width = widget.width;
+    size = widget.size;
     textColor = widget.textColor;
     textStyle = widget.textStyle;
     fontSize = widget.fontSize;
@@ -50,14 +41,17 @@ class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () {},
+        onPressed:
+            () {}, //This is the place for navigating when pressed this button
         style: ElevatedButton.styleFrom(
+            maximumSize: size,
+            minimumSize: size,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),
             backgroundColor: Kivagreen),
         child: Text(
-          "$text",
+          text,
           style: TextStyle(
               color: textColor, fontFamily: textStyle, fontSize: fontSize),
         ));
