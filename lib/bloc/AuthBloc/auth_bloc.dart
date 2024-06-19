@@ -6,8 +6,20 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
-    on<AuthEvent>((event, emit) {
-      // TODO: implement event handler
+
+    
+    on<AuthenticateUser>((event, emit) {
+      
+      emit(AuthLoading());
+
+      //TODO : add the api function call here for authentication
+      //For Developing we have added the time delay for the loading feature
+      Future.delayed(const Duration(seconds:3));
+
+      emit(AuthSuccessfull(successMessage: "You have Logged in Successfully!!"));
+
+
+
     });
   }
 }
