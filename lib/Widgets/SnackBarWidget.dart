@@ -16,10 +16,10 @@ class SnackbarHelper {
         margin: EdgeInsets.only(left:10, right: 10,bottom: 30),
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: Colors.black.withOpacity(0.2),
-            width: 0.9,
+            color: const Color.fromARGB(255, 131, 131, 131).withOpacity(0.2),
+            width: 0.5,
           ),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(14),
         ),
         backgroundColor: Colors.white,
         content: Padding(
@@ -36,11 +36,11 @@ class SnackbarHelper {
                   children: [
                     Text(
                       title,
-                      style: Kmaintext,
+                      style: Kmaintext.copyWith(fontSize: 20),
                     ),
                     Text(
                       message,
-                      style: Ksecondarytext
+                      style: Ksecondarytext.copyWith(fontSize: 15)
                     ),
                   ],
                 ),
