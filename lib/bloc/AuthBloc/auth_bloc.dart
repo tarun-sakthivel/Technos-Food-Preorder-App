@@ -10,16 +10,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     
     on<AuthenticateUser>((event, emit)async {
       
-      emit(AuthLoading());
+      
 
       //TODO : add the api function call here for authentication
       //For Developing we have added the time delay for the loading feature
-      print("delaying");
-      await Future.delayed(const Duration(seconds:3));
-      print("delayed");
+      if (event.userName.isEmpty || event.password.isEmpty){
+        emit(AuthFailed(errorMessage: "Please fill UserName or Password"));
+      }else if ( event.userName.length >15 ){
+        emit(AuthFailed(errorMessage: "UserName should be at less than 6 characters"));
+      }else {
+        emit(AuthLoading());
+        await Future.delayed(const Duration(seconds:2));
+        emit(AuthSuccessfull(successMessage: "You have Logged in Successfully!!"));
+      }
+      
+      
 
-      emit(
-          AuthSuccessfull(successMessage: "You have Logged in Successfully!!"));
+      
     });
   }
 }

@@ -11,7 +11,7 @@ class UserLogButton extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         SnackbarHelper.showSnackbar(context,
-         title: "Not Implemented",
+         
          message: "User log feature not implemented", 
          icon: Icons.close,
          
@@ -19,9 +19,11 @@ class UserLogButton extends StatelessWidget {
       },
       child: Container(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("UserLog",style:Ksecondarytext.copyWith(color:Khypertext)),
-            
+            Text("UserLog",style:Ksecondarytext.copyWith(color:Khypertext,decoration: TextDecoration.underline , decorationColor:Khypertext,decorationThickness: 1.5,)),
+            SizedBox(width: 5,),
             const Icon(Icons.history,color:Khypertext),
           ],
         ),

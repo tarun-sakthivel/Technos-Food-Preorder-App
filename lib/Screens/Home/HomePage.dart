@@ -32,16 +32,24 @@ class _HomePageState extends State<HomePage> {
           // message: "Logout function not yet implemented yet ",
           // icon: Icons.dangerous_outlined,
           // color: Colors.red);
-          Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Loginscreen()));
-        }, icon: Icon(Icons.logout_outlined,color:Kivawhite)),
+          
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Loginscreen()),
+          (route)=> true);
+        }, icon: Icon(Icons.logout,color:Kivawhite)),
+        //create a image button
+        // GestureDetector(
+        //   onTap: (){
+        //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Loginscreen()), (route)=>true);
+        //   },
+        //   child:Image.asset("assets/Icons/Logout_Button.png",scale: 4,),
+        // )
       ],
 
       ),
 
 
       body:Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 8),
+        padding: const EdgeInsets.symmetric(vertical: 19,horizontal: 19),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,15 +57,15 @@ class _HomePageState extends State<HomePage> {
           children: [
 
             Text("Hello Technos",style:Kmaintext),
-            const SizedBox(height:16),
+            const SizedBox(height:32),
             NumberOfOrders(numberOfOrders: "24"),
             const SizedBox(height:24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children:[
-                Text("Orders",style:Ksecondarytext.copyWith(fontWeight:FontWeight.w500)),
-                UserLogButton(),
+                Text("Your orders:",style:Ksecondarytext.copyWith(fontWeight:FontWeight.w500)),
+                const UserLogButton(),
 
               ]
 
