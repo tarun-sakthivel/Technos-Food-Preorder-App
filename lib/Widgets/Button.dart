@@ -3,10 +3,11 @@ import 'package:food_preorder_app/Constants/Color.dart';
 
 class Button extends StatefulWidget {
   Size size;
-  String text;
+  
   String textStyle;
   Color textColor;
   double fontSize;
+  Widget customWidget;
   Function() Navigation;
 
   Button(
@@ -16,7 +17,8 @@ class Button extends StatefulWidget {
       required this.textColor,
       required this.textStyle,
       required this.size,
-      required this.text});
+      
+      required this.customWidget});
 
   @override
   State<Button> createState() => _ButtonState();
@@ -29,11 +31,12 @@ class _ButtonState extends State<Button> {
   Color textColor = const Color(0xFFFFFFFF);
   double fontSize = 16;
   late Function() Navigation;
+  Widget customWidget = Text("Click!");
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    text = widget.text;
+    customWidget = widget.customWidget;
     size = widget.size;
     textColor = widget.textColor;
     textStyle = widget.textStyle;
@@ -53,10 +56,11 @@ class _ButtonState extends State<Button> {
               borderRadius: BorderRadius.circular(14),
             ),
             backgroundColor: Kivagreen),
-        child: Text(
-          text,
-          style: TextStyle(
-              color: textColor, fontFamily: textStyle, fontSize: fontSize),
-        ));
+        // child: Text(
+        //   text,
+        //   style: TextStyle(
+        //       color: textColor, fontFamily: textStyle, fontSize: fontSize),
+        // ));
+        child:customWidget);
   }
 }

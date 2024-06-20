@@ -3,7 +3,7 @@ import 'package:food_preorder_app/Constants/Text.dart';
 
 class SnackbarHelper {
   static void showSnackbar(BuildContext context,
-      {required String title,
+      {
       required String message,
       required IconData icon,
       required Color color}) {
@@ -34,10 +34,7 @@ class SnackbarHelper {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: Kmaintext.copyWith(fontSize: 20),
-                    ),
+                    
                     Text(
                       message,
                       style: Ksecondarytext.copyWith(fontSize: 15)

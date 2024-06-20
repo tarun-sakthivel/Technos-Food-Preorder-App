@@ -5,25 +5,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Screens/Home/HomePage.dart';
-import 'package:food_preorder_app/Screens/Home/HomePage.dart';
+import 'package:food_preorder_app/Widgets/DialogeBox.dart';
+import 'package:food_preorder_app/Widgets/SnackBarWidget.dart';
 import 'package:food_preorder_app/bloc/AuthBloc/auth_bloc.dart';
 import 'package:food_preorder_app/bloc/UserLogBloc/bloc/user_log_bloc.dart';
 
 import '../../Widgets/Button.dart';
 
 class Loginscreen extends StatefulWidget {
-  const Loginscreen({super.key});
+  const Loginscreen({Key? key}) : super(key: key);
 
   @override
-  State<Loginscreen> createState() => _LoginscreenState();
+  _LoginscreenState createState() => _LoginscreenState();
 }
 
 class _LoginscreenState extends State<Loginscreen> {
   TextEditingController Usernametexteditor = TextEditingController();
-  String Username = '';
   TextEditingController PasswordTextController = TextEditingController();
+  String Username = '';
   String Password = '';
   bool _obscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -234,17 +236,23 @@ class _LoginscreenState extends State<Loginscreen> {
                                 padding:
                                     const EdgeInsets.only(bottom: 8, top: 30),
                                 child: Button(
-                                    Navigation: () {
-                                      context.read<AuthBloc>().add(
-                                          AuthenticateUser(
-                                              userName: "$Username",
-                                              password: "$Password"));
-                                    },
-                                    fontSize: 20,
-                                    textColor: Kivawhite,
-                                    textStyle: 'Poppins-Medium',
-                                    size: Size(174, 39),
-                                    text: "Login"),
+                                  Navigation: () {
+                                    context.read<AuthBloc>().add(
+                                        AuthenticateUser(
+                                            userName: "$Username",
+                                            password: "$Password"));
+                                  },
+                                  fontSize: 20,
+                                  textColor: Kivawhite,
+                                  textStyle: 'Poppins-Medium',
+                                  size: Size(174, 39),
+                                  customWidget: Text(
+                                    "Login",
+                                    style: Ksecondarytext.copyWith(
+                                      color: Kivawhite,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ],
                           ),

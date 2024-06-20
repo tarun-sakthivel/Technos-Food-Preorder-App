@@ -25,6 +25,8 @@ class UserLogButton extends StatelessWidget {
       },
       child: Container(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text("UserLog", style: Ksecondarytext.copyWith(color: Khypertext)),
             const Icon(Icons.history, color: Khypertext),
