@@ -26,7 +26,7 @@ class Button extends StatefulWidget {
 
 class _ButtonState extends State<Button> {
   String text = "Re";
-  Size size = Size(70, 40);
+  Size size = const Size(70, 40);
   String textStyle = '';
   Color textColor = const Color(0xFFFFFFFF);
   double fontSize = 16;

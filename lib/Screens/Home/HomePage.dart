@@ -80,15 +80,10 @@ class _HomePageState extends State<HomePage> {
                 
                 DateTime(2024, 6, 25),
                 DateTime(2024, 6, 19),
-                          ],isInteractive: true,),
+                          ],isInteractive: true,),),
               ),
-            ),
-
-           
-          
-          ],
-        ),
-      )
-    );
+            ],
+          ),
+        ));
   }
 }

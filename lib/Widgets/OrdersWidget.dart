@@ -4,10 +4,10 @@ import 'package:food_preorder_app/Constants/Text.dart'; // Assuming Kmaintext an
 class NumberOfOrders extends StatelessWidget {
   final String numberOfOrders;
 
-  NumberOfOrders({
-    Key? key,
+  const NumberOfOrders({
+    super.key,
     required this.numberOfOrders,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

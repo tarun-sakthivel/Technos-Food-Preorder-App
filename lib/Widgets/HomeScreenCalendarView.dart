@@ -5,7 +5,7 @@ class StaticCalendar extends StatefulWidget {
   final List<DateTime> highlightedDates;
   final bool isInteractive;
 
-  StaticCalendar({
+  const StaticCalendar({super.key, 
     required this.highlightedDates,
     this.isInteractive = false,
   });
@@ -42,7 +42,7 @@ class _StaticCalendarState extends State<StaticCalendar> {
       headerVisible: true,
       calendarFormat: CalendarFormat.month,
       availableGestures: widget.isInteractive ? AvailableGestures.all : AvailableGestures.none,
-      calendarStyle: CalendarStyle(
+      calendarStyle: const CalendarStyle(
         outsideDaysVisible: true, // Show outside days for next month
         holidayDecoration: BoxDecoration(
           color: Colors.green,
@@ -53,13 +53,13 @@ class _StaticCalendarState extends State<StaticCalendar> {
       daysOfWeekVisible: true,
       selectedDayPredicate: (day) {
         // Only show selected state for dates that are on or after the current date
-        return day.isAfter(DateTime.now().subtract(Duration(days: 1))) &&
+        return day.isAfter(DateTime.now().subtract(const Duration(days: 1))) &&
                selectedDates.any((d) => isSameDay(d, day)) && day.weekday != DateTime.saturday  &&day.weekday != DateTime.sunday;
       },
       onDaySelected: widget.isInteractive
           ? (selectedDay, focusedDay) {
               // Check if the selected day is not a Saturday or Sunday
-              if (selectedDay.weekday != DateTime.saturday && selectedDay.weekday != DateTime.sunday &&selectedDay.isAfter(DateTime(now.year, now.month, now.day).subtract(Duration(days: 1))) ) {
+              if (selectedDay.weekday != DateTime.saturday && selectedDay.weekday != DateTime.sunday &&selectedDay.isAfter(DateTime(now.year, now.month, now.day).subtract(const Duration(days: 1))) ) {
                 
                   setState(() {
                     if (selectedDates.any((d) => isSameDay(d, selectedDay))) {
@@ -78,14 +78,14 @@ class _StaticCalendarState extends State<StaticCalendar> {
           if (day.weekday == DateTime.saturday || day.weekday == DateTime.sunday || hasWeekendsOrPastDates(day)) {
             // Disable interaction for Saturdays and Sundays
             return Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.transparent,
                 shape: BoxShape.circle,
               ),
               child: Center(
                 child: Text(
                   '${day.day}',
-                  style: TextStyle(color: Colors.grey), // Text style for weekends
+                  style: const TextStyle(color: Colors.grey), // Text style for weekends
                 ),
               ),
             );
@@ -93,14 +93,14 @@ class _StaticCalendarState extends State<StaticCalendar> {
 
           if (selectedDates.any((d) => isSameDay(d, day))) {
             return Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.green,
                 shape: BoxShape.circle,
               ),
               child: Center(
                 child: Text(
                   '${day.day}',
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
             );
