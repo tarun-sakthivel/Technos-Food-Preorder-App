@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
-import 'package:food_preorder_app/Screens/Login/LoginScreen.dart';
+import 'package:food_preorder_app/Widgets/HomeScreenCalendarView.dart';
 import 'package:food_preorder_app/Widgets/OrdersWidget.dart';
 import 'package:food_preorder_app/Widgets/SnackBarWidget.dart';
+import 'package:food_preorder_app/Widgets/UserlogButton.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,12 +33,11 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              Loginscreen())); //Have to make changes after getting the API keys-------------------
-                  // SnackbarHelper.showSnackbar(context, title: "Not implemented!!", message: "Logout function not yet implemented yet ", icon: Icons.dangerous_outlined, color: Colors.red);
+                  SnackbarHelper.showSnackbar(context,
+                      title: "Not implemented!!",
+                      message: "Logout function not yet implemented yet ",
+                      icon: Icons.dangerous_outlined,
+                      color: Colors.red);
                 },
                 icon: const Icon(Icons.logout_outlined, color: Kivawhite)),
           ],
@@ -50,7 +50,34 @@ class _HomePageState extends State<HomePage> {
             children: [
               Text("Hello Technos", style: Kmaintext),
               const SizedBox(height: 16),
-              NumberOfOrders(numberOfOrders: "24"),
+              const NumberOfOrders(numberOfOrders: "24"),
+              const SizedBox(height: 24),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Orders",
+                        style: Ksecondarytext.copyWith(
+                            fontWeight: FontWeight.w500)),
+                    const UserLogButton(),
+                  ]),
+              const SizedBox(height: 16),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.black)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: StaticCalendar(
+                    highlightedDates: [
+                      DateTime(2024, 6, 5),
+                      DateTime(2024, 6, 25),
+                      DateTime(2024, 6, 19),
+                    ],
+                    isInteractive: true,
+                  ),
+                ),
+              ),
             ],
           ),
         ));

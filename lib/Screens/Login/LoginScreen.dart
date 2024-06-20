@@ -1,13 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Screens/Login/Home/HomePage.dart';
-import 'package:food_preorder_app/Widgets/SnackBarWidget.dart';
 import 'package:food_preorder_app/bloc/AuthBloc/auth_bloc.dart';
 
 import '../../Widgets/Button.dart';
@@ -32,7 +29,7 @@ class _LoginscreenState extends State<Loginscreen> {
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthLoading) {
-            AlertDialog(
+            const AlertDialog(
               backgroundColor: Color.fromARGB(104, 250, 101, 91),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -47,7 +44,7 @@ class _LoginscreenState extends State<Loginscreen> {
             );
           } else if (state is AuthSuccessfull) {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
+                context, MaterialPageRoute(builder: (context) => const HomePage()));
           } else if (state is AuthFailed) {}
         },
         child: SizedBox(
@@ -58,12 +55,12 @@ class _LoginscreenState extends State<Loginscreen> {
               Positioned(
                 top: -3,
                 left: 0,
+                height: 165,
+                width: 230,
                 child: Image.asset(
                   "assets/Page_Assets/loginpage_bananna_leaf_1.png",
                   scale: 4,
                 ),
-                height: 165,
-                width: 230,
               ),
               Positioned(
                 right: 0,
@@ -180,7 +177,7 @@ class _LoginscreenState extends State<Loginscreen> {
                                         border: InputBorder
                                             .none, // Remove default border
                                         hintText: 'Type Here....',
-                                        hintStyle: TextStyle(
+                                        hintStyle: const TextStyle(
                                             fontSize: 13, color: Colors.grey),
                                         suffixIcon: IconButton(
                                           //Icon button to add the visibility icon to the password textfield
@@ -217,13 +214,13 @@ class _LoginscreenState extends State<Loginscreen> {
                             child: Button(
                                 Navigation: () {
                                   context.read<AuthBloc>().add(AuthenticateUser(
-                                      userName: "$Username",
-                                      password: "$Password"));
+                                      userName: Username,
+                                      password: Password));
                                 },
                                 fontSize: 20,
                                 textColor: Kivawhite,
                                 textStyle: 'Poppins-Medium',
-                                size: Size(170, 40),
+                                size: const Size(170, 40),
                                 text: "Login"),
                           ),
                         ],

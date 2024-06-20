@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
-import 'package:food_preorder_app/Screens/Login/Home/HomePage.dart';
 
 class Button extends StatefulWidget {
   Size size;
@@ -27,7 +24,7 @@ class Button extends StatefulWidget {
 
 class _ButtonState extends State<Button> {
   String text = "Re";
-  Size size = Size(70, 40);
+  Size size = const Size(70, 40);
   String textStyle = '';
   Color textColor = const Color(0xFFFFFFFF);
   double fontSize = 16;
