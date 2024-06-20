@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
+import 'package:food_preorder_app/Screens/Login/LoginScreen.dart';
 import 'package:food_preorder_app/Widgets/HomeScreenCalendarView.dart';
 import 'package:food_preorder_app/Widgets/OrdersWidget.dart';
-import 'package:food_preorder_app/Widgets/SnackBarWidget.dart';
 import 'package:food_preorder_app/Widgets/UserlogButton.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Image.asset(
             "assets/Icons/IVA_Logo.png",
             scale: 4,
@@ -33,13 +34,16 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(
                 onPressed: () {
-                  SnackbarHelper.showSnackbar(context,
-                      title: "Not implemented!!",
-                      message: "Logout function not yet implemented yet ",
-                      icon: Icons.dangerous_outlined,
-                      color: Colors.red);
+                  // SnackbarHelper.showSnackbar(context,
+                  // title: "Not implemented!!",
+                  // message: "Logout function not yet implemented yet ",
+                  // icon: Icons.dangerous_outlined,
+                  // color: Colors.red);
+                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Loginscreen()));
                 },
-                icon: const Icon(Icons.logout_outlined, color: Kivawhite)),
+                icon: Icon(Icons.logout_outlined, color: Kivawhite)),
           ],
         ),
         body: Padding(
@@ -50,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Text("Hello Technos", style: Kmaintext),
               const SizedBox(height: 16),
-              const NumberOfOrders(numberOfOrders: "24"),
+              NumberOfOrders(numberOfOrders: "24"),
               const SizedBox(height: 24),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                     Text("Orders",
                         style: Ksecondarytext.copyWith(
                             fontWeight: FontWeight.w500)),
-                    const UserLogButton(),
+                    UserLogButton(),
                   ]),
               const SizedBox(height: 16),
               Container(
