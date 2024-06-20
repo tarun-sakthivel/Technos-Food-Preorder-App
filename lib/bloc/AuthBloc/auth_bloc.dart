@@ -18,7 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (event.userName.isEmpty || event.password.isEmpty){
         emit(AuthFailed(errorMessage: "Please fill UserName or Password"));
       }else if ( event.userName.length >15 ){
-        emit(AuthFailed(errorMessage: "UserName should be at less than 6 characters"));
+        emit(AuthFailed(errorMessage: "UserName should be at less than 15 characters"));
       }else {
         emit(AuthLoading());
         await Future.delayed(const Duration(seconds:2));

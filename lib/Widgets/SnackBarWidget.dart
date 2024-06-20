@@ -13,7 +13,7 @@ class SnackbarHelper {
         duration: const Duration(seconds: 3),
         behavior: SnackBarBehavior.floating,
         padding: const EdgeInsets.all(0),
-        margin: const EdgeInsets.only(left:10, right: 10,bottom: 30),
+        margin: const EdgeInsets.only(left:10, right: 10,bottom: 350),
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: const Color.fromARGB(255, 131, 131, 131).withOpacity(0.2),

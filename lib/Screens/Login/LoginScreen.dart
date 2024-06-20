@@ -42,18 +42,50 @@ class _LoginscreenState extends State<Loginscreen> {
             } else if (state is AuthSuccessfull) {
               // Close the loading dialog
               //FocusScope.of(context).unfocus(); // Dismiss keyboard if open
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const HomePage()),
                 (Route) => true,
               );
             } else if (state is AuthFailed) {
-              SnackbarHelper.showSnackbar(
-                context,
-                message: state.errorMessage,
-                icon: Icons.close,
-                color: Colors.red,
-              );
+              // showDialog(
+              //   context: context,
+              //   barrierDismissible: true,
+              //   builder: (BuildContext context) {
+              //     return  Dialog(
+              //   child: Container(
+                
+              //   decoration: BoxDecoration(color: Kivawhite,borderRadius:BorderRadius.circular(10),border: Border.all(width: 2,color: Colors.black.withOpacity(0.5)) ),
+              //     padding: EdgeInsets.all(20),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       children: [
+                      
+                      
+              //         Expanded(child: Text("${state.errorMessage}",style: Ksecondarytext.copyWith(color: Colors.red),textAlign: TextAlign.center,)),
+              //       ],
+              //     ),
+              //   ),
+              //   );
+              //   },
+              // );
+              SnackbarHelper.showSnackbar(context, message: state.errorMessage, icon: Icons.close, color: Colors.red);
+                // AlertDialog(
+                //                 backgroundColor:
+                //                     Color.fromARGB(104, 250, 101, 91),
+                //                 content: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //     crossAxisAlignment: CrossAxisAlignment.center,
+                //     children: [
+                      
+                      
+                //       Expanded(child: Text("${state.errorMessage}",style: Ksecondarytext.copyWith(color: Colors.red),textAlign: TextAlign.center,)),
+                //     ],
+                //   ),
+                //               );
+             
             }
           },
           child: Stack(

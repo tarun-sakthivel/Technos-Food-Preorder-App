@@ -5,6 +5,7 @@ import 'package:food_preorder_app/Screens/Login/LoginScreen.dart';
 import 'package:food_preorder_app/Widgets/HomeScreenCalendarView.dart';
 import 'package:food_preorder_app/Widgets/OrdersWidget.dart';
 import 'package:food_preorder_app/Widgets/UserlogButton.dart';
+import 'package:food_preorder_app/dates.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -71,11 +72,7 @@ class _HomePageState extends State<HomePage> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: StaticCalendar(
-                    highlightedDates: [
-                      DateTime(2024, 6, 5),
-                      DateTime(2024, 6, 25),
-                      DateTime(2024, 6, 19),
-                    ],
+                    highlightedDates:dates,
                     isInteractive: true,
                   ),
                 ),
