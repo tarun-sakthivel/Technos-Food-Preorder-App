@@ -13,9 +13,8 @@ class UserLogButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<UserLogBloc>();
-        //Navigator.push(
-        //  context, MaterialPageRoute(builder: (context) => UserLogPage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => UserLogPage()));
         // SnackbarHelper.showSnackbar(context,
         //  title: "Not Implemented",
         //  message: "User log feature not implemented",

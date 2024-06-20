@@ -20,7 +20,7 @@ class _UserLogPageState extends State<UserLogPage> {
         automaticallyImplyLeading: false,
         title: Text(
           "UserLog History",
-          style: Kmaintext.copyWith(color: Kivagreen),
+          style: Kmaintext.copyWith(color: Kivagreen, fontSize: 20),
         ),
         flexibleSpace: Stack(children: [
           Positioned(
@@ -44,27 +44,30 @@ class _UserLogPageState extends State<UserLogPage> {
               icon: Icon(Icons.logout_outlined, color: Kivawhite)),
         ],
       ),
-      body: BlocListener<UserLogBloc, UserLogState>(
-        listener: (context, state) {
-          if (state is UserLogLoading) {
-            CircularProgressIndicator();
-          } else if (state is UserLogFailed) {
-          } else if (state is UserLogSuccess) {
-            print(state.successmessage);
-          }
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Choose the month and year",
-                style:
-                    Kmaintext.copyWith(fontSize: 15, color: Color(0xFF666666)),
-              )
-            ],
+      body: BlocProvider(
+        create: (context) => UserLogBloc(),
+        child: BlocListener<UserLogBloc, UserLogState>(
+          listener: (context, state) {
+            if (state is UserLogLoading) {
+              CircularProgressIndicator();
+            } else if (state is UserLogFailed) {
+            } else if (state is UserLogSuccess) {
+              print(state.successmessage);
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Choose the month and year",
+                  style: Kmaintext.copyWith(
+                      fontSize: 15, color: Color(0xFF666666)),
+                )
+              ],
+            ),
           ),
         ),
       ),
