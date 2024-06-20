@@ -8,7 +8,6 @@ import 'package:food_preorder_app/Screens/Home/HomePage.dart';
 import 'package:food_preorder_app/Widgets/DialogeBox.dart';
 import 'package:food_preorder_app/Widgets/SnackBarWidget.dart';
 import 'package:food_preorder_app/bloc/AuthBloc/auth_bloc.dart';
-import 'package:food_preorder_app/bloc/UserLogBloc/bloc/user_log_bloc.dart';
 
 import '../../Widgets/Button.dart';
 
