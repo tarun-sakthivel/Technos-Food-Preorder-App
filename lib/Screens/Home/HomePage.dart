@@ -39,31 +39,29 @@ class _HomePageState extends State<HomePage> {
                   // message: "Logout function not yet implemented yet ",
                   // icon: Icons.dangerous_outlined,
                   // color: Colors.red);
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Loginscreen()));
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Loginscreen()), (route)=>true);
                 },
                 icon: Icon(Icons.logout_outlined, color: Kivawhite)),
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 19),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("Hello Technos", style: Kmaintext),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
               NumberOfOrders(numberOfOrders: "24"),
               const SizedBox(height: 24),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text("Orders",
+                    Text("Your orders:",
                         style: Ksecondarytext.copyWith(
                             fontWeight: FontWeight.w500)),
-                    UserLogButton(),
+                    const UserLogButton(),
                   ]),
               const SizedBox(height: 16),
               Container(

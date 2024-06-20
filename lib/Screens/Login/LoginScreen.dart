@@ -8,7 +8,6 @@ import 'package:food_preorder_app/Screens/Home/HomePage.dart';
 import 'package:food_preorder_app/Widgets/DialogeBox.dart';
 import 'package:food_preorder_app/Widgets/SnackBarWidget.dart';
 import 'package:food_preorder_app/bloc/AuthBloc/auth_bloc.dart';
-import 'package:food_preorder_app/bloc/UserLogBloc/bloc/user_log_bloc.dart';
 
 import '../../Widgets/Button.dart';
 
@@ -30,22 +29,32 @@ class _LoginscreenState extends State<Loginscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: BlocProvider(
-        create: (context) => UserLogBloc(),
-        child: BlocListener<AuthBloc, AuthState>(
+      body:BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
             if (state is AuthLoading) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Logging in...'),
-                  duration: Duration(seconds: 3),
-                ),
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext context) {
+                  return CustomDialog(message: "Logging in...");
+                },
               );
             } else if (state is AuthSuccessfull) {
-              Navigator.pop(context);
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => HomePage()));
-            } else if (state is AuthFailed) {}
+              // Close the loading dialog
+              //FocusScope.of(context).unfocus(); // Dismiss keyboard if open
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+                (Route) => true,
+              );
+            } else if (state is AuthFailed) {
+              SnackbarHelper.showSnackbar(
+                context,
+                message: state.errorMessage,
+                icon: Icons.close,
+                color: Colors.red,
+              );
+            }
           },
           child: Stack(
             children: [
@@ -70,13 +79,14 @@ class _LoginscreenState extends State<Loginscreen> {
               Align(
                 alignment: Alignment.center,
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 16.0, top: 120, bottom: 120, right: 16.0),
+                  padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(14),
                       child: BackdropFilter(
                         filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
                         child: Container(
+                          height: 560,
+                          width: 323,
                           decoration: BoxDecoration(
                               border:
                                   Border.all(color: const Color(0xFFC4C4C4)),
@@ -237,15 +247,19 @@ class _LoginscreenState extends State<Loginscreen> {
                                     const EdgeInsets.only(bottom: 8, top: 30),
                                 child: Button(
                                   Navigation: () {
+                                    FocusScope.of(context)
+                                        .unfocus(); // Dismiss keyboard
                                     context.read<AuthBloc>().add(
-                                        AuthenticateUser(
-                                            userName: "$Username",
-                                            password: "$Password"));
+                                          AuthenticateUser(
+                                            userName: Username,
+                                            password: Password,
+                                          ),
+                                        );
                                   },
                                   fontSize: 20,
                                   textColor: Kivawhite,
                                   textStyle: 'Poppins-Medium',
-                                  size: Size(174, 39),
+                                  size: Size(170, 40),
                                   customWidget: Text(
                                     "Login",
                                     style: Ksecondarytext.copyWith(
@@ -263,7 +277,7 @@ class _LoginscreenState extends State<Loginscreen> {
             ],
           ),
         ),
-      ),
-    );
+      );
+  
   }
 }
