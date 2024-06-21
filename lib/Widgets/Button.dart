@@ -31,10 +31,10 @@ class _ButtonState extends State<Button> {
   Color textColor = const Color(0xFFFFFFFF);
   double fontSize = 16;
   late Function() Navigation;
-  Widget customWidget = Text("Click!");
+  Widget customWidget = const Text("Click!");
   @override
   void initState() {
-    // TODO: implement initState
+   
     super.initState();
     customWidget = widget.customWidget;
     size = widget.size;

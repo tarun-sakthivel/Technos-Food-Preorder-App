@@ -3,20 +3,20 @@ import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/dates.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class StaticCalendar extends StatefulWidget {
+class SelectableCalendar extends StatefulWidget {
   final Set<DateTime> highlightedDates;
   final bool isInteractive;
 
-  const StaticCalendar({super.key, 
+  const SelectableCalendar({super.key, 
     required this.highlightedDates,
     this.isInteractive = false,
   });
 
   @override
-  _StaticCalendarState createState() => _StaticCalendarState();
+  _SelectableCalendarState createState() => _SelectableCalendarState();
 }
 
-class _StaticCalendarState extends State<StaticCalendar> {
+class _SelectableCalendarState extends State<SelectableCalendar> {
   //late Set<DateTime> selectedDates;
 
   @override
@@ -30,7 +30,6 @@ class _StaticCalendarState extends State<StaticCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    getFutureDates(dates);
 
     DateTime now = DateTime.now();
     DateTime today = DateTime(now.year,now.month,now.day);
@@ -46,13 +45,11 @@ class _StaticCalendarState extends State<StaticCalendar> {
     }
 
     return Container(
-      
       decoration: BoxDecoration(border: Border.all(width: 1,color:Colors.black),
                                 borderRadius: BorderRadius.circular(14)),
       child: Padding(
         padding: const EdgeInsets.all(2.0),
         child: TableCalendar(
-          
           firstDay: firstDayOfMonth,
           lastDay: lastDayOfMonth,
           focusedDay: now,
@@ -67,7 +64,7 @@ class _StaticCalendarState extends State<StaticCalendar> {
           calendarStyle:  CalendarStyle(
             // tableBorder: TableBorder.all(width:1,borderRadius: BorderRadius.circular(14),color:Colors.black),
             // rowDecoration: BoxDecoration(border: Border.all(width:1)),
-            cellMargin: EdgeInsets.all(0),
+            cellMargin: EdgeInsets.all(2),
             isTodayHighlighted: false,
             outsideDaysVisible: false,
             outsideDecoration: BoxDecoration(borderRadius: BorderRadius.circular(14),border: Border.all(width: 2,color: Colors.black)) // Show outside days for next month
@@ -85,42 +82,44 @@ class _StaticCalendarState extends State<StaticCalendar> {
           //   return selectedDates.any((d) => isSameDay(d, day)) && day.weekday != DateTime.sunday;
           // },
           
-          // onDaySelected: widget.isInteractive
-          //     ? (selectedDay, focusedDay) {
-          //         // Check if the selected day is not a Saturday or Sunday
-          //         if (selectedDay.weekday != DateTime.sunday && selectedDay.isAfter(DateTime(now.year, now.month, now.day)) ) {
+          onDaySelected: widget.isInteractive
+              ? (selectedDay, focusedDay) {
+                  // Check if the selected day is not a Saturday or Sunday
+                  if (selectedDay.weekday != DateTime.sunday && selectedDay.isAfter(DateTime(now.year, now.month, now.day)) ) {
                     
-          //             setState(() {
-          //               if (selectedDates.any((d) => isSameDay(d, selectedDay))) {
-          //                 selectedDates.removeWhere((d) => isSameDay(d, selectedDay));
-          //               } else {
-          //                 selectedDates.add(selectedDay);
-          //               }
-          //             });
-          //             print(selectedDates);
+                      setState(() {
+                        if (dates.any((d) => isSameDay(d, selectedDay))) {
+                          dates.removeWhere((d) => isSameDay(d, selectedDay));
+                          future_dates.removeWhere((d) => isSameDay(d, selectedDay));
+                        } else {
+                          dates.add(selectedDay);
+                          future_dates.add(selectedDay);
+                          
+                        }
+                      });
+                      print("printing future dates ${dates}");
                     
-          //         }
-          //       }
-          //     : null,
+                  }
+                }
+              : null,
           calendarBuilders: CalendarBuilders(
             defaultBuilder: (context, day, focusedDay) {
-              if (isSameDay(today, day) && future_dates.any((d)=>isSameDay(d,day))) {
-                return Container(
-                    decoration: BoxDecoration(
-                      border:Border.all(color: Kivawhite,width:2),
-                      color: Color.fromRGBO(196, 153, 108, 1),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '${day.day}',
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  );
-                
-              }
-              if (future_dates.any((d)=> isSameDay(d,day)) ){
+              // if ( isSameDay(today, day)&& selectedDates.any((d)=>isSameDay(d,day))) {
+              //   return Container(
+              //     decoration: BoxDecoration(
+              //       border:Border.all(color: Kivawhite,width:2),
+              //       color: Color.fromRGBO(196, 153, 108, 1),
+              //       shape: BoxShape.circle,
+              //     ),
+              //     child: Center(
+              //       child: Text(
+              //         '${day.day}',
+              //         style: const TextStyle(color: Colors.white),
+              //       ),
+              //     ),
+              //   );
+              // }
+              if (!isSameDay(today, day)&& future_dates.any((d)=> isSameDay(d,day)) ){
                 return Container(
                   decoration: BoxDecoration(
                     border:Border.all(color: Kivawhite,width:2),color:Kivagreen,

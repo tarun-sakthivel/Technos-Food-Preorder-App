@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:food_preorder_app/Constants/Text.dart'; // Assuming Kmaintext and Ksecondarytext are defined here
 
 class NumberOfOrders extends StatelessWidget {
-  final String numberOfOrders;
+  late  int numberOfOrders;
 
-  const NumberOfOrders({
+  NumberOfOrders({
     super.key,
     required this.numberOfOrders,
   });
@@ -75,7 +75,7 @@ class NumberOfOrders extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      numberOfOrders,
+                      numberOfOrders.toString(),
                       style: Kmaintext.copyWith(fontSize: 40),
                     ),
                     SizedBox(width: 8), // Adjust spacing between text widgets

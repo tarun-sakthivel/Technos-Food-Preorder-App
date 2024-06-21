@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Screens/Home/HomePage.dart';
-import 'package:food_preorder_app/Widgets/DialogeBox.dart';
-import 'package:food_preorder_app/Widgets/SnackBarWidget.dart';
+import 'package:food_preorder_app/Widgets/Popups/DialogeBox.dart';
+import 'package:food_preorder_app/Widgets/Popups/showErrorDialog.dart';
 import 'package:food_preorder_app/bloc/AuthBloc/auth_bloc.dart';
 
 import '../../Widgets/Button.dart';
@@ -41,14 +41,18 @@ class _LoginscreenState extends State<Loginscreen> {
               );
             } else if (state is AuthSuccessfull) {
               // Close the loading dialog
-              //FocusScope.of(context).unfocus(); // Dismiss keyboard if open
+              FocusScope.of(context).unfocus(); // Dismiss keyboard if open
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const HomePage()),
-                (Route) => true,
+                (Route) => false,
               );
             } else if (state is AuthFailed) {
+              return showErrorDialog(
+                    context, state.errorMessage, "Login Error");
+                            //Navigator.push(context, MaterialPageRoute(builder: (context)=> ErrorDialog(title: "Error", content: "Can't able to Login check your email and password")));
+                            
               // showDialog(
               //   context: context,
               //   barrierDismissible: true,
@@ -71,7 +75,7 @@ class _LoginscreenState extends State<Loginscreen> {
               //   );
               //   },
               // );
-              SnackbarHelper.showSnackbar(context, message: state.errorMessage, icon: Icons.close, color: Colors.red);
+              // SnackbarHelper.showSnackbar(context, message: state.errorMessage, icon: Icons.close, color: Colors.red);
                 // AlertDialog(
                 //                 backgroundColor:
                 //                     Color.fromARGB(104, 250, 101, 91),
@@ -162,12 +166,17 @@ class _LoginscreenState extends State<Loginscreen> {
                                       child: TextField(
                                         cursorColor: Kivagreen,
                                         controller: Usernametexteditor,
+                                        
+                                        keyboardType:TextInputType.text,
                                         onChanged: (value) {
                                           Username = value;
+                                         
                                         },
-                                        maxLength: null,
-                                        maxLines:
-                                            1, // Use 1 as a default if max_lines is null
+                                        maxLength: 15,
+                                        
+                                        maxLines:1,
+                                      
+                                             // Use 1 as a default if max_lines is null
 
                                         // Allow unlimited lines in the text field
                                         decoration: InputDecoration(
@@ -186,6 +195,7 @@ class _LoginscreenState extends State<Loginscreen> {
                                             borderSide:
                                                 BorderSide(color: Kivacream),
                                           ),
+                                          counterText: '',
                                         ),
                                       ),
                                     ),
@@ -294,8 +304,8 @@ class _LoginscreenState extends State<Loginscreen> {
                                   size: Size(170, 40),
                                   customWidget: Text(
                                     "Login",
-                                    style: Ksecondarytext.copyWith(
-                                      color: Kivawhite,
+                                    style: Kmaintext.copyWith(
+                                      color: Kivawhite,fontSize: 20
                                     ),
                                   ),
                                 ),

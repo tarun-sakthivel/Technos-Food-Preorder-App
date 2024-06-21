@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:food_preorder_app/Constants/Color.dart";
 import "package:food_preorder_app/Constants/Text.dart";
-import "package:food_preorder_app/Widgets/SnackBarWidget.dart";
+import "package:food_preorder_app/Widgets/Popups/SnackBarWidget.dart";
 
 class UserLogButton extends StatelessWidget {
   const UserLogButton({super.key});
