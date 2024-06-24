@@ -39,6 +39,10 @@ dependencies:
   google_fonts: ^6.2.1
   syncfusion_flutter_calendar: ^26.1.38
   table_calendar: ^3.1.2
+  flutter_localizations:
+    sdk: flutter
+  month_picker_dialog: ^4.0.0
+
 
 dev_dependencies:
   flutter_test:
