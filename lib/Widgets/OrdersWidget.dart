@@ -27,7 +27,7 @@ class NumberOfOrders extends StatelessWidget {
         child: Container(
           height: 95, // Adjust height as necessary
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
            
             color: Colors.white,
             // boxShadow: [
@@ -78,7 +78,7 @@ class NumberOfOrders extends StatelessWidget {
                       numberOfOrders.toString(),
                       style: Kmaintext.copyWith(fontSize: 40),
                     ),
-                    SizedBox(width: 8), // Adjust spacing between text widgets
+                    const SizedBox(width: 8), // Adjust spacing between text widgets
                     Text(
                       "Orders",
                       style: Ksecondarytext,

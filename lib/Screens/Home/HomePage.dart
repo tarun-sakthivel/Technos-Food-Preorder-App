@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Screens/Home/popUpCalendarSelector.dart';
 import 'package:food_preorder_app/Screens/Login/LoginScreen.dart';
 import 'package:food_preorder_app/Widgets/Button.dart';
-import 'package:food_preorder_app/Widgets/HomeScreenCalendarView.dart';
+import 'package:food_preorder_app/Widgets/Calendars/StaticClendar.dart';
 import 'package:food_preorder_app/Widgets/OrdersWidget.dart';
 import 'package:food_preorder_app/Widgets/Popups/SnackBarWidget.dart';
 import 'package:food_preorder_app/Widgets/UserlogButton.dart';
+import 'package:food_preorder_app/bloc/CalendarBloc/bloc/calendar_bloc.dart';
 import 'package:food_preorder_app/dates.dart';
-int  no_of_orders= 0;
+
+int no_of_orders = 0;
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -18,13 +22,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-   @override
-   void initState(){
+  @override
+  void initState() {
     super.initState();
+  }
 
-    
-   }
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,10 +52,16 @@ class _HomePageState extends State<HomePage> {
                   // message: "Logout function not yet implemented yet ",
                   // icon: Icons.dangerous_outlined,
                   // color: Colors.red);
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Loginscreen()), (route)=>false);
-                  SnackbarHelper.showSnackbar(context, message: "Logged Out!", icon: Icons.check_box, color: Colors.green);
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Loginscreen()),
+                      (route) => false);
+                  SnackbarHelper.showSnackbar(context,
+                      message: "Logged Out!",
+                      icon: Icons.check_box,
+                      color: Colors.green);
                 },
-                icon: Icon(Icons.logout_outlined, color: Kivawhite)),
+                icon: const Icon(Icons.logout_outlined, color: Kivawhite)),
           ],
         ),
         body: Padding(
@@ -65,7 +73,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text("Hello Techno!", style: Kmaintext),
                 const SizedBox(height: 24),
-                 NumberOfOrders(numberOfOrders: getFutureDates(dates).length),
+                NumberOfOrders(numberOfOrders: getFutureDates(dates).length),
                 const SizedBox(height: 24),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,7 +83,6 @@ class _HomePageState extends State<HomePage> {
                           style: Ksecondarytext.copyWith(
                               fontWeight: FontWeight.w500)),
                       const UserLogButton(),
-                      
                     ]),
                 const SizedBox(height: 16),
                 // Container(
@@ -83,22 +90,41 @@ class _HomePageState extends State<HomePage> {
                 //       maxHeight: 400.0, // Adjust height as needed
                 //       maxWidth: 400.0, // Adjust width as needed
                 //     ),
-                  
+
                 //   child: StaticCalendarView()),
                 Container(
-                  
-                  child: StaticCalendar(highlightedDates:dates,isInteractive: false,),
+                  child: BlocBuilder<CalendarBloc, CalendarState>(
+                    builder: (context, state) {
+                      if (state is CalendarChanged){
+                        print("Bloc function is called in the homepage for changing");
+                        return const StaticCalendar(
+                        // highlightedDates: dates,
+                        // isInteractive: false,
+                      );
+                      }
+                      return const StaticCalendar(
+                        // highlightedDates: dates,
+                        // isInteractive: false,
+                      );
+                    },
+                  ),
                 ),
-            
-            
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Button(Navigation: (){
-                     Navigator.pop(context);
-                     ShowSelectorCalendar(context);
-            
-                    }, fontSize: 15, textColor: Kivawhite, textStyle: "Poppins", size:const Size(150,40), customWidget: Text("Order/Modify",style:Ksecondarytext.copyWith(color: Colors.white))),
+                    Button(
+                        Navigation: () {
+                          //  Navigator.pop(context);
+                          ShowSelectorCalendar(context,future_dates);
+                        },
+                        fontSize: 15,
+                        textColor: Kivawhite,
+                        textStyle: "Poppins",
+                        size: const Size(150, 40),
+                        customWidget: Text("Order/Modify",
+                            style:
+                                Ksecondarytext.copyWith(color: Colors.white))),
                   ],
                 ),
               ],

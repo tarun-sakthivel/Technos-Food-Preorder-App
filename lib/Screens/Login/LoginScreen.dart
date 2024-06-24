@@ -12,7 +12,7 @@ import 'package:food_preorder_app/bloc/AuthBloc/auth_bloc.dart';
 import '../../Widgets/Button.dart';
 
 class Loginscreen extends StatefulWidget {
-  const Loginscreen({Key? key}) : super(key: key);
+  const Loginscreen({super.key});
 
   @override
   _LoginscreenState createState() => _LoginscreenState();
@@ -132,7 +132,7 @@ class _LoginscreenState extends State<Loginscreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Image(
+                              const Image(
                                 image: AssetImage('assets/Icons/IVA_Logo.png'),
                                 height: 100,
                                 width: 237,
@@ -180,20 +180,20 @@ class _LoginscreenState extends State<Loginscreen> {
 
                                         // Allow unlimited lines in the text field
                                         decoration: InputDecoration(
-                                          contentPadding: EdgeInsets.symmetric(
+                                          contentPadding: const EdgeInsets.symmetric(
                                               vertical: 7, horizontal: 10),
                                           isDense: true,
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(14),
                                             borderSide:
-                                                BorderSide(color: Kivacream),
+                                                const BorderSide(color: Kivacream),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                             borderSide:
-                                                BorderSide(color: Kivacream),
+                                                const BorderSide(color: Kivacream),
                                           ),
                                           counterText: '',
                                         ),
@@ -229,7 +229,7 @@ class _LoginscreenState extends State<Loginscreen> {
                                           left: 10.0,
                                           right: 5.0,
                                           bottom: 1.0),
-                                      child: Container(
+                                      child: SizedBox(
                                         height: 40,
                                         child: TextField(
                                           decoration: InputDecoration(
@@ -249,7 +249,7 @@ class _LoginscreenState extends State<Loginscreen> {
                                               },
                                             ),
                                             contentPadding:
-                                                EdgeInsets.symmetric(
+                                                const EdgeInsets.symmetric(
                                                     vertical: 3,
                                                     horizontal: 10),
                                             isDense: true,
@@ -257,13 +257,13 @@ class _LoginscreenState extends State<Loginscreen> {
                                               borderRadius:
                                                   BorderRadius.circular(14),
                                               borderSide:
-                                                  BorderSide(color: Kivacream),
+                                                  const BorderSide(color: Kivacream),
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                               borderSide:
-                                                  BorderSide(color: Kivacream),
+                                                  const BorderSide(color: Kivacream),
                                             ),
                                           ),
                                           cursorColor: Kivagreen,
@@ -301,7 +301,7 @@ class _LoginscreenState extends State<Loginscreen> {
                                   fontSize: 20,
                                   textColor: Kivawhite,
                                   textStyle: 'Poppins-Medium',
-                                  size: Size(170, 40),
+                                  size: const Size(170, 40),
                                   customWidget: Text(
                                     "Login",
                                     style: Kmaintext.copyWith(

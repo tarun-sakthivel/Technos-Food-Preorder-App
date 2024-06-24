@@ -23,7 +23,7 @@ class UserLogButton extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text("UserLog",style:Ksecondarytext.copyWith(color:Khypertext,decoration: TextDecoration.underline,decorationColor: Khypertext,decorationThickness: 1.5)),
-            SizedBox(width: 5,),
+            const SizedBox(width: 5,),
             const Icon(Icons.history,color:Khypertext,),
           ],
         ),
