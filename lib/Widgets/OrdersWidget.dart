@@ -46,7 +46,7 @@ class NumberOfOrders extends StatelessWidget {
                 left: 0,
                 bottom: 0,
                 child: Opacity(
-                  opacity: 1,
+                  opacity: 0.6,
                   child: Image.asset(
                     "assets/Page_Assets/waiter_home_page_watermark.png",
                     scale: 3,
@@ -76,7 +76,8 @@ class NumberOfOrders extends StatelessWidget {
                   children: [
                     Text(
                       numberOfOrders.toString(),
-                      style: Kmaintext.copyWith(fontSize: 40),
+                      //style: Kmaintext.copyWith(fontSize: 40,fontWeight: FontWeight.w400),
+                      style:TextStyle(fontSize: 45,fontWeight: FontWeight.w500,color: Colors.black),
                     ),
                     const SizedBox(width: 8), // Adjust spacing between text widgets
                     Text(

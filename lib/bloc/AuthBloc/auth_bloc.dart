@@ -15,8 +15,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       //TODO : add the api function call here for authentication
       //For Developing we have added the time delay for the loading feature
-      if (event.userName.isEmpty || event.password.isEmpty){
-        emit(AuthFailed(errorMessage: "Please fill UserName or Password"));
+      if (event.userName.isEmpty ){
+        emit(AuthFailed(errorMessage: "Please fill UserName"));
+      }else if( event.password.isEmpty){
+        emit(AuthFailed(errorMessage: "Pleas fill Your Password"));
       }else if ( event.userName.length >15 ){
         emit(AuthFailed(errorMessage: "UserName should be at less than 15 characters"));
       }else {

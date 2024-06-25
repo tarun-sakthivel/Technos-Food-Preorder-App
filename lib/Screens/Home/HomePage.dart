@@ -35,9 +35,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Image.asset(
-            "assets/Icons/IVA_Logo.png",
-            scale: 4,
+          title: Hero(
+            tag: "mainlogo",
+            child: Image.asset(
+              "assets/Icons/IVA_Logo.png",
+              scale: 25,
+            ),
           ),
           flexibleSpace: Stack(children: [
             Positioned(
@@ -84,6 +87,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text("Your orders:",
                           style: Ksecondarytext.copyWith(
+                            fontSize: 16,
                               fontWeight: FontWeight.w500)),
                       const UserLogButton(),
                     ]),

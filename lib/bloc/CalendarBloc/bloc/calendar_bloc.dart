@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:food_preorder_app/Widgets/Popups/SnackBarWidget.dart';
 import 'package:food_preorder_app/dates.dart';
 import 'package:food_preorder_app/utils/SameDayFunction.dart';
-import 'package:meta/meta.dart';
 
 part 'calendar_event.dart';
 part 'calendar_state.dart';
@@ -15,6 +16,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       dates =List.from(dummydates);
       getFutureDates(dates);
       emit((CalendarChanged()));
+      SnackbarHelper.showSnackbar(event.context, message: "Changes Successfull", icon: Icons.check, color: Colors.green);
     }
     
     
@@ -53,6 +55,8 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       
       print("dates ${dates}");
       print("new dummy data ${dummydates}");
+      SnackbarHelper.showSnackbar(event.context, message: "No changes Done", icon: Icons.close, color: Colors.red);
+      
       
     });
   }

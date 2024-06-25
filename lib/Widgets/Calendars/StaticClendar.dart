@@ -56,8 +56,10 @@ class _StaticCalendarState extends State<StaticCalendar> {
           focusedDay: now,
           headerStyle:const HeaderStyle(formatButtonVisible: false,
           rightChevronVisible: false,
+          titleTextStyle: Kcalendattitletext,
           leftChevronVisible: false,
           headerPadding: EdgeInsets.only(left:10,top:10,bottom:18),
+          //titleTextFormatter: (DateTime.now(), locale) => DateFormat.yM(locale).format(date),
           ),
           
           weekNumbersVisible: false,
@@ -65,6 +67,7 @@ class _StaticCalendarState extends State<StaticCalendar> {
           calendarFormat: CalendarFormat.month,
           availableGestures:AvailableGestures.all,
           calendarStyle:  CalendarStyle(
+            
             // tableBorder: TableBorder.all(width:1,borderRadius: BorderRadius.circular(14),color:Colors.black),
             // rowDecoration: BoxDecoration(border: Border.all(width:1)),
             cellMargin: const EdgeInsets.all(0),
@@ -80,8 +83,13 @@ class _StaticCalendarState extends State<StaticCalendar> {
             //disabledTextStyle: const TextStyle(color: Colors.grey), // Style for disabled dates
           ),
           daysOfWeekVisible: true,
+          daysOfWeekStyle: DaysOfWeekStyle(dowTextFormatter: (date, locale) {
+           final daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+            return daysOfWeek[date.weekday - 1];
+          },),
           
           calendarBuilders: CalendarBuilders(
+
             defaultBuilder: (context, day, focusedDay) {
               if (isSameDay(today, day) && future_dates.any((d)=>isSameDay(d,day))) {
                 return Container(
