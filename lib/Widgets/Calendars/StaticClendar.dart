@@ -23,18 +23,13 @@ class _StaticCalendarState extends State<StaticCalendar> {
   @override
   void initState() {
     super.initState();
-    //print("getfuturedates function is called in the initstate of the static calendar");
-    //getFutureDates(dates);
-    // getFutureDates(widget.highlightedDates);
-    // // selectedDates = List.from(widget.highlightedDates);
-    // selectedDates = future_dates;
     
   }
 
   @override
   Widget build(BuildContext context) {
     
-    print("printing the future dates $future_dates");
+    
     DateTime now = DateTime.now();
     DateTime today = DateTime(now.year,now.month,now.day);
     

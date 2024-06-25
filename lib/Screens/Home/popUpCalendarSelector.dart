@@ -5,8 +5,8 @@ import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Widgets/Calendars/DynamicCalendar.dart';
 import 'package:food_preorder_app/bloc/CalendarBloc/bloc/calendar_bloc.dart';
 import 'package:food_preorder_app/dates.dart';
-Set<DateTime> modifieddate = {};
-void ShowSelectorCalendar(BuildContext context,Set<DateTime> showdates) {
+
+void ShowSelectorCalendar(BuildContext context) {
   showDialog(
     useSafeArea: true,
     barrierDismissible: false,
@@ -44,15 +44,14 @@ void ShowSelectorCalendar(BuildContext context,Set<DateTime> showdates) {
              ),
              Padding(
                padding: const EdgeInsets.all(3.0),
-               child: DynamicCalendar(highlightedDates: showdates,isInteractive: true,),
+               child: DynamicCalendar(highlightedDates: dummydates,isInteractive: true,),
              ),
           ]
         ),
         actions: [
           ElevatedButton(
             onPressed: () {
-              print("futuredates after clacelling ${future_dates}");
-              modifieddate.clear();
+              context.read<CalendarBloc>().add(NoChangeInDynamicCalendar());
               Navigator.pop(context);
               
               // setState(context){
@@ -68,9 +67,9 @@ void ShowSelectorCalendar(BuildContext context,Set<DateTime> showdates) {
 
           ElevatedButton(
             onPressed: () {
-              print("old future dates $future_dates");
-              //future_dates = modifieddate;
-              print("new future dates $future_dates");
+              
+
+              
               
               //dates = dates.union(future_dates);
               //modifieddate.clear();

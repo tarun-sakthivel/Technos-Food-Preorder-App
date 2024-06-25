@@ -25,6 +25,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    previous_dates = List.from(getPreviousDates(dates));
+    dummydates = List.from(dates);
+    getFutureDates(dates);
   }
 
   @override
@@ -73,7 +76,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text("Hello Techno!", style: Kmaintext),
                 const SizedBox(height: 24),
-                NumberOfOrders(numberOfOrders: getFutureDates(dates).length),
+                NumberOfOrders(numberOfOrders:previous_dates.length),
                 const SizedBox(height: 24),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                     Button(
                         Navigation: () {
                           //  Navigator.pop(context);
-                          ShowSelectorCalendar(context,future_dates);
+                          ShowSelectorCalendar(context);
                         },
                         fontSize: 15,
                         textColor: Kivawhite,
