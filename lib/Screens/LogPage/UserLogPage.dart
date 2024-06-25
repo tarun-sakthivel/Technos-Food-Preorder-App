@@ -1,25 +1,42 @@
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Screens/Home/HomePage.dart';
+import 'package:food_preorder_app/Screens/LogPage/Historypage.dart';
+import 'package:food_preorder_app/Screens/Login/LoginScreen.dart';
 import 'package:food_preorder_app/Widgets/Calendars/Monthcalendar.dart';
+import 'package:food_preorder_app/Widgets/CalenderUserLog.dart';
+import 'package:food_preorder_app/bloc/bloc/user_log_bloc.dart';
+import 'package:food_preorder_app/dates.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 class UserLogPage extends StatefulWidget {
-  const UserLogPage({super.key});
+  final DateTime initialDate;
+  const UserLogPage({super.key, required this.initialDate});
 
   @override
   State<UserLogPage> createState() => _UserLogPageState();
 }
 
 class _UserLogPageState extends State<UserLogPage> {
+  DateTime? selectedDate;
+  Set<DateTime?> selecteddates = {};
   Set<DateTime> selecteddatees = {
     DateTime(2023, 6, 5),
     DateTime(2023, 6, 12),
     DateTime(2023, 6, 18),
     DateTime(2023, 6, 25),
   };
+  @override
+  void initState() {
+    selectedDate = widget.initialDate;
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +61,7 @@ class _UserLogPageState extends State<UserLogPage> {
         Locale('it'),
       ],
       home: Scaffold(
+        backgroundColor: Kivawhite,
         appBar: AppBar(
             leadingWidth: 26,
             automaticallyImplyLeading: false,
@@ -62,10 +80,12 @@ class _UserLogPageState extends State<UserLogPage> {
             ]),
             leading: IconButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const HomePage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomePage()));
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.navigate_before,
                   size: 28,
                   color: Kivagreen,
@@ -83,13 +103,16 @@ class _UserLogPageState extends State<UserLogPage> {
                   style: Kmaintext.copyWith(
                       fontWeight: FontWeight.w100,
                       fontSize: 15,
-                      color: const Color(0xFF666666)),
+                      color: Color(0xFF666666)),
                 ),
               ),
-              SizedBox(
-                height: 393,
-                width: 400,
-                child: MonthPickerExample(initialDate: DateTime.now()),
+              Center(
+                child: Container(
+                    width: 320,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: Colors.black)),
+                    child: CalendarPage()),
               ),
             ],
           ),

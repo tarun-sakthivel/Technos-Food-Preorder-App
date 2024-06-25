@@ -1,141 +1,196 @@
-
 import 'package:flutter/material.dart';
+import 'package:food_preorder_app/Constants/Text.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Screens/LogPage/Historypage.dart';
 import 'package:food_preorder_app/dates.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
 
-class Monthcalendar extends StatefulWidget {
-  final Set<DateTime> highlightedDates;
-  final bool isInteractive;
-  const Monthcalendar({
-    super.key,
-    required this.highlightedDates,
-    this.isInteractive = false,
-  });
-
+class CalendarPage extends StatefulWidget {
+  final List<int> years = List<int>.generate(101, (int index) => 2000 + index);
   @override
-  State<Monthcalendar> createState() => _MonthcalendarState();
+  _CalendarPageState createState() => _CalendarPageState();
 }
 
-class _MonthcalendarState extends State<Monthcalendar> {
-  Set<DateTime> selecteddatees = {
-    DateTime(2023, 6, 5),
-    DateTime(2023, 6, 12),
-    DateTime(2023, 6, 18),
-    DateTime(2023, 6, 25),
-  };
-  @override
-  void initState() {
-    super.initState();
-    // getFutureDates(widget.highlightedDates);
-    // // selectedDates = List.from(widget.highlightedDates);
-    // selectedDates = future_dates;
-  }
+class _CalendarPageState extends State<CalendarPage> {
+  DateTime? selectedDate;
+  int selectedYear = DateTime.now().year;
+  final List<int> years = List<int>.generate(101, (int index) => 2000 + index);
 
   @override
   Widget build(BuildContext context) {
-    getFutureDates(dates);
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+//YearSelector(controller: , onYearSelected:(value) => yearSelected,),
+        Container(
+          height: 60,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              color: Kivagreen,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(14), topRight: Radius.circular(14))),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              'Filter',
+              style: TextStyle(
+                  color: Colors.white, fontSize: 24, fontFamily: 'Poppins'),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 20,
+            left: 38.0,
+          ),
+          child: DropdownButton<int>(
+            isExpanded: false,
+            isDense: true,
+            dropdownColor: Kivawhite,
+            menuMaxHeight: 240,
+            value: selectedYear,
+            onChanged: (int? newValue) {
+              setState(() {
+                selectedYear = newValue!;
+              });
+            },
+            items: widget.years.map<DropdownMenuItem<int>>((int value) {
+              return DropdownMenuItem<int>(
+                value: value,
+                child: Text(
+                  value.toString(),
+                  style: TextStyle(fontSize: 11),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
 
-    DateTime now = DateTime.now();
-    DateTime today = DateTime(now.year, now.month, now.day);
-    print("today $today");
-    //print(selectedDates.contains(today));
-    DateTime firstDayOfMonth = DateTime(now.year, now.month, 1);
-    DateTime lastDayOfMonth = DateTime(now.year, now.month + 1, 0);
-
-    // Check if the current date has crossed the 15th
-    if (now.day > 15) {
-      // Display next month fully
-      lastDayOfMonth = DateTime(now.year, now.month + 2, 0);
-    }
-
-    return Container(
-      child: MonthPickerExample(initialDate: DateTime.now()),
+        Container(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(14)),
+          height: 220,
+          width: 322,
+          child: MonthPickerWidget(
+            selectedDate: selectedDate ?? DateTime.now(),
+            onChanged: (date) {
+              setState(() {
+                selectedDate = date;
+              });
+            },
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 24.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Historypage()));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20.0, bottom: 8.0),
+                    child: Text('OK',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                            fontFamily: 'Poppins')),
+                  ))
+            ],
+          ),
+        )
+      ],
     );
   }
-
-  bool isSameDay(DateTime a, DateTime b) {
-    return a.year == b.year && a.month == b.month && a.day == b.day;
-  }
 }
 
-class MonthPickerExample extends StatefulWidget {
-  final DateTime initialDate;
+class MonthPickerWidget extends StatefulWidget {
+  final DateTime selectedDate;
+  final ValueChanged<DateTime> onChanged;
 
-  const MonthPickerExample({super.key, required this.initialDate});
+  const MonthPickerWidget({
+    Key? key,
+    required this.selectedDate,
+    required this.onChanged,
+  }) : super(key: key);
 
   @override
-  _MonthPickerExampleState createState() => _MonthPickerExampleState();
+  _MonthPickerWidgetState createState() => _MonthPickerWidgetState();
 }
 
-class _MonthPickerExampleState extends State<MonthPickerExample> {
-  DateTime? selectedDate;
-  Set<DateTime?> selecteddates = {};
+class _MonthPickerWidgetState extends State<MonthPickerWidget> {
+  late DateTime _selectedDate;
+  List<String> Months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ];
+
   @override
   void initState() {
     super.initState();
-    selectedDate = widget.initialDate;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _showMonthPicker(context).then((date) {
-        if (date != null) {
-          setState(() {
-            selectedDate = date;
-          });
-        }
-      });
+    _selectedDate = widget.selectedDate;
+  }
+
+  void _onMonthSelected(int month) {
+    setState(() {
+      _selectedDate = DateTime(_selectedDate.year, month);
+      widget.onChanged(_selectedDate);
     });
   }
 
-  Future<DateTime?> _showMonthPicker(BuildContext context) {
-    return showMonthPicker(
-      context: context,
-      firstDate: DateTime(DateTime.now().year - 5, 5),
-      lastDate: DateTime(DateTime.now().year + 8, 9),
-      initialDate: selectedDate ?? widget.initialDate,
-      locale: const Locale('en'),
-      headerColor: Kivagreen,
-      forceSelectedDate: false,
-      headerTextColor: Kivawhite,
-      selectedMonthBackgroundColor: Kivagreen,
-      selectedMonthTextColor: Colors.white,
-      unselectedMonthTextColor: Colors.black,
-      currentMonthTextColor: Colors.black,
-      dismissible: false,
-      confirmWidget: ElevatedButton(
-          onPressed: () {
-            selecteddates.add(selectedDate);
-
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Historypage()));
-          },
-          child: Text(
-            'OK',
-            style: Ksecondarytext,
-          )),
-      roundedCornersRadius: 15,
-      yearFirst: false,
-      backgroundColor: Colors.blueGrey[50],
-      buttonBorder: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(100),
-              bottomLeft: Radius.circular(100),
-              topLeft: Radius.circular(100),
-              topRight: Radius.circular(100))),
-      headerTitle: const Text(
-        'Filter',
-        style: TextStyle(color: Colors.white),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(''),
+    return GridView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 1),
+      shrinkWrap: true,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 5.0, // Adjust spacing between rows/columns
+        crossAxisSpacing: 5.0, // Adjust spacing between columns/rows
+        childAspectRatio: 2, // Adjust aspect ratio of each item
       ),
+      itemCount: 12,
+      itemBuilder: (context, index) {
+        final month = index + 1;
+        final isSelected = month == _selectedDate.month;
+        return GestureDetector(
+          onTap: () => _onMonthSelected(month),
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 22.0, vertical: 5.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+                color: isSelected ? Kivagreen : Kivawhite,
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                Months[index],
+                style: TextStyle(
+                  fontSize: 15,
+                  color: isSelected ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

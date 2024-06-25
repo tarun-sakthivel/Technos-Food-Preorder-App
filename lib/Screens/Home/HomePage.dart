@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Screens/Home/popUpCalendarSelector.dart';
 import 'package:food_preorder_app/Screens/Login/LoginScreen.dart';
 import 'package:food_preorder_app/Widgets/Button.dart';
-import 'package:food_preorder_app/Widgets/Calendars/OrdersWidget.dart';
 import 'package:food_preorder_app/Widgets/Calendars/StaticClendar.dart';
-
+import 'package:food_preorder_app/Widgets/OrdersWidget.dart';
 import 'package:food_preorder_app/Widgets/Popups/SnackBarWidget.dart';
 import 'package:food_preorder_app/Widgets/UserlogButton.dart';
+import 'package:food_preorder_app/bloc/CalendarBloc/bloc/calendar_bloc.dart';
 import 'package:food_preorder_app/dates.dart';
 
 int no_of_orders = 0;
@@ -24,6 +25,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    previous_dates = List.from(getPreviousDates(dates));
+    dummydates = List.from(dates);
+    getFutureDates(dates);
   }
 
   @override
@@ -53,7 +57,8 @@ class _HomePageState extends State<HomePage> {
                   // color: Colors.red);
                   Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => const Loginscreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const Loginscreen()),
                       (route) => false);
                   SnackbarHelper.showSnackbar(context,
                       message: "Logged Out!",
@@ -72,7 +77,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text("Hello Techno!", style: Kmaintext),
                 const SizedBox(height: 24),
-                NumberOfOrders(numberOfOrders: getFutureDates(dates).length),
+                NumberOfOrders(numberOfOrders: previous_dates.length),
                 const SizedBox(height: 24),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                       Text("Your orders:",
                           style: Ksecondarytext.copyWith(
                               fontWeight: FontWeight.w500)),
-                      const UserLogButton(),
+                      UserLogButton(),
                     ]),
                 const SizedBox(height: 16),
                 // Container(
@@ -92,9 +97,21 @@ class _HomePageState extends State<HomePage> {
 
                 //   child: StaticCalendarView()),
                 Container(
-                  child: StaticCalendar(
-                    highlightedDates: dates,
-                    isInteractive: false,
+                  child: BlocBuilder<CalendarBloc, CalendarState>(
+                    builder: (context, state) {
+                      if (state is CalendarChanged) {
+                        print(
+                            "Bloc function is called in the homepage for changing");
+                        return const StaticCalendar(
+                            // highlightedDates: dates,
+                            // isInteractive: false,
+                            );
+                      }
+                      return const StaticCalendar(
+                          // highlightedDates: dates,
+                          // isInteractive: false,
+                          );
+                    },
                   ),
                 ),
 
@@ -103,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Button(
                         Navigation: () {
-                          Navigator.pop(context);
+                          //  Navigator.pop(context);
                           ShowSelectorCalendar(context);
                         },
                         fontSize: 15,

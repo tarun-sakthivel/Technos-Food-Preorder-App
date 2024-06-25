@@ -9,7 +9,17 @@ final class AuthFailed extends AuthState{
   AuthFailed({required this.errorMessage});
 
 }
+final class NoPassword extends AuthState{
+  String errorMessage;
+  NoPassword({required this.errorMessage});
 
+}
+
+final class NoUserName extends AuthState{
+  String errorMessage;
+  NoUserName({required this.errorMessage});
+
+}
 final class AuthSuccessfull extends AuthState{
   String successMessage;
   AuthSuccessfull({required this.successMessage});

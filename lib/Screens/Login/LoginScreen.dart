@@ -9,7 +9,6 @@ import 'package:food_preorder_app/Widgets/Popups/DialogeBox.dart';
 import 'package:food_preorder_app/Widgets/Popups/showErrorDialog.dart';
 import 'package:food_preorder_app/bloc/AuthBloc/auth_bloc.dart';
 
-
 import '../../Widgets/Button.dart';
 
 class Loginscreen extends StatefulWidget {
@@ -175,20 +174,21 @@ class _LoginscreenState extends State<Loginscreen> {
 
                                       // Allow unlimited lines in the text field
                                       decoration: InputDecoration(
-                                        contentPadding: const EdgeInsets.symmetric(
-                                            vertical: 7, horizontal: 10),
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 7, horizontal: 10),
                                         isDense: true,
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(14),
-                                          borderSide:
-                                              const BorderSide(color: Kivacream),
+                                          borderSide: const BorderSide(
+                                              color: Kivacream),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(15),
-                                          borderSide:
-                                              const BorderSide(color: Kivacream),
+                                          borderSide: const BorderSide(
+                                              color: Kivacream),
                                         ),
                                         counterText: '',
                                       ),
@@ -243,20 +243,21 @@ class _LoginscreenState extends State<Loginscreen> {
                                               });
                                             },
                                           ),
-                                          contentPadding: const EdgeInsets.symmetric(
-                                              vertical: 3, horizontal: 10),
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                                  vertical: 3, horizontal: 10),
                                           isDense: true,
                                           enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(14),
-                                            borderSide:
-                                                const BorderSide(color: Kivacream),
+                                            borderSide: const BorderSide(
+                                                color: Kivacream),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15),
-                                            borderSide:
-                                                const BorderSide(color: Kivacream),
+                                            borderSide: const BorderSide(
+                                                color: Kivacream),
                                           ),
                                         ),
                                         cursorColor: Kivagreen,

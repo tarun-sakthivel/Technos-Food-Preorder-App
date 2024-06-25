@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Screens/Home/HomePage.dart';
 import 'package:food_preorder_app/Widgets/Calendars/HistoryCalendar.dart';
+import 'package:food_preorder_app/dates.dart';
 
 class Historypage extends StatefulWidget {
   const Historypage({super.key});
@@ -61,8 +61,9 @@ class _HistorypageState extends State<Historypage> {
             ]),
             leading: IconButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const HomePage()));
+                  Navigator.pop(
+                    context,
+                  );
                 },
                 icon: const Icon(
                   Icons.navigate_before,
@@ -76,7 +77,8 @@ class _HistorypageState extends State<Historypage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -84,15 +86,30 @@ class _HistorypageState extends State<Historypage> {
                       "June 2024",
                       style: Kmaintext.copyWith(
                           fontWeight: FontWeight.w100,
-                          fontSize: 15,
-                          color: const Color(0xFF666666)),
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 0, 0, 0)),
                     ),
-                    Text(
-                      "No. of days: 4",
-                      style: Kmaintext.copyWith(
-                          fontWeight: FontWeight.w100,
-                          fontSize: 15,
-                          color: const Color(0xFF666666)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "No. of days:",
+                          style: Kmaintext.copyWith(
+                              fontWeight: FontWeight.w100,
+                              fontSize: 10,
+                              color: Color.fromARGB(255, 0, 0, 0)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text(
+                            '${future_dates.length}',
+                            style: Kmaintext.copyWith(
+                                fontWeight: FontWeight.w100,
+                                fontSize: 20,
+                                color: Color.fromARGB(255, 0, 0, 0)),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
