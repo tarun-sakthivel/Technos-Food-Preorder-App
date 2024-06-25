@@ -6,6 +6,9 @@ part 'user_log_state.dart';
 
 class UserLogBloc extends Bloc<UserLogEvent, UserLogState> {
   UserLogBloc() : super(UserLogInitial()) {
+    on<navigateuserlog>((event, emit) {
+      emit(backbutton());
+    });
     on<UserLogEvent>((event, emit) {
       emit(UserLogLoading());
       //The api calls will be written here

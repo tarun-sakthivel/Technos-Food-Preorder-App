@@ -6,6 +6,7 @@ import 'package:food_preorder_app/Screens/LogPage/UserLogPage.dart';
 import 'package:food_preorder_app/Screens/Login/LoginScreen.dart';
 import 'package:food_preorder_app/bloc/AuthBloc/auth_bloc.dart';
 import 'package:food_preorder_app/bloc/CalendarBloc/bloc/calendar_bloc.dart';
+import 'package:food_preorder_app/bloc/HistoryBloc/history_bloc_bloc.dart';
 import 'package:food_preorder_app/bloc/bloc/user_log_bloc.dart';
 
 void main() {
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => AuthBloc()),
         BlocProvider(create: (context) => CalendarBloc()),
-        BlocProvider(create: (context) => UserLogBloc())
+        BlocProvider(create: (context) => UserLogBloc()),
+        BlocProvider(create: (context) => HistoryBlocBloc())
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -110,7 +110,7 @@ class _UserLogPageState extends State<UserLogPage> {
                 child: Container(
                     width: 320,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
+                        borderRadius: BorderRadius.circular(16),
                         border: Border.all(color: Colors.black)),
                     child: CalendarPage()),
               ),
