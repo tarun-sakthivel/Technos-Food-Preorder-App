@@ -40,6 +40,10 @@ dependencies:
   syncfusion_flutter_calendar: ^26.1.38
   table_calendar: ^3.1.2
   calendar_view: ^1.2.0
+  month_picker_dialog: ^4.0.0
+  flutter_localizations:
+    sdk: flutter
+  flutter_date_pickers: ^0.4.3
 
 dev_dependencies:
   flutter_test:
