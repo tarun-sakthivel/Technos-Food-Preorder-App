@@ -128,10 +128,13 @@ class _LoginscreenState extends State<Loginscreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Image(
-                              image: AssetImage('assets/Icons/IVA_Logo.png'),
-                              height: 100,
-                              width: 237,
+                            Hero(
+                              tag: "mainlogo",
+                              child: const Image(
+                                image: AssetImage('assets/Icons/IVA_Logo.png'),
+                                height: 100,
+                                width: 237,
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(15.0),
@@ -148,18 +151,21 @@ class _LoginscreenState extends State<Loginscreen> {
                                     child: Text(
                                       'Username',
                                       style: Ksecondarytext.copyWith(
-                                          fontFamily: 'Poppins-ExtraLight',
+                                          fontFamily: 'Poppins',
                                           color: Colors.black,
                                           fontWeight: FontWeight.w300),
                                     ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 0.0,
+                                        top: 2.5,
                                         left: 10.0,
                                         right: 5.0,
                                         bottom: 0.0),
                                     child: TextField(
+                                      inputFormatters: [
+                                        VarcharTextInputFormatter()
+                                      ],
                                       cursorColor: Kivagreen,
                                       controller: Usernametexteditor,
 
@@ -221,7 +227,7 @@ class _LoginscreenState extends State<Loginscreen> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 0,
+                                        top: 2.5,
                                         left: 10.0,
                                         right: 5.0,
                                         bottom: 1.0),
@@ -295,12 +301,19 @@ class _LoginscreenState extends State<Loginscreen> {
                                 },
                                 fontSize: 20,
                                 textColor: Kivawhite,
-                                textStyle: 'Poppins-Medium',
+                                textStyle: 'Poppins',
                                 size: const Size(170, 40),
-                                customWidget: Text(
+                                customWidget: const Text(
                                   "Login",
-                                  style: Kmaintext.copyWith(
-                                      color: Kivawhite, fontSize: 20),
+                                  // style: Kmaintext.copyWith(
+                                  //   fontWeight: FontWeight.w200,
+                                  //   color: Kivawhite,fontSize: 20
+                                  // ),
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: "Poppins",
+                                      fontWeight: FontWeight.w500,
+                                      color: Kivawhite),
                                 ),
                               ),
                             ),
@@ -314,5 +327,18 @@ class _LoginscreenState extends State<Loginscreen> {
         ),
       ),
     );
+  }
+}
+
+class VarcharTextInputFormatter extends TextInputFormatter {
+  static final _varcharRegex = RegExp(r'^[\w\s\.,!?]+$');
+
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    if (_varcharRegex.hasMatch(newValue.text)) {
+      return newValue;
+    }
+    return oldValue;
   }
 }
