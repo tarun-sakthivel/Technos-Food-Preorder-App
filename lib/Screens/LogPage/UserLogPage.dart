@@ -1,18 +1,10 @@
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Screens/Home/HomePage.dart';
-import 'package:food_preorder_app/Screens/LogPage/Historypage.dart';
-import 'package:food_preorder_app/Screens/Login/LoginScreen.dart';
 import 'package:food_preorder_app/Widgets/Calendars/Monthcalendar.dart';
-import 'package:food_preorder_app/Widgets/CalenderUserLog.dart';
-import 'package:food_preorder_app/bloc/bloc/user_log_bloc.dart';
-import 'package:food_preorder_app/dates.dart';
-import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 class UserLogPage extends StatefulWidget {
   final DateTime initialDate;
@@ -85,7 +77,7 @@ class _UserLogPageState extends State<UserLogPage> {
                       MaterialPageRoute(
                           builder: (context) => const HomePage()));
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.navigate_before,
                   size: 28,
                   color: Kivagreen,
@@ -103,7 +95,7 @@ class _UserLogPageState extends State<UserLogPage> {
                   style: Kmaintext.copyWith(
                       fontWeight: FontWeight.w100,
                       fontSize: 15,
-                      color: Color(0xFF666666)),
+                      color: const Color(0xFF666666)),
                 ),
               ),
               Center(

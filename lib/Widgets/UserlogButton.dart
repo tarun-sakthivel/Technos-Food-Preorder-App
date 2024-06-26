@@ -1,12 +1,10 @@
 import "package:flutter/material.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
 import "package:food_preorder_app/Constants/Color.dart";
 import "package:food_preorder_app/Constants/Text.dart";
 import "package:food_preorder_app/Screens/LogPage/UserLogPage.dart";
-import "package:food_preorder_app/bloc/bloc/user_log_bloc.dart";
 
 class UserLogButton extends StatelessWidget {
-  UserLogButton({super.key});
+  const UserLogButton({super.key});
 
   @override
   Widget build(BuildContext context) {

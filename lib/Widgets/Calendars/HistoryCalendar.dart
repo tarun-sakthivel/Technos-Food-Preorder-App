@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
-import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/dates.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class HistorryCalendar extends StatefulWidget {
-  final Set<DateTime> highlightedDates;
+  final String selectedMonth;
+  final List<DateTime> highlightedDates;
   final bool isInteractive;
-  const HistorryCalendar({
+  HistorryCalendar({
     super.key,
+    required this.selectedMonth,
     required this.highlightedDates,
     this.isInteractive = false,
   });
@@ -17,12 +18,23 @@ class HistorryCalendar extends StatefulWidget {
   State<HistorryCalendar> createState() => _HistorryCalendarState();
 }
 
+// The month selceted will be indexed and will be sorted with the dates that is given through the api calls.
 class _HistorryCalendarState extends State<HistorryCalendar> {
+  String selectedMonth = 'J';
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    selectedMonth = widget.selectedMonth;
+
+    print(selectedMonth);
+  }
+
   @override
   Widget build(BuildContext context) {
     getFutureDates(dates);
 
-    DateTime now = DateTime(2024, 6, 24);
+    DateTime now = DateTime.now();
     DateTime today = DateTime(now.year, now.month, now.day);
     print("today $today");
     //print(selectedDates.contains(today));
@@ -37,14 +49,14 @@ class _HistorryCalendarState extends State<HistorryCalendar> {
         Container(
           height: 60,
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Kivagreen,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(14), topRight: Radius.circular(14))),
           child: Padding(
-            padding: const EdgeInsets.only(top: 15.0, left: 20, bottom: 15),
+            padding: EdgeInsets.only(top: 15.0, left: 20, bottom: 15),
             child: Text(
-              'History',
+              '$selectedMonth',
               style: TextStyle(
                   color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),
             ),
@@ -53,7 +65,7 @@ class _HistorryCalendarState extends State<HistorryCalendar> {
         Container(
           decoration: BoxDecoration(
               border: Border.all(width: 1, color: Colors.black),
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(14),
                   bottomRight: Radius.circular(14))),
           child: Padding(
@@ -78,10 +90,10 @@ class _HistorryCalendarState extends State<HistorryCalendar> {
               calendarFormat: CalendarFormat.month,
               availableGestures: AvailableGestures.none,
               calendarStyle: CalendarStyle(
-                  holidayTextStyle:
-                      TextStyle(fontSize: 10, fontWeight: FontWeight.w700),
-                  defaultTextStyle:
-                      TextStyle(fontSize: 10, fontWeight: FontWeight.w700),
+                  holidayTextStyle: const TextStyle(
+                      fontSize: 10, fontWeight: FontWeight.w700),
+                  defaultTextStyle: const TextStyle(
+                      fontSize: 10, fontWeight: FontWeight.w700),
                   // tableBorder: TableBorder.all(width:1,borderRadius: BorderRadius.circular(14),color:Colors.black),
                   // rowDecoration: BoxDecoration(border: Border.all(width:1)),
                   cellMargin: const EdgeInsets.all(0),

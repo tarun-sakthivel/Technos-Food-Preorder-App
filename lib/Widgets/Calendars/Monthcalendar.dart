@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_preorder_app/Constants/Text.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
-import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Screens/LogPage/Historypage.dart';
 import 'package:food_preorder_app/bloc/HistoryBloc/history_bloc_bloc.dart';
-import 'package:food_preorder_app/dates.dart';
-import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 class CalendarPage extends StatefulWidget {
   final List<int> years = List<int>.generate(101, (int index) => 2000 + index);
+
+  CalendarPage({super.key});
   @override
   _CalendarPageState createState() => _CalendarPageState();
 }
@@ -30,12 +27,12 @@ class _CalendarPageState extends State<CalendarPage> {
         Container(
           height: 60,
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Kivagreen,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(14), topRight: Radius.circular(14))),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 30.0, top: 18),
+          child: const Padding(
+            padding: EdgeInsets.only(left: 30.0, top: 18),
             child: Text(
               'Filter',
               style: TextStyle(
@@ -43,37 +40,10 @@ class _CalendarPageState extends State<CalendarPage> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 20,
-            left: 38.0,
-          ),
-          child: DropdownButton<int>(
-            isExpanded: false,
-            isDense: true,
-            dropdownColor: Kivawhite,
-            menuMaxHeight: 240,
-            value: selectedYear,
-            onChanged: (int? newValue) {
-              setState(() {
-                selectedYear = newValue!;
-              });
-            },
-            items: widget.years.map<DropdownMenuItem<int>>((int value) {
-              return DropdownMenuItem<int>(
-                value: value,
-                child: Text(
-                  value.toString(),
-                  style: TextStyle(fontSize: 11),
-                ),
-              );
-            }).toList(),
-          ),
-        ),
 
         Container(
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(14)),
-          height: 290,
+          height: 330,
           width: 322,
           child: MonthPickerWidget(
             selectedDate: selectedDate ?? DateTime.now(),
@@ -92,18 +62,21 @@ class _CalendarPageState extends State<CalendarPage> {
 class MonthPickerWidget extends StatefulWidget {
   final DateTime selectedDate;
   final ValueChanged<DateTime> onChanged;
-
-  const MonthPickerWidget({
-    Key? key,
+  final List<int> years = List<int>.generate(101, (int index) => 2000 + index);
+  MonthPickerWidget({
+    super.key,
     required this.selectedDate,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   _MonthPickerWidgetState createState() => _MonthPickerWidgetState();
 }
 
 class _MonthPickerWidgetState extends State<MonthPickerWidget> {
+  DateTime? selectedDate;
+  int selectedYear = DateTime.now().year;
+  final List<int> years = List<int>.generate(101, (int index) => 2000 + index);
   late DateTime _selectedDate;
   List<String> Months = [
     'Jan',
@@ -136,20 +109,52 @@ class _MonthPickerWidgetState extends State<MonthPickerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final List<int> years =
+        List<int>.generate(101, (int index) => 2000 + index);
     return BlocListener<HistoryBlocBloc, HistoryBlocState>(
       listener: (context, state) {
         if (state is dataSuccessfull) {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Historypage()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Historypage()));
         }
         // TODO: implement listener
       },
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 20,
+              left: 38.0,
+            ),
+            child: DropdownButton<int>(
+              isExpanded: false,
+              isDense: true,
+              dropdownColor: Kivawhite,
+              menuMaxHeight: 240,
+              value: selectedYear,
+              onChanged: (int? newValue) {
+                setState(() {
+                  selectedYear = newValue!;
+                });
+              },
+              items: widget.years.map<DropdownMenuItem<int>>((int value) {
+                return DropdownMenuItem<int>(
+                  value: value,
+                  onTap: () {},
+                  child: Text(
+                    value.toString(),
+                    style: const TextStyle(fontSize: 11),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
           GridView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 1),
             shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               mainAxisSpacing: 5.0, // Adjust spacing between rows/columns
               crossAxisSpacing: 5.0, // Adjust spacing between columns/rows
@@ -190,16 +195,16 @@ class _MonthPickerWidgetState extends State<MonthPickerWidget> {
               children: [
                 TextButton(
                     onPressed: () {
-                      context
-                          .read<HistoryBlocBloc>()
-                          .add(GetLogData(selectedmonth: _selectedDate));
+                      context.read<HistoryBlocBloc>().add(GetLogData(
+                          selectedmonth: _selectedDate,
+                          selectedYear: selectedYear));
                       // Navigator.push(
                       //     context,
                       //     MaterialPageRoute(
                       //         builder: (context) => Historypage()));
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 20.0, bottom: 8.0),
+                    child: const Padding(
+                      padding: EdgeInsets.only(top: 20.0, bottom: 8.0),
                       child: Text('OK',
                           style: TextStyle(
                               color: Colors.black,

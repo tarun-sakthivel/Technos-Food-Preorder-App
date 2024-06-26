@@ -8,7 +8,11 @@ final class HistoryBlocInitial extends HistoryBlocState {}
 final class dataSuccessfull extends HistoryBlocState {
   String successMessage;
   DateTime? selectedmonth;
-  dataSuccessfull({required this.successMessage, required this.selectedmonth});
+  int yearSelected;
+  dataSuccessfull(
+      {required this.successMessage,
+      required this.selectedmonth,
+      required this.yearSelected});
 }
 
 final class dataFailed extends HistoryBlocState {

@@ -8,9 +8,9 @@ class HistoryBlocBloc extends Bloc<HistoryBlocEvent, HistoryBlocState> {
   HistoryBlocBloc() : super(HistoryBlocInitial()) {
     on<GetLogData>((event, emit) {
       emit(dataSuccessfull(
-        successMessage: 'Data successfull',
-        selectedmonth: event.selectedmonth,
-      ));
+          successMessage: 'Data successfull',
+          selectedmonth: event.selectedmonth,
+          yearSelected: event.selectedYear));
     });
   }
 }

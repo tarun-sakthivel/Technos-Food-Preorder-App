@@ -46,13 +46,13 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
 
     on<NoChangeInDynamicCalendar>((event,emit){
       print("INVOKED CALCEL FUNCTION");
-      print("dates ${dates}");
-      print("previous dummy data ${dummydates}");
+      print("dates $dates");
+      print("previous dummy data $dummydates");
       dummydates.clear();
       dummydates = List.from(dates);
       
-      print("dates ${dates}");
-      print("new dummy data ${dummydates}");
+      print("dates $dates");
+      print("new dummy data $dummydates");
       
     });
   }
