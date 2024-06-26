@@ -56,7 +56,7 @@ class _HistorryCalendarState extends State<HistorryCalendar> {
           child: Padding(
             padding: EdgeInsets.only(top: 15.0, left: 20, bottom: 15),
             child: Text(
-              '$selectedMonth',
+              'History',
               style: TextStyle(
                   color: Colors.white, fontSize: 20, fontFamily: 'Poppins'),
             ),
