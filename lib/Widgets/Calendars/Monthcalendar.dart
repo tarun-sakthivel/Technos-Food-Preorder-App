@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Screens/LogPage/Historypage.dart';
+import 'package:food_preorder_app/Screens/LogPage/UserLogPage.dart';
 import 'package:food_preorder_app/bloc/HistoryBloc/history_bloc_bloc.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -113,10 +114,15 @@ class _MonthPickerWidgetState extends State<MonthPickerWidget> {
         List<int>.generate(101, (int index) => 2000 + index);
     return BlocListener<HistoryBlocBloc, HistoryBlocState>(
       listener: (context, state) {
-        if (state is dataSuccessfull) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const Historypage()));
-        }
+        // if (state is dataSuccessfull) {
+        //   // Navigator.push(
+        //   //     context,
+        //   //     MaterialPageRoute(
+        //   //         builder: (context) =>
+        //   //             UserLogPage(initialDate: DateTime.now())));
+        //   Navigator.push(context,
+        //       MaterialPageRoute(builder: (context) =>  Historypage()));
+        // }
         // TODO: implement listener
       },
       child: Column(

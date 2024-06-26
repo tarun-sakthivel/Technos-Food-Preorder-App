@@ -1,10 +1,12 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Screens/Home/HomePage.dart';
+import 'package:food_preorder_app/Screens/LogPage/Historypage.dart';
 import 'package:food_preorder_app/Widgets/Calendars/Monthcalendar.dart';
+import 'package:food_preorder_app/bloc/HistoryBloc/history_bloc_bloc.dart';
 
 class UserLogPage extends StatefulWidget {
   final DateTime initialDate;
@@ -72,41 +74,51 @@ class _UserLogPageState extends State<UserLogPage> {
             ]),
             leading: IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomePage()));
+                  Navigator.pop(context);
                 },
                 icon: const Icon(
                   Icons.navigate_before,
                   size: 28,
                   color: Kivagreen,
                 ))),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Choose the month and year",
-                  style: Kmaintext.copyWith(
-                      fontWeight: FontWeight.w100,
-                      fontSize: 15,
-                      color: const Color(0xFF666666)),
+        body: BlocListener<HistoryBlocBloc, HistoryBlocState>(
+          listener: (context, state) {
+            // TODO: implement listener
+            if (state is dataSuccessfull) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Historypage(
+                          selectedmonth: state.selectedmonth,
+                          yearSelected: state.yearSelected)));
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Choose the month and year",
+                    style: Kmaintext.copyWith(
+                        fontWeight: FontWeight.w100,
+                        fontSize: 15,
+                        color: const Color(0xFF666666)),
+                  ),
                 ),
-              ),
-              Center(
-                child: Container(
-                    width: 320,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: Colors.black)),
-                    child: CalendarPage()),
-              ),
-            ],
+                Center(
+                  child: Container(
+                      width: 320,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: Colors.black)),
+                      child: CalendarPage()),
+                ),
+              ],
+            ),
           ),
         ),
       ),
