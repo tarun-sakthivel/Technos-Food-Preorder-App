@@ -48,8 +48,25 @@ class _DynamicCalendarState extends State<DynamicCalendar> {
       lastDayOfMonth = DateTime(now.year, now.month + 2, 0);
     }
 
-    return BlocBuilder<CalendarBloc, CalendarState>(
+    return BlocConsumer<CalendarBloc, CalendarState>(
+      listener: (context, state) {
+        // if (state is AddingToDatabase){
+        //   print("from dynamic calendar checking the listerner functionality");
+        //   CustomDialog(message: "Adding");
+          
+        // }
+        // if (state is AddingToDatabaseFailed){
+        //   showErrorDialog(context, "failed", "error");
+        // }
+      },
       builder: (context, state) {
+        // if (state is AddingToDatabase){
+        //   print("from dynamic calendar checking the listerner functionality");
+          
+        //   return CustomDialog(message: "Adding");
+        // }
+        
+        
         // if (state is DynamicCalendarChanged){
         //   return TableCalendar(
         //   firstDay: firstDayOfMonth,

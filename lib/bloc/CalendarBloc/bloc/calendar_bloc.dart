@@ -10,8 +10,16 @@ part 'calendar_state.dart';
 class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   CalendarBloc() : super(CalendarInitial()) {
     DateTime now = DateTime.now();
-    on<ChangeCalendar>((event, emit) {
+    on<ChangeCalendar>((event, emit) async {
       // TODO: implement event handler
+      // emit((AddingToDatabase()));
+      // await Future.delayed(Duration(seconds: 1));
+      //CustomDialog(message: "Adding your orders");
+
+      
+      
+      
+      
       dates.clear();
       dates = List.from(dummydates);
       getFutureDates(dates);
@@ -54,6 +62,33 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       print("new dummy data ${dummydates}");
       SnackbarHelper.showSnackbar(event.context,
           message: "No changes Done", icon: Icons.close, color: Colors.red);
+    });
+
+
+    on<AddOrdersToDatabase>((event,emit)async{
+      //TODO:use the api calls for the post function
+      try{
+        emit((AddingToDatabase()));
+        print("adding to database state is emmitted");
+        
+        await Future.delayed(Duration(seconds: 2));
+        add(ChangeCalendar(context: event.context));
+      } catch (e){
+        print(e.toString());
+
+        add(NoChangeInDynamicCalendar(context: event.context));
+
+      }
+      Navigator.pop(event.context);
+      
+      
+    });
+
+
+
+
+    on<ShowDynamicCalendar>((event,emit){
+      emit((ShowingDynamicCalendar()));
     });
   }
 }

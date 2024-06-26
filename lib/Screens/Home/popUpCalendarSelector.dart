@@ -88,14 +88,16 @@ void ShowSelectorCalendar(BuildContext context) {
                             fontWeight: FontWeight.w700, fontSize: 12)))),
           ),
           GestureDetector(
-            onTap: () {
+            onTap: () async {
               //dates = dates.union(future_dates);
               //modifieddate.clear();
               //calling the Bloc
+              //context.read<CalendarBloc>().add(ChangeCalendar(context: context));
+
               context
                   .read<CalendarBloc>()
-                  .add(ChangeCalendar(context: context));
-              Navigator.pop(context);
+                  .add(AddOrdersToDatabase(context: context));
+              // Navigator.pop(context);
 
               // setState(context){
 
@@ -103,12 +105,22 @@ void ShowSelectorCalendar(BuildContext context) {
             },
             child: Container(
                 color: Colors.transparent,
-                height: 30,
+                height: 50,
                 width: 50,
-                child: Center(
-                    child: Text('Ok',
-                        style: Ksecondarytext.copyWith(
-                            fontWeight: FontWeight.w700, fontSize: 12)))),
+                child: BlocBuilder<CalendarBloc, CalendarState>(
+                  builder: (context, state) {
+                    if (state is AddingToDatabase) {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                        color: Kivagreen,
+                      ));
+                    }
+                    return Center(
+                        child: Text('Ok',
+                            style: Ksecondarytext.copyWith(
+                                fontWeight: FontWeight.w700, fontSize: 12)));
+                  },
+                )),
           ),
         ],
         shape: RoundedRectangleBorder(
