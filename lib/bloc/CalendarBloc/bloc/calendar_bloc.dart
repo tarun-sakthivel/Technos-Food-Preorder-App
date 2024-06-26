@@ -26,7 +26,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       final date = event.date;
 
 
-      if (date.weekday != DateTime.sunday && date.isAfter(DateTime(now.year, now.month, now.day))) {
+      if (date.weekday != DateTime.sunday && date.isAfter(DateTime(now.year, now.month, now.day)) && DateTime(date.year,date.month,date.day) !=(DateTime(now.year, now.month, now.day))) {
         if (dummydates.any((d) => isSameDay(d, date))) {
                       //dates.removeWhere((d) => isSameDay(d, selectedDay));
           dummydates.removeWhere((d) => isSameDay(d, date));
