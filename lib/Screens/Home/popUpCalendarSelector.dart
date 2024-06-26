@@ -35,7 +35,7 @@ void ShowSelectorCalendar(BuildContext context) {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
@@ -45,12 +45,22 @@ void ShowSelectorCalendar(BuildContext context) {
                             fontWeight: FontWeight.w400,
                             fontSize: 20),
                       ),
+                      IconButton(
+                          onPressed: () {
+                            context.read<CalendarBloc>().add(
+                                NoChangeInDynamicCalendar(context: context));
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(
+                            Icons.close,
+                            color: Kivawhite,
+                          ))
                     ],
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(3.0),
+                padding: const EdgeInsets.symmetric(horizontal: 6.0),
                 child: DynamicCalendar(
                   highlightedDates: dummydates,
                   isInteractive: true,
@@ -58,38 +68,47 @@ void ShowSelectorCalendar(BuildContext context) {
               ),
             ]),
         actions: [
-          ElevatedButton(
-            onPressed: () {
-              context.read<CalendarBloc>().add(NoChangeInDynamicCalendar());
+          GestureDetector(
+            onTap: () {
+              context
+                  .read<CalendarBloc>()
+                  .add(NoChangeInDynamicCalendar(context: context));
               Navigator.pop(context);
 
               // setState(context){
 
               // } // Close the dialog
             },
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.black,
-              backgroundColor: Colors.white,
-            ),
-            child: const Text('Cancel'),
+            child: Container(
+                height: 30,
+                width: 60,
+                child: Center(
+                    child: Text('Cancel',
+                        style: Ksecondarytext.copyWith(
+                            fontWeight: FontWeight.w700, fontSize: 12)))),
           ),
-          ElevatedButton(
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
               //dates = dates.union(future_dates);
               //modifieddate.clear();
               //calling the Bloc
-              context.read<CalendarBloc>().add(ChangeCalendar());
+              context
+                  .read<CalendarBloc>()
+                  .add(ChangeCalendar(context: context));
               Navigator.pop(context);
 
               // setState(context){
 
               // } // Close the dialog
             },
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.black,
-              backgroundColor: Colors.white,
-            ),
-            child: const Text('OK'),
+            child: Container(
+                color: Colors.transparent,
+                height: 30,
+                width: 50,
+                child: Center(
+                    child: Text('Ok',
+                        style: Ksecondarytext.copyWith(
+                            fontWeight: FontWeight.w700, fontSize: 12)))),
           ),
         ],
         shape: RoundedRectangleBorder(

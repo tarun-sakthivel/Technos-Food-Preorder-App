@@ -224,14 +224,18 @@ class _DynamicCalendarState extends State<DynamicCalendar> {
           firstDay: firstDayOfMonth,
           lastDay: lastDayOfMonth,
           focusedDay: now,
+          
           headerStyle: const HeaderStyle(
               formatButtonVisible: false,
               rightChevronVisible: false,
               leftChevronVisible: false,
               rightChevronPadding: EdgeInsets.only(right: 0, bottom: 10),
               leftChevronPadding: EdgeInsets.only(left: 0, bottom: 10),
-              headerPadding: EdgeInsets.only(left: 10, top: 18, bottom: 10),
-              decoration: BoxDecoration(color: Kivawhite)),
+              headerPadding: EdgeInsets.only(left: 10, top: 18, bottom: 18),
+              decoration: BoxDecoration(color: Kivawhite),
+              titleTextStyle :Kcalendattitletext,),
+              
+              
 
           weekNumbersVisible: false,
           headerVisible: true,
@@ -243,7 +247,7 @@ class _DynamicCalendarState extends State<DynamicCalendar> {
 
               // tableBorder: TableBorder.all(width:1,borderRadius: BorderRadius.circular(14),color:Colors.black),
               // rowDecoration: BoxDecoration(border: Border.all(width:1)),
-              cellMargin: const EdgeInsets.all(2),
+              cellMargin: const EdgeInsets.all(0),
               isTodayHighlighted: false,
               outsideDaysVisible: false,
               outsideDecoration: BoxDecoration(
@@ -260,6 +264,13 @@ class _DynamicCalendarState extends State<DynamicCalendar> {
               //disabledTextStyle: const TextStyle(color: Colors.grey), // Style for disabled dates
               ),
           daysOfWeekVisible: true,
+          daysOfWeekStyle: DaysOfWeekStyle(dowTextFormatter: (date, locale) {
+           final daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+            return daysOfWeek[date.weekday - 1];
+          },
+          weekdayStyle: Ksecondarytext.copyWith(fontSize: 13,color: Kgrey),
+          weekendStyle: Ksecondarytext.copyWith(fontSize: 13,color: Kgrey),
+          ),
           // selectedDayPredicate: (day) {
           //   // Only show selected state for dates that are on or after the current date
           //   return selectedDates.any((d) => isSameDay(d, day)) && day.weekday != DateTime.sunday;
@@ -301,7 +312,7 @@ class _DynamicCalendarState extends State<DynamicCalendar> {
                       child: Text(
                         '${day.day}',
                         style: Kcalendartext.copyWith(color:day.isAfter(now)? Colors.white:  const Color.fromARGB(
-                              255, 201, 201, 201)),
+                              255, 201, 201, 201),fontSize: 12),
                       ),
                     ));
               } if (day.weekday == DateTime.sunday || day.isBefore(now)) {
@@ -316,7 +327,7 @@ class _DynamicCalendarState extends State<DynamicCalendar> {
                       '${day.day}',
                       style: Kcalendartext.copyWith(
                           color: const Color.fromARGB(
-                              255, 201, 201, 201)), // Text style for weekends
+                              255, 201, 201, 201),fontSize: 12), // Text style for weekends
                     ),
                   ),
                 );}
@@ -353,7 +364,7 @@ class _DynamicCalendarState extends State<DynamicCalendar> {
               return Center(
                 child: Text(
                   '${day.day}',
-                  style: Kcalendartext.copyWith(color: Colors.black), // Text style for weekends
+                  style: Kcalendartext.copyWith(color: Colors.black,fontSize: 12), // Text style for weekends
                 ),
               );
             },
