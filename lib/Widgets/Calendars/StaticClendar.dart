@@ -81,6 +81,10 @@ class _StaticCalendarState extends State<StaticCalendar> {
               //disabledTextStyle: const TextStyle(color: Colors.grey), // Style for disabled dates
               ),
           daysOfWeekVisible: true,
+          daysOfWeekStyle: DaysOfWeekStyle(dowTextFormatter: (date, locale) {
+           final daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+            return daysOfWeek[date.weekday - 1];
+          },),
           calendarBuilders: CalendarBuilders(
             defaultBuilder: (context, day, focusedDay) {
               if (isSameDay(today, day) &&
