@@ -79,13 +79,12 @@ class _HomePageState extends State<HomePage> {
                   message: "Changes Successfull",
                   icon: Icons.check,
                   color: Colors.green);
+            } else if (state is ShowingDynamicCalendar) {
+              ShowSelectorCalendar(context);
+            } else if (state is AddingToDatabase) {
+              CustomDialog(
+                  message: "adding your orders"); // TODO: implement listener
             }
-            else if (state is ShowingDynamicCalendar){
-                ShowSelectorCalendar(context);
-            } 
-            else if (state is AddingToDatabase){
-              CustomDialog(message: "adding your orders");// TODO: implement listener
-          }
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 19),
@@ -136,21 +135,21 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      
-                        Button(
-                            Navigation: () {
-                              //  Navigator.pop(context);
-                              //ShowSelectorCalendar(context);
-                              context.read<CalendarBloc>().add(ShowDynamicCalendar());
-                            },
-                            fontSize: 15,
-                            textColor: Kivawhite,
-                            textStyle: "Poppins",
-                            size: const Size(150, 40),
-                            customWidget: Text("Order/Modify",
-                                style: Ksecondarytext.copyWith(
-                                    color: Colors.white))),
-                     
+                      Button(
+                          Navigation: () {
+                            //  Navigator.pop(context);
+                            //ShowSelectorCalendar(context);
+                            context
+                                .read<CalendarBloc>()
+                                .add(ShowDynamicCalendar());
+                          },
+                          fontSize: 15,
+                          textColor: Kivawhite,
+                          textStyle: "Poppins",
+                          size: const Size(150, 40),
+                          customWidget: Text("Order/Modify",
+                              style: Ksecondarytext.copyWith(
+                                  color: Colors.white))),
                     ],
                   ),
                 ],

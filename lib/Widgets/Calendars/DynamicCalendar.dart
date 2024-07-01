@@ -303,21 +303,21 @@ class _DynamicCalendarState extends State<DynamicCalendar> {
               : null,
           calendarBuilders: CalendarBuilders(
             defaultBuilder: (context, day, focusedDay) {
-              // if ( isSameDay(today, day)&& selectedDates.any((d)=>isSameDay(d,day))) {
-              //   return Container(
-              //     decoration: BoxDecoration(
-              //       border:Border.all(color: Kivawhite,width:2),
-              //       color: Color.fromRGBO(196, 153, 108, 1),
-              //       shape: BoxShape.circle,
-              //     ),
-              //     child: Center(
-              //       child: Text(
-              //         '${day.day}',
-              //         style: const TextStyle(color: Colors.white),
-              //       ),
-              //     ),
-              //   );
-              // }
+              if ( isSameDay(today, day)&& dummydates.any((d)=>isSameDay(d,day))) {
+                return Container(
+                  decoration: BoxDecoration(
+                    border:Border.all(color: Kivawhite,width:2),
+                    color: isAfter9AM()?Kgrey: Color.fromRGBO(196, 153, 108, 1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Text(
+                      '${day.day}',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                );
+              }
               if (!isSameDay(today, day) &&
                   dummydates.any((d) => isSameDay(d, day)) ) {
                 return Container(
@@ -332,7 +332,7 @@ class _DynamicCalendarState extends State<DynamicCalendar> {
                               255, 201, 201, 201),fontSize: 12),
                       ),
                     ));
-              } if (day.weekday == DateTime.sunday || day.isBefore(now)) {
+              } if (day.weekday == DateTime.sunday || day.isBefore(DateTime(now.year,now.month,now.day))) {
                 // Disable interaction for Saturdays and Sundays
                 return Container(
                   decoration: const BoxDecoration(

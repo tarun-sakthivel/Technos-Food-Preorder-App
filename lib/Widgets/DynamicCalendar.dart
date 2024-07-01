@@ -1,36 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
-import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/dates.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class StaticCalendar extends StatefulWidget {
-  // final Set<DateTime> highlightedDates;
-  // final bool isInteractive;
+class SelectableCalendar extends StatefulWidget {
+  final Set<DateTime> highlightedDates;
+  final bool isInteractive;
 
-  const StaticCalendar({
+  const SelectableCalendar({
     super.key,
-    // required this.highlightedDates,
-    // this.isInteractive = false,
+    required this.highlightedDates,
+    this.isInteractive = false,
   });
 
   @override
-  _StaticCalendarState createState() => _StaticCalendarState();
+  _SelectableCalendarState createState() => _SelectableCalendarState();
 }
 
-class _StaticCalendarState extends State<StaticCalendar> {
+class _SelectableCalendarState extends State<SelectableCalendar> {
   //late Set<DateTime> selectedDates;
 
   @override
   void initState() {
     super.initState();
+    // getFutureDates(widget.highlightedDates);
+    // // selectedDates = List.from(widget.highlightedDates);
+    // selectedDates = future_dates;
   }
 
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
     DateTime today = DateTime(now.year, now.month, now.day);
-
+    print("today $today");
     //print(selectedDates.contains(today));
     DateTime firstDayOfMonth = DateTime(now.year, now.month, 1);
     DateTime lastDayOfMonth = DateTime(now.year, now.month + 1, 0);
@@ -53,18 +55,19 @@ class _StaticCalendarState extends State<StaticCalendar> {
           focusedDay: now,
           headerStyle: const HeaderStyle(
             formatButtonVisible: false,
-            rightChevronVisible: false,
-            leftChevronVisible: false,
-            headerPadding: EdgeInsets.only(left: 10, top: 10, bottom: 18),
+            rightChevronVisible: true,
           ),
+
           weekNumbersVisible: false,
           headerVisible: true,
           calendarFormat: CalendarFormat.month,
-          availableGestures: AvailableGestures.all,
+          availableGestures: widget.isInteractive
+              ? AvailableGestures.all
+              : AvailableGestures.none,
           calendarStyle: CalendarStyle(
               // tableBorder: TableBorder.all(width:1,borderRadius: BorderRadius.circular(14),color:Colors.black),
               // rowDecoration: BoxDecoration(border: Border.all(width:1)),
-              cellMargin: const EdgeInsets.all(0),
+              cellMargin: const EdgeInsets.all(2),
               isTodayHighlighted: false,
               outsideDaysVisible: false,
               outsideDecoration: BoxDecoration(
@@ -81,29 +84,50 @@ class _StaticCalendarState extends State<StaticCalendar> {
               //disabledTextStyle: const TextStyle(color: Colors.grey), // Style for disabled dates
               ),
           daysOfWeekVisible: true,
-          daysOfWeekStyle: DaysOfWeekStyle(dowTextFormatter: (date, locale) {
-           final daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-            return daysOfWeek[date.weekday - 1];
-          },),
+          // selectedDayPredicate: (day) {
+          //   // Only show selected state for dates that are on or after the current date
+          //   return selectedDates.any((d) => isSameDay(d, day)) && day.weekday != DateTime.sunday;
+          // },
+
+          onDaySelected: widget.isInteractive
+              ? (selectedDay, focusedDay) {
+                  // Check if the selected day is not a Saturday or Sunday
+                  if (selectedDay.weekday != DateTime.sunday &&
+                      selectedDay
+                          .isAfter(DateTime(now.year, now.month, now.day))) {
+                    setState(() {
+                      if (dates.any((d) => isSameDay(d, selectedDay))) {
+                        dates.removeWhere((d) => isSameDay(d, selectedDay));
+                        future_dates
+                            .removeWhere((d) => isSameDay(d, selectedDay));
+                      } else {
+                        dates.add(selectedDay);
+                        future_dates.add(selectedDay);
+                      }
+                    });
+                    print("printing future dates $dates");
+                  }
+                }
+              : null,
           calendarBuilders: CalendarBuilders(
             defaultBuilder: (context, day, focusedDay) {
-              if (isSameDay(today, day) &&
+              // if ( isSameDay(today, day)&& selectedDates.any((d)=>isSameDay(d,day))) {
+              //   return Container(
+              //     decoration: BoxDecoration(
+              //       border:Border.all(color: Kivawhite,width:2),
+              //       color: Color.fromRGBO(196, 153, 108, 1),
+              //       shape: BoxShape.circle,
+              //     ),
+              //     child: Center(
+              //       child: Text(
+              //         '${day.day}',
+              //         style: const TextStyle(color: Colors.white),
+              //       ),
+              //     ),
+              //   );
+              // }
+              if (!isSameDay(today, day) &&
                   future_dates.any((d) => isSameDay(d, day))) {
-                return Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Kivawhite, width: 2),
-                    color: const Color.fromRGBO(196, 153, 108, 1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Text(
-                      '${day.day}',
-                      style: Kcalendartext.copyWith(color: Colors.white),
-                    ),
-                  ),
-                );
-              }
-              if (future_dates.any((d) => isSameDay(d, day))) {
                 return Container(
                     decoration: BoxDecoration(
                         border: Border.all(color: Kivawhite, width: 2),
@@ -112,19 +136,7 @@ class _StaticCalendarState extends State<StaticCalendar> {
                     child: Center(
                       child: Text(
                         '${day.day}',
-                        style: Kcalendartext.copyWith(color: Colors.white),
-                      ),
-                    ));
-              } else if (day.isBefore(today)) {
-                return Container(
-                    decoration: const BoxDecoration(
-                        //border:Border.all(color: Kivawhite,width:2),
-                        shape: BoxShape.circle),
-                    child: Center(
-                      child: Text(
-                        '${day.day}',
-                        style: Kcalendartext.copyWith(
-                            color: const Color.fromARGB(255, 201, 201, 201)),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ));
               } else if (day.weekday == DateTime.sunday) {
@@ -137,8 +149,8 @@ class _StaticCalendarState extends State<StaticCalendar> {
                   child: Center(
                     child: Text(
                       '${day.day}',
-                      style: Kcalendartext.copyWith(
-                          color: const Color.fromARGB(
+                      style: const TextStyle(
+                          color: Color.fromARGB(
                               255, 201, 201, 201)), // Text style for weekends
                     ),
                   ),
@@ -161,12 +173,7 @@ class _StaticCalendarState extends State<StaticCalendar> {
               // }
               // If the current date is highlighted, show it in golden color
 
-              return Center(
-                child: Text(
-                  '${day.day}',
-                  style: Kcalendartext, // Text style for weekends
-                ),
-              );
+              return null;
             },
             // todayBuilder: (context, day, focusedDay) {
             //   if (selectedDates.contains(now)){

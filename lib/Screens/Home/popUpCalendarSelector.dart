@@ -109,9 +109,11 @@ void ShowSelectorCalendar(BuildContext context) {
                 width: 50,
                 child: BlocBuilder<CalendarBloc, CalendarState>(
                   builder: (context, state) {
-                    if (state is AddingToDatabase){
-                      return const  Center(
-                        child: CircularProgressIndicator(color:Kivagreen,));
+                    if (state is AddingToDatabase) {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                        color: Kivagreen,
+                      ));
                     }
                     return Center(
                         child: Text('Ok',
