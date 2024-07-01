@@ -4,6 +4,7 @@ import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Screens/Home/popUpCalendarSelector.dart';
 import 'package:food_preorder_app/Screens/Login/LoginScreen.dart';
+import 'package:food_preorder_app/UserModel.dart';
 import 'package:food_preorder_app/Widgets/Button.dart';
 import 'package:food_preorder_app/Widgets/Calendars/StaticClendar.dart';
 import 'package:food_preorder_app/Widgets/OrdersWidget.dart';
@@ -11,7 +12,6 @@ import 'package:food_preorder_app/Widgets/Popups/DialogeBox.dart';
 import 'package:food_preorder_app/Widgets/Popups/SnackBarWidget.dart';
 import 'package:food_preorder_app/Widgets/UserlogButton.dart';
 import 'package:food_preorder_app/bloc/CalendarBloc/bloc/calendar_bloc.dart';
-import 'package:food_preorder_app/dates.dart';
 
 int no_of_orders = 0;
 
@@ -54,6 +54,7 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(
                 onPressed: () {
+                  Clear_data();
                   // SnackbarHelper.showSnackbar(context,
                   // title: "Not implemented!!",
                   // message: "Logout function not yet implemented yet ",
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const Loginscreen()),
                       (route) => false);
                   SnackbarHelper.showSnackbar(context,
-                      message: "Logged Out!",
+                      message: "Logged Out and all user data removed!",
                       icon: Icons.check_box,
                       color: Colors.green);
                 },
@@ -93,9 +94,10 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Hello Techno!", style: Kmaintext),
+                  Text("Hello ${UserName}!", style: Kmaintext),
                   const SizedBox(height: 24),
-                  NumberOfOrders(numberOfOrders: previous_dates.length),
+                  //NumberOfOrders(numberOfOrders: previous_dates.length),
+                  NumberOfOrders(numberOfOrders: Orders_completed),
                   const SizedBox(height: 24),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

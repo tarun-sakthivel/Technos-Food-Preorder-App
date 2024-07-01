@@ -32,6 +32,9 @@ class _LoginscreenState extends State<Loginscreen> {
       backgroundColor: Colors.white,
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
+          if (state is AuthLoading){
+
+          }
           if (state is AuthLoading) {
             showDialog(
               context: context,
@@ -40,7 +43,7 @@ class _LoginscreenState extends State<Loginscreen> {
                 return CustomDialog(message: "Logging in...");
               },
             );
-          } else if (state is AuthSuccessfull) {
+          }  if (state is AuthSuccessfull) {
             // Close the loading dialog
             FocusScope.of(context).unfocus(); // Dismiss keyboard if open
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -49,7 +52,10 @@ class _LoginscreenState extends State<Loginscreen> {
               MaterialPageRoute(builder: (context) => const HomePage()),
               (Route) => false,
             );
-          } else if (state is AuthFailed) {
+          }  if (state is AuthFailed) {
+            //remove all the loading widget or scaffold widget
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            Navigator.pop(context);
             return showErrorDialog(context, state.errorMessage, "Login Error");
             //Navigator.push(context, MaterialPageRoute(builder: (context)=> ErrorDialog(title: "Error", content: "Can't able to Login check your email and password")));
 
@@ -290,6 +296,8 @@ class _LoginscreenState extends State<Loginscreen> {
                                   const EdgeInsets.only(bottom: 8, top: 30),
                               child: Button(
                                 Navigation: () {
+                                  print(Username);
+                                  print(Password);
                                   FocusScope.of(context)
                                       .unfocus(); // Dismiss keyboard
                                   context.read<AuthBloc>().add(

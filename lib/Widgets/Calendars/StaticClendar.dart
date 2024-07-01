@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
-import 'package:food_preorder_app/dates.dart';
+import 'package:food_preorder_app/UserModel.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class StaticCalendar extends StatefulWidget {

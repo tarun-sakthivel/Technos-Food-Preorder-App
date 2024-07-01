@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:food_preorder_app/UserModel.dart';
 import 'package:food_preorder_app/Widgets/Popups/SnackBarWidget.dart';
-import 'package:food_preorder_app/dates.dart';
 import 'package:food_preorder_app/utils/SameDayFunction.dart';
 
 part 'calendar_event.dart';
