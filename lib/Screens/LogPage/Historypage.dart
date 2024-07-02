@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
+import 'package:food_preorder_app/UserModel.dart';
 import 'package:food_preorder_app/Widgets/Calendars/HistoryCalendar.dart';
 
 class Historypage extends StatefulWidget {
@@ -152,6 +153,8 @@ class _HistorypageState extends State<Historypage> {
                   height: 500,
                   width: 400,
                   child: HistorryCalendar(
+                    selectedMonth: widget.selectedmonth,
+                    selectedYear: widget.yearSelected,
                     highlightedDates: widget.data,
                   ),
                 ),

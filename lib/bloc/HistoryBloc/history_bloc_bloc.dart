@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:food_preorder_app/UserModel.dart';
 import 'package:intl/intl.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -21,15 +22,15 @@ class HistoryBlocBloc extends Bloc<HistoryBlocEvent, HistoryBlocState> {
         print(int.parse(event.selectedmonth.toString().substring(5, 7)));
 
         final url = Uri.parse(
-            'http://ivalunch-001-site1.atempurl.com/api/User/UserLunchHistory');
+            'http://lunchapi-001-site1.etempurl.com/api/User/UserLunchHistory');
         final headers = {
           'Content-Type': 'application/json',
           'Authorization':
-              'Basic ' + base64Encode(utf8.encode('11183821:60-dayfreetrial'))
+              'Basic ' + base64Encode(utf8.encode('11184427:60-dayfreetrial'))
         };
         print(history);
         final body = jsonEncode({
-          'id': 123,
+          'id': '123',
           'datetime': "${history.toIso8601String()}",
         });
 

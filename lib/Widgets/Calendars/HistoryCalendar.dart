@@ -6,8 +6,12 @@ import 'package:table_calendar/table_calendar.dart';
 class HistorryCalendar extends StatefulWidget {
   final List<DateTime> highlightedDates;
   final bool isInteractive;
+  final DateTime? selectedMonth;
+  final int selectedYear;
   const HistorryCalendar({
     super.key,
+    required this.selectedYear,
+    required this.selectedMonth,
     required this.highlightedDates,
     this.isInteractive = false,
   });
@@ -17,12 +21,7 @@ class HistorryCalendar extends StatefulWidget {
 }
 
 class _HistorryCalendarState extends State<HistorryCalendar> {
-  List<DateTime> highlightedDates = [
-    DateTime(2024, 06, 02),
-    DateTime(2024, 06, 22),
-    DateTime(2024, 06, 12),
-    DateTime(2024, 06, 27)
-  ];
+  List<DateTime> highlightedDates = [];
 
   @override
   void initState() {
@@ -33,6 +32,7 @@ class _HistorryCalendarState extends State<HistorryCalendar> {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
+
     DateTime today = DateTime(now.year, now.month, now.day);
 
     // Set the focused date within the range of highlighted dates
@@ -40,10 +40,10 @@ class _HistorryCalendarState extends State<HistorryCalendar> {
         ? widget.highlightedDates[0]
         //? highlightedDates[0]
         : DateTime.now();
-    DateTime firstDayOfMonth =
-        DateTime(dateselected.year, dateselected.month, 1);
-    DateTime lastDayOfMonth =
-        DateTime(dateselected.year, dateselected.month + 1, 0);
+    DateTime firstDayOfMonth = DateTime(widget.selectedYear,
+        int.parse(widget.selectedMonth.toString().substring(5, 7)), 1);
+    DateTime lastDayOfMonth = DateTime(widget.selectedYear,
+        int.parse(widget.selectedMonth.toString().substring(5, 7)) + 1, 0);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -83,7 +83,10 @@ class _HistorryCalendarState extends State<HistorryCalendar> {
             child: TableCalendar(
               firstDay: firstDayOfMonth,
               lastDay: lastDayOfMonth,
-              focusedDay: dateselected,
+              focusedDay: DateTime(
+                  widget.selectedYear,
+                  int.parse(widget.selectedMonth.toString().substring(5, 7)),
+                  12),
               headerStyle: const HeaderStyle(
                 headerPadding: EdgeInsets.all(16),
                 titleTextStyle: TextStyle(
@@ -130,7 +133,7 @@ class _HistorryCalendarState extends State<HistorryCalendar> {
               ),
               calendarBuilders: CalendarBuilders(
                 defaultBuilder: (context, day, focusedDay) {
-                  if (highlightedDates.any((d) => isSameDay(d, day))) {
+                  if (widget.highlightedDates.any((d) => isSameDay(d, day))) {
                     return Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: Kivawhite, width: 2),

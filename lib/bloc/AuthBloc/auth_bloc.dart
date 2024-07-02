@@ -28,7 +28,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         //await Future.delayed(const Duration(seconds: 2));
         try {
           final url = Uri.parse(
-              'http://ivalunch-001-site1.atempurl.com/api/User/Login?username=${event.userName}&password=${event.password}');
+              'http://lunchapi-001-site1.etempurl.com/api/User/Login?username=${event.userName}&password=${event.password}');
           final headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Basic ' +

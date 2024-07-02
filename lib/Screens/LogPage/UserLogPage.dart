@@ -97,7 +97,13 @@ class _UserLogPageState extends State<UserLogPage> {
               return showErrorDialog(
                   context, state.errorMessage, 'Error Occured');
             } else if (state is dataLoading) {
-              CustomDialog(message: 'Loading...');
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext context) {
+                  return CustomDialog(message: "Loading...");
+                },
+              );
             }
           },
           child: Padding(

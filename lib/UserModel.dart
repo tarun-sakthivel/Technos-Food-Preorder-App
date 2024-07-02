@@ -7,7 +7,7 @@ List<DateTime> dates = [
   DateTime(2024, 6, 21),
   DateTime(2024, 6, 22),
   DateTime(2024, 6, 27),
-  DateTime(2024,7,12),
+  DateTime(2024, 7, 12),
 ];
 
 List<DateTime> dummydates = [];
@@ -65,25 +65,22 @@ late String Company;
 late String Employeecode;
 late int Orders_completed = 90;
 
-
-
-
-void Add_data(Map<String,dynamic> data){
-          Id = data['id'];
-         Employeecode = data['employeecode'];
-         FirstName = data['firstname'];
-         LastName = data['lastname'];
-         UserName = data['username'];
-         Company = data['company'];
-        //  print(Id);
-        //  print(Employeecode);
-        //  print(FirstName);
-        //  print(LastName);
-        //  print(UserName);
-        //  print(Company);
+void Add_data(Map<String, dynamic> data) {
+  Id = data['id'];
+  Employeecode = data['employeecode'];
+  FirstName = data['firstname'];
+  LastName = data['lastname'];
+  UserName = data['username'];
+  Company = data['company'];
+  //  print(Id);
+  //  print(Employeecode);
+  //  print(FirstName);
+  //  print(LastName);
+  //  print(UserName);
+  //  print(Company);
 }
 
-void Clear_data(){
+void Clear_data() {
   Id = 0;
   Employeecode = "";
   FirstName = "";
@@ -91,5 +88,4 @@ void Clear_data(){
   UserName = "";
   Company = "";
   print("data cleared  from the app local storage");
-
 }
