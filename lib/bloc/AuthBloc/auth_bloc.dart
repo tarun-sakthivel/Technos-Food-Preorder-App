@@ -31,7 +31,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         try{
           
 
-          final url = Uri.parse('${Baseurl.toString()}/api/User/Login?username=${event.userName}&password=${event.password}');
+          final url = Uri.parse('http://lunchapi-001-site1.etempurl.com/api/User/Login?username=${event.userName}&password=${event.password}');
           final headers = {'Content-Type': 'application/json','Authorization' : 'Basic ' + base64Encode(utf8.encode('${Authusername}:${Authpassword}'))};
           
 

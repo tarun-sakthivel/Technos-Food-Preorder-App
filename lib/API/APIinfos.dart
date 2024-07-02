@@ -1,3 +1,3 @@
-final String Authusername = '11183821';
+final String Authusername = '11184427';
 final String Authpassword = '60-dayfreetrial';
-final String Baseurl = 'http://ivalunch-001-site1.atempurl.com/';
+final String Baseurl = 'http://lunchapi-001-site1.etempurl.com';

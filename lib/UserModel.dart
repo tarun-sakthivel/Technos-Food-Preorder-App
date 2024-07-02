@@ -66,7 +66,7 @@ late String LastName;
 late String Password;
 late String Company;
 late String Employeecode;
-late int Orders_completed = 90;
+late int Orders_completed ;
 
 
 
@@ -78,12 +78,12 @@ void Add_data(Map<String,dynamic> data){
          LastName = data['lastname'];
          UserName = data['username'];
          Company = data['company'];
-        //  print(Id);
-        //  print(Employeecode);
-        //  print(FirstName);
-        //  print(LastName);
-        //  print(UserName);
-        //  print(Company);
+         print(Id);
+         print(Employeecode);
+         print(FirstName);
+         print(LastName);
+         print(UserName);
+         print(Company);
 }
 
 //clearing the user infromation when loggin out of the app
