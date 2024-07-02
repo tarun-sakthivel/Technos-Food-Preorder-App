@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:food_preorder_app/API/API_methods.dart';
 import 'package:food_preorder_app/UserModel.dart';
 import 'package:food_preorder_app/Widgets/Popups/SnackBarWidget.dart';
 import 'package:food_preorder_app/utils/SameDayFunction.dart';
@@ -83,8 +84,10 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       try{
         emit((AddingToDatabase()));
         print("adding to database state is emmitted");
+       
+        //TODO: write the api for pushing function in the databse
+        await pushPreLunchDetail(Id, dummydates);
         
-        await Future.delayed(Duration(seconds: 2));
         add(ChangeCalendar(context: event.context));
       } catch (e){
         print(e.toString());

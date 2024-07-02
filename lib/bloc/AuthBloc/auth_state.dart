@@ -27,3 +27,6 @@ final class AuthSuccessfull extends AuthState{
 final class AuthLoading extends AuthState{
   
 }
+final class GettingUserInfo extends AuthState{
+
+}

@@ -32,7 +32,15 @@ class _LoginscreenState extends State<Loginscreen> {
       backgroundColor: Colors.white,
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is AuthLoading){
+          if (state is GettingUserInfo){
+            Navigator.pop(context);
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return CustomDialog(message: "Getting User info..");
+              },
+            );
 
           }
           if (state is AuthLoading) {
@@ -45,6 +53,7 @@ class _LoginscreenState extends State<Loginscreen> {
             );
           }  if (state is AuthSuccessfull) {
             // Close the loading dialog
+            Navigator.pop(context);
             FocusScope.of(context).unfocus(); // Dismiss keyboard if open
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             Navigator.pushAndRemoveUntil(
