@@ -112,17 +112,22 @@ class _HistorypageState extends State<Historypage> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 16.0, horizontal: 8.0),
+                      vertical: 16.0, horizontal: 4.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "${monthSelected(widget.selectedmonth.toString().substring(5, 7))}"
-                        "  ${widget.yearSelected}",
-                        style: Kmaintext.copyWith(
-                            fontWeight: FontWeight.w100,
-                            fontSize: 20,
-                            color: const Color.fromARGB(255, 0, 0, 0)),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          "${monthSelected(widget.selectedmonth.toString().substring(5, 7))}"
+                          "  ${widget.yearSelected}",
+                          style: Kmaintext.copyWith(
+                              fontWeight: FontWeight.w100,
+                              fontSize: 20,
+                              color: const Color.fromARGB(255, 0, 0, 0)),
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

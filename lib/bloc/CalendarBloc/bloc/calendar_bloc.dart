@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:food_preorder_app/API/API_methods.dart';
 import 'package:food_preorder_app/UserModel.dart';
 import 'package:food_preorder_app/Widgets/Popups/SnackBarWidget.dart';
 import 'package:food_preorder_app/utils/SameDayFunction.dart';
@@ -16,10 +17,6 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       // await Future.delayed(Duration(seconds: 1));
       //CustomDialog(message: "Adding your orders");
 
-      
-      
-      
-      
       dates.clear();
       dates = List.from(dummydates);
       getFutureDates(dates);
@@ -34,21 +31,20 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       //&&(date.isAfter(DateTime(now.year, now.month, now.day)) || date.isAtSameMomentAs(now))
       //&& DateTime(date.year, date.month, date.day) !=(DateTime(now.year, now.month, now.day)
 
-      if (date.weekday != DateTime.sunday  &&(date.isAfter(DateTime(now.year, now.month, now.day)) || date.isAtSameMomentAs(now)) 
-            ) {
-              if (appConstraintSatsifsied(date)){
-                print("more than nine am ${date}");
-
-              }
-              else{
-                if (dummydates.any((d) => isSameDay(d, date))) {
-          //dates.removeWhere((d) => isSameDay(d, selectedDay));
-                  dummydates.removeWhere((d) => isSameDay(d, date));
-                } else {
-                  dummydates.add(date);
-                }
-                emit((DynamicCalendarChanged()));
-              }
+      if (date.weekday != DateTime.sunday &&
+          (date.isAfter(DateTime(now.year, now.month, now.day)) ||
+              date.isAtSameMomentAs(now))) {
+        if (appConstraintSatsifsied(date)) {
+          print("more than nine am ${date}");
+        } else {
+          if (dummydates.any((d) => isSameDay(d, date))) {
+            //dates.removeWhere((d) => isSameDay(d, selectedDay));
+            dummydates.removeWhere((d) => isSameDay(d, date));
+          } else {
+            dummydates.add(date);
+          }
+          emit((DynamicCalendarChanged()));
+        }
         // if (dummydates.any((d) => isSameDay(d, date))) {
         //   //dates.removeWhere((d) => isSameDay(d, selectedDay));
         //   dummydates.removeWhere((d) => isSameDay(d, date));
@@ -59,8 +55,6 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         print(dates);
         print("dummydates =================================");
         print(dummydates);
-
-        
       }
     });
 
@@ -77,45 +71,39 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
           message: "No changes Done", icon: Icons.close, color: Colors.red);
     });
 
-
-    on<AddOrdersToDatabase>((event,emit)async{
+    on<AddOrdersToDatabase>((event, emit) async {
       //TODO:use the api calls for the post function
-      try{
+      try {
         emit((AddingToDatabase()));
         print("adding to database state is emmitted");
-        
-        await Future.delayed(const Duration(seconds: 2));
+
+        //TODO: write the api for pushing function in the databse
+        await pushPreLunchDetail(Id, dummydates);
+
         add(ChangeCalendar(context: event.context));
-      } catch (e){
+      } catch (e) {
         print(e.toString());
 
         add(NoChangeInDynamicCalendar(context: event.context));
-
       }
       Navigator.pop(event.context);
-      
-      
     });
 
-
-
-
-    on<ShowDynamicCalendar>((event,emit){
+    on<ShowDynamicCalendar>((event, emit) {
       emit((ShowingDynamicCalendar()));
     });
   }
 }
+
 bool isAfter9AM() {
   DateTime now = DateTime.now();
   return now.hour > 9;
 }
 
-bool appConstraintSatsifsied(DateTime date){
+bool appConstraintSatsifsied(DateTime date) {
   DateTime now = DateTime.now();
-  if (isSameDay(date, DateTime(now.year,now.month,now.day)) && isAfter9AM()){
-      return true;
+  if (isSameDay(date, DateTime(now.year, now.month, now.day)) && isAfter9AM()) {
+    return true;
   }
   return false;
-  
-  
 }

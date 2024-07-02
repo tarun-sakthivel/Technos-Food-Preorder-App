@@ -1,18 +1,22 @@
-//create a list where the elements are datetime
-List<DateTime> dates = [
-  DateTime(2024, 6, 5),
-  DateTime(2024, 6, 25),
-  DateTime(2024, 6, 19),
-  DateTime(2024, 6, 20),
-  DateTime(2024, 6, 21),
-  DateTime(2024, 6, 22),
-  DateTime(2024, 6, 27),
-  DateTime(2024, 7, 12),
-];
+//this is the list where  the retrived dates list will be added
+// List<DateTime> dates = [
+//   DateTime(2024, 6, 5),
+//   DateTime(2024, 6, 25),
+//   DateTime(2024, 6, 19),
+//   DateTime(2024, 6, 20),
+//   DateTime(2024, 6, 21),
+//   DateTime(2024, 6, 22),
+//   DateTime(2024, 6, 27),
+//   DateTime(2024,7,12),
+// ];
 
-List<DateTime> dummydates = [];
-List<DateTime> previous_dates = [];
-List<DateTime> future_dates = [];
+List<DateTime> dates = [];
+List<DateTime> dummydates =
+    []; //used in the the dynamic calendar when choosing the dates
+List<DateTime> previous_dates =
+    []; //it contains all the previouse dates this will be remove when apis is fully implemented
+List<DateTime> future_dates =
+    []; //it will contain all the future dates of the retrived dates this will be removed whe apis are fully implemeneted
 //List<DateTime> modifieddate = {};
 
 List<DateTime> getFutureDates(List<DateTime> dates) {
@@ -52,10 +56,11 @@ List<DateTime> getPreviousDates(List<DateTime> dates) {
   return filteredDates;
 }
 
-int selectedYear = 0;
+// int selectedYear = 0;
 
 DateTime _selectedDate = DateTime.now();
 
+//Here i have variable for storing the udser information
 late int Id;
 late String UserName;
 late String FirstName;
@@ -63,8 +68,9 @@ late String LastName;
 late String Password;
 late String Company;
 late String Employeecode;
-late int Orders_completed = 90;
+late int Orders_completed;
 
+//adding the user infromation to the varibale when loggin in
 void Add_data(Map<String, dynamic> data) {
   Id = data['id'];
   Employeecode = data['employeecode'];
@@ -72,14 +78,15 @@ void Add_data(Map<String, dynamic> data) {
   LastName = data['lastname'];
   UserName = data['username'];
   Company = data['company'];
-  //  print(Id);
-  //  print(Employeecode);
-  //  print(FirstName);
-  //  print(LastName);
-  //  print(UserName);
-  //  print(Company);
+  print(Id);
+  print(Employeecode);
+  print(FirstName);
+  print(LastName);
+  print(UserName);
+  print(Company);
 }
 
+//clearing the user infromation when loggin out of the app
 void Clear_data() {
   Id = 0;
   Employeecode = "";

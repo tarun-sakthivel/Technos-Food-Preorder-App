@@ -96,15 +96,7 @@ class _UserLogPageState extends State<UserLogPage> {
             } else if (state is dataFailed) {
               return showErrorDialog(
                   context, state.errorMessage, 'Error Occured');
-            } else if (state is dataLoading) {
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) {
-                  return CustomDialog(message: "Loading...");
-                },
-              );
-            }
+            } else if (state is dataLoading) {}
           },
           child: Padding(
             padding: const EdgeInsets.all(16.0),
