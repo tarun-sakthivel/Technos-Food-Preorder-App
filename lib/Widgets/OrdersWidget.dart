@@ -77,7 +77,7 @@ class NumberOfOrders extends StatelessWidget {
                     Text(
                       numberOfOrders.toString(),
                       //style: Kmaintext.copyWith(fontSize: 40,fontWeight: FontWeight.w400),
-                      style:TextStyle(fontSize: 45,fontWeight: FontWeight.w500,color: Colors.black),
+                      style:const TextStyle(fontSize: 45,fontWeight: FontWeight.w500,color: Colors.black),
                     ),
                     const SizedBox(width: 8), // Adjust spacing between text widgets
                     Text(

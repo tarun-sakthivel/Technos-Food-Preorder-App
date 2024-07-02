@@ -1,34 +1,26 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
-import 'package:food_preorder_app/Screens/LogPage/UserLogPage.dart';
 import 'package:food_preorder_app/Widgets/Calendars/HistoryCalendar.dart';
-import 'package:food_preorder_app/Widgets/Popups/showErrorDialog.dart';
-import 'package:food_preorder_app/bloc/HistoryBloc/history_bloc_bloc.dart';
-import 'package:food_preorder_app/bloc/bloc/user_log_bloc.dart';
 import 'package:food_preorder_app/dates.dart';
 
 class Historypage extends StatefulWidget {
+  List<DateTime> data;
   DateTime? selectedmonth;
   int yearSelected;
   Historypage(
-      {super.key, required this.selectedmonth, required this.yearSelected});
+      {super.key,
+      required this.data,
+      required this.selectedmonth,
+      required this.yearSelected});
 
   @override
   State<Historypage> createState() => _HistorypageState();
 }
 
 class _HistorypageState extends State<Historypage> {
-  List<DateTime> selecteddatees = [
-    DateTime(2023, 6, 5),
-    DateTime(2023, 6, 12),
-    DateTime(2023, 6, 18),
-    DateTime(2023, 6, 25),
-  ];
+  List<DateTime> data = [];
 
   monthSelected(String selectedMonth) {
     print(selectedMonth);
@@ -60,7 +52,6 @@ class _HistorypageState extends State<Historypage> {
       selectedMonth = selectedMonth;
     }
     return selectedMonth;
-    print(selectedMonth);
   }
 
   @override
@@ -126,8 +117,8 @@ class _HistorypageState extends State<Historypage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${monthSelected(widget.selectedmonth.toString().substring(5, 7))}" +
-                            "  ${widget.yearSelected}",
+                        "${monthSelected(widget.selectedmonth.toString().substring(5, 7))}"
+                        "  ${widget.yearSelected}",
                         style: Kmaintext.copyWith(
                             fontWeight: FontWeight.w100,
                             fontSize: 20,
@@ -146,7 +137,7 @@ class _HistorypageState extends State<Historypage> {
                           Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(
-                              '${future_dates.length}',
+                              '${widget.data.length}',
                               style: Kmaintext.copyWith(
                                   fontWeight: FontWeight.w100,
                                   fontSize: 20,
@@ -162,9 +153,7 @@ class _HistorypageState extends State<Historypage> {
                   height: 500,
                   width: 400,
                   child: HistorryCalendar(
-                    highlightedDates: selecteddatees,
-                    selectedMonth: monthSelected(
-                        widget.selectedmonth.toString().substring(5, 7)),
+                    highlightedDates: widget.data,
                   ),
                 ),
               ],

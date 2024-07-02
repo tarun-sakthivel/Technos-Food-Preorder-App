@@ -128,9 +128,9 @@ class _LoginscreenState extends State<Loginscreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Hero(
+                            const Hero(
                               tag: "mainlogo",
-                              child: const Image(
+                              child: Image(
                                 image: AssetImage('assets/Icons/IVA_Logo.png'),
                                 height: 100,
                                 width: 237,

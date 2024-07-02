@@ -58,8 +58,8 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       dummydates.clear();
       dummydates = List.from(dates);
 
-      print("dates ${dates}");
-      print("new dummy data ${dummydates}");
+      print("dates $dates");
+      print("new dummy data $dummydates");
       SnackbarHelper.showSnackbar(event.context,
           message: "No changes Done", icon: Icons.close, color: Colors.red);
     });
@@ -71,7 +71,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         emit((AddingToDatabase()));
         print("adding to database state is emmitted");
         
-        await Future.delayed(Duration(seconds: 2));
+        await Future.delayed(const Duration(seconds: 2));
         add(ChangeCalendar(context: event.context));
       } catch (e){
         print(e.toString());

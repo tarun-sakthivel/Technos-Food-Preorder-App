@@ -79,7 +79,7 @@ void ShowSelectorCalendar(BuildContext context) {
 
               // } // Close the dialog
             },
-            child: Container(
+            child: SizedBox(
                 height: 30,
                 width: 60,
                 child: Center(

@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                     child: BlocBuilder<CalendarBloc, CalendarState>(
                       builder: (context, state) {
                         if (state is CalendarChanged) {
-                          return StaticCalendar(
+                          return const StaticCalendar(
                               // highlightedDates: dates,
                               // isInteractive: false,
                               );

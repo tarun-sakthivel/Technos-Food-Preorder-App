@@ -8,15 +8,18 @@ class CustomDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-      
-      decoration: BoxDecoration(color: Kivawhite,borderRadius:BorderRadius.circular(10),border: Border.all(width: 2,color: Colors.black.withOpacity(0.5)) ),
+        decoration: BoxDecoration(
+            color: Kivawhite,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2, color: Colors.black.withOpacity(0.5))),
         padding: const EdgeInsets.all(20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CircularProgressIndicator(color: Kivagreen,),
-            
+            const CircularProgressIndicator(
+              color: Kivagreen,
+            ),
             Text(message),
           ],
         ),
