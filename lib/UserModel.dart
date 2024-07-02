@@ -7,6 +7,7 @@ List<DateTime> dates = [
   DateTime(2024, 6, 21),
   DateTime(2024, 6, 22),
   DateTime(2024, 6, 27),
+  DateTime(2024,7,12),
 ];
 
 List<DateTime> dummydates = [];
@@ -54,3 +55,41 @@ List<DateTime> getPreviousDates(List<DateTime> dates) {
 int selectedYear = 0;
 
 DateTime _selectedDate = DateTime.now();
+
+late int Id;
+late String UserName;
+late String FirstName;
+late String LastName;
+late String Password;
+late String Company;
+late String Employeecode;
+late int Orders_completed = 90;
+
+
+
+
+void Add_data(Map<String,dynamic> data){
+          Id = data['id'];
+         Employeecode = data['employeecode'];
+         FirstName = data['firstname'];
+         LastName = data['lastname'];
+         UserName = data['username'];
+         Company = data['company'];
+        //  print(Id);
+        //  print(Employeecode);
+        //  print(FirstName);
+        //  print(LastName);
+        //  print(UserName);
+        //  print(Company);
+}
+
+void Clear_data(){
+  Id = 0;
+  Employeecode = "";
+  FirstName = "";
+  LastName = "";
+  UserName = "";
+  Company = "";
+  print("data cleared  from the app local storage");
+
+}

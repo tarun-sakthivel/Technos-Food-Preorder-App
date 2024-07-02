@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
-import 'package:food_preorder_app/dates.dart';
+import 'package:food_preorder_app/UserModel.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class StaticCalendar extends StatefulWidget {
@@ -81,6 +81,10 @@ class _StaticCalendarState extends State<StaticCalendar> {
               //disabledTextStyle: const TextStyle(color: Colors.grey), // Style for disabled dates
               ),
           daysOfWeekVisible: true,
+          daysOfWeekStyle: DaysOfWeekStyle(dowTextFormatter: (date, locale) {
+           final daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+            return daysOfWeek[date.weekday - 1];
+          },),
           calendarBuilders: CalendarBuilders(
             defaultBuilder: (context, day, focusedDay) {
               if (isSameDay(today, day) &&
