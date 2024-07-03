@@ -31,20 +31,21 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       //&&(date.isAfter(DateTime(now.year, now.month, now.day)) || date.isAtSameMomentAs(now))
       //&& DateTime(date.year, date.month, date.day) !=(DateTime(now.year, now.month, now.day)
 
-      if (date.weekday != DateTime.sunday &&
-          (date.isAfter(DateTime(now.year, now.month, now.day)) ||
-              date.isAtSameMomentAs(now))) {
-        if (appConstraintSatsifsied(date)) {
-          //print("more than nine am ${date}");
-        } else {
-          if (dummydates.any((d) => isSameDay(d, date))) {
-            //dates.removeWhere((d) => isSameDay(d, selectedDay));
-            dummydates.removeWhere((d) => isSameDay(d, date));
-          } else {
-            dummydates.add(date);
-          }
-          emit((DynamicCalendarChanged()));
-        }
+      if (date.weekday != DateTime.sunday  &&(date.isAfter(DateTime(now.year, now.month, now.day)) || date.isAtSameMomentAs(now)) 
+            ) {
+              if (appConstraintSatsifsied(date)){
+                //print("more than nine am ${date}");
+
+              }
+              else{
+                if (dummydates.any((d) => isSameDay(d, date))) {
+          //dates.removeWhere((d) => isSameDay(d, selectedDay));
+                  dummydates.removeWhere((d) => isSameDay(d, date));
+                } else {
+                  dummydates.add(date);
+                }
+                emit((DynamicCalendarChanged()));
+              }
         // if (dummydates.any((d) => isSameDay(d, date))) {
         //   //dates.removeWhere((d) => isSameDay(d, selectedDay));
         //   dummydates.removeWhere((d) => isSameDay(d, date));
@@ -55,6 +56,8 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         // print(dates);
         // print("dummydates =================================");
         // print(dummydates);
+
+        
       }
     });
 
@@ -76,7 +79,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       try {
         emit((AddingToDatabase()));
         //print("adding to database state is emmitted");
-
+       
         //TODO: write the api for pushing function in the databse
         await pushPreLunchDetail(Id, dummydates);
 
@@ -106,9 +109,9 @@ bool isAfter9AM() {
 
 bool appConstraintSatsifsied(DateTime date) {
   DateTime now = DateTime.now();
-  if (isSameDay(date, DateTime(now.year, now.month, now.day)) && isAfter9AM()) {
-    //print("more that 9 am");
-    return true;
+  if (isSameDay(date, DateTime(now.year,now.month,now.day)) && isAfter9AM()){
+      //print("more that 9 am");
+      return true;
   }
   //print("less than 9 am");
   return false;

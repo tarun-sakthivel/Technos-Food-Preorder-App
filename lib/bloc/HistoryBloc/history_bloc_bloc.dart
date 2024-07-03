@@ -1,9 +1,11 @@
 import 'dart:convert';
+
+import 'package:bloc/bloc.dart';
 import 'package:food_preorder_app/API/APIinfos.dart';
 import 'package:food_preorder_app/UserModel.dart';
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
+import 'package:meta/meta.dart';
+
 part 'history_bloc_event.dart';
 part 'history_bloc_state.dart';
 
@@ -18,15 +20,15 @@ class HistoryBlocBloc extends Bloc<HistoryBlocEvent, HistoryBlocState> {
             int.parse(event.selectedmonth.toString().substring(5, 7)), 26);
         print(int.parse(event.selectedmonth.toString().substring(5, 7)));
 
-        final url = Uri.parse('$Baseurl/api/User/UserLunchHistory');
+        final url = Uri.parse('${Baseurl}/api/User/UserLunchHistory');
         final headers = {
           'Content-Type': 'application/json',
           'Authorization':
-              'Basic ${base64Encode(utf8.encode('11184427:60-dayfreetrial'))}'
+              'Basic ${base64Encode(utf8.encode('${Authusername}:${Authpassword}'))}'
         };
         print(history);
         final body = jsonEncode({
-          'id': '$Id',
+          'id': Id.toString(),
           'datetime': history.toIso8601String(),
         });
 
