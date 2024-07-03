@@ -44,6 +44,7 @@ class _LoginscreenState extends State<Loginscreen> {
 
           }
           if (state is AuthLoading) {
+            
             showDialog(
               context: context,
               barrierDismissible: false,
@@ -185,9 +186,9 @@ class _LoginscreenState extends State<Loginscreen> {
                                       controller: Usernametexteditor,
 
                                       keyboardType: TextInputType.text,
-                                      onChanged: (value) {
-                                        Username = value;
-                                      },
+                                      // onChanged: (value) {
+                                      //   Username = value;
+                                      // },
                                       maxLength: 15,
 
                                       maxLines: 1,
@@ -286,9 +287,9 @@ class _LoginscreenState extends State<Loginscreen> {
                                         obscureText: _obscureText,
 
                                         controller: PasswordTextController,
-                                        onChanged: (value) {
-                                          Password = value;
-                                        },
+                                        // onChanged: (value) {
+                                        //   Password = value;
+                                        // },
                                         maxLength: null,
                                         maxLines:
                                             1, // Use 1 as a default if max_lines is null
@@ -311,8 +312,8 @@ class _LoginscreenState extends State<Loginscreen> {
                                       .unfocus(); // Dismiss keyboard
                                   context.read<AuthBloc>().add(
                                         AuthenticateUser(
-                                          userName: Username,
-                                          password: Password,
+                                          userName: Usernametexteditor.text.trim(),
+                                          password: PasswordTextController.text.trim(),
                                         ),
                                       );
                                 },
@@ -348,7 +349,7 @@ class _LoginscreenState extends State<Loginscreen> {
 }
 
 class VarcharTextInputFormatter extends TextInputFormatter {
-  static final _varcharRegex = RegExp(r'^[\w\s\.,!?]+$');
+  static final _varcharRegex = RegExp(r'^[\w\s\.,!?]*$');
 
   @override
   TextEditingValue formatEditUpdate(

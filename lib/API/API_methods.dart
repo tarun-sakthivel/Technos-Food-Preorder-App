@@ -57,16 +57,16 @@ Future<int> Get_orders_completed(int id) async {
       
       dynamic fulldata = jsonDecode(response.body);
       
-      print(fulldata['data']);
+      // print(fulldata['data']);
       return fulldata['data'];
       
     } else {
-      print('Failed to retrieve orders: ${response.reasonPhrase}');
+      // print('Failed to retrieve orders: ${response.reasonPhrase}');
       
       return 0;
     }
   } catch (e) {
-    print('Error: $e');
+    // print('Error: $e');
     return 0;
    
   }
@@ -85,12 +85,12 @@ Future<List<DateTime>> Get_Pre_Orders(int id) async {
           
           dates = separateTheDates(response.body);
           //TODO: when gettign clean data get the dates alone and put it in the dates list
-          print("API dates ===================");
-          print(dates);
+          // print("API dates ===================");
+          // print(dates);
           return dates;
           
       } else {
-          print('pre order data retrival: ${response.reasonPhrase}');
+          // print('pre order data retrival: ${response.reasonPhrase}');
           return [];
           
       }
@@ -124,11 +124,11 @@ Future<List<DateTime>> pushPreLunchDetail(int id, List<DateTime> dateList) async
       
       return dates;
     } else {
-      print('Failed to retrieve details: ${response.reasonPhrase}');
+      //print('Failed to retrieve details: ${response.reasonPhrase}');
       return [];
     }
   } catch (e) {
-    print('Error: $e');
+    //print('Error: $e');
     return [];
   }
 }

@@ -38,7 +38,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       if (date.weekday != DateTime.sunday  &&(date.isAfter(DateTime(now.year, now.month, now.day)) || date.isAtSameMomentAs(now)) 
             ) {
               if (appConstraintSatsifsied(date)){
-                print("more than nine am ${date}");
+                //print("more than nine am ${date}");
 
               }
               else{
@@ -56,24 +56,24 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         // } else {
         //   dummydates.add(date);
         // }
-        print("dates ===========================");
-        print(dates);
-        print("dummydates =================================");
-        print(dummydates);
+        // print("dates ===========================");
+        // print(dates);
+        // print("dummydates =================================");
+        // print(dummydates);
 
         
       }
     });
 
     on<NoChangeInDynamicCalendar>((event, emit) {
-      print("INVOKED CALCEL FUNCTION");
-      print("dates $dates");
-      print("previous dummy data $dummydates");
+      // print("INVOKED CALCEL FUNCTION");
+      // print("dates $dates");
+      // print("previous dummy data $dummydates");
       dummydates.clear();
       dummydates = List.from(dates);
 
-      print("dates ${dates}");
-      print("new dummy data ${dummydates}");
+      // print("dates ${dates}");
+      // print("new dummy data ${dummydates}");
       SnackbarHelper.showSnackbar(event.context,
           message: "No changes Done", icon: Icons.close, color: Colors.red);
     });
@@ -83,7 +83,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       //TODO:use the api calls for the post function
       try{
         emit((AddingToDatabase()));
-        print("adding to database state is emmitted");
+        //print("adding to database state is emmitted");
        
         //TODO: write the api for pushing function in the databse
         await pushPreLunchDetail(Id, dummydates);
@@ -110,14 +110,20 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
 }
 bool isAfter9AM() {
   DateTime now = DateTime.now();
-  return now.hour > 9;
+  //NOTE this time should be one hour lesser than your expected time
+  //if the contraint should be greater than nine then 
+  //while typing it should be  8
+  //because "now.hour >8 " is true only if it gets  to 9 untill then even if it is 8:15 the return value will be false
+  return now.hour > 8;
 }
 
 bool appConstraintSatsifsied(DateTime date){
   DateTime now = DateTime.now();
   if (isSameDay(date, DateTime(now.year,now.month,now.day)) && isAfter9AM()){
+      //print("more that 9 am");
       return true;
   }
+  //print("less than 9 am");
   return false;
   
   

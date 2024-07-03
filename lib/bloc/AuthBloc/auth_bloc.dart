@@ -38,7 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final response = await http.post(url, headers: headers);
 
         if (response.statusCode == 200) {
-          print(response.statusCode);
+          //print(response.statusCode);
           Map<String, dynamic> fulldata = jsonDecode(response.body);
           Map<String, dynamic> data = fulldata['data'];
           emit((GettingUserInfo()));
@@ -48,13 +48,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           await Get_Pre_Orders(Id);
           emit(AuthSuccessfull(successMessage: "You have Logged in Successfully!!"));
         } else {
-          print('Login failed: ${response.reasonPhrase}');
+          //print('Login failed: ${response.reasonPhrase}');
           emit(AuthFailed(errorMessage: "${response.reasonPhrase}"));
         }
 
 
         }catch(e){
-          print("error in api");
+          //print("error in api");
           emit(AuthFailed(errorMessage: "${e.toString()}"));
           
         }
