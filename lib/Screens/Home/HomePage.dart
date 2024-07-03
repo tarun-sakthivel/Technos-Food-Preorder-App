@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Hello ${UserName}!", style: Kmaintext),
+                  Text("Hello $UserName!", style: Kmaintext),
                   const SizedBox(height: 24),
                   //NumberOfOrders(numberOfOrders: previous_dates.length),
                   NumberOfOrders(numberOfOrders: Orders_completed),

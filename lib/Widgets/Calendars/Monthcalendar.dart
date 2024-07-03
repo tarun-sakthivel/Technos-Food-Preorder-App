@@ -187,7 +187,9 @@ class _MonthPickerWidgetState extends State<MonthPickerWidget> {
               BlocBuilder<HistoryBlocBloc, HistoryBlocState>(
                 builder: (context, state) {
                   if (state is dataLoading) {
-                    return const CircularProgressIndicator();
+                    return const CircularProgressIndicator(
+                      color: Kivagreen,
+                    );
                   } else if (state is dataSuccessfull) {
                     return TextButton(
                         onPressed: () {

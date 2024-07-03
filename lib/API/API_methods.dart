@@ -15,8 +15,8 @@ import 'package:http/http.dart' as http;
 //returns the user datails
 Future<Map<String,dynamic>> Get_user_details(int id) async {
  
-      final url = Uri.parse('${Baseurl.toString()}/api/User/GetUserDetail/${id}');
-      final headers = {'Content-Type': 'application/json','Authorization' : 'Basic ' + base64Encode(utf8.encode('${Authusername}:${Authpassword}'))};
+      final url = Uri.parse('${Baseurl.toString()}/api/User/GetUserDetail/$id');
+      final headers = {'Content-Type': 'application/json','Authorization' : 'Basic ${base64Encode(utf8.encode('$Authusername:$Authpassword'))}'};
           
       final response = await http.get(url, headers: headers);
 
@@ -48,7 +48,7 @@ Future<int> Get_orders_completed(int id) async {
     final url = Uri.parse('${Baseurl.toString()}/api/User/GetEmployeeLunchCount/${id.toString()}');
     final headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + base64Encode(utf8.encode('${Authusername}:${Authpassword}')),
+      'Authorization': 'Basic ${base64Encode(utf8.encode('$Authusername:$Authpassword'))}',
     };
 
     final response = await http.get(url, headers: headers);
@@ -75,8 +75,8 @@ Future<int> Get_orders_completed(int id) async {
 
 Future<List<DateTime>> Get_Pre_Orders(int id) async {
  
-      final url = Uri.parse('${Baseurl.toString()}/api/User/GetPreOrders/${id}');
-      final headers = {'Content-Type': 'application/json','Authorization' : 'Basic ' + base64Encode(utf8.encode('${Authusername}:${Authpassword}'))};
+      final url = Uri.parse('${Baseurl.toString()}/api/User/GetPreOrders/$id');
+      final headers = {'Content-Type': 'application/json','Authorization' : 'Basic ${base64Encode(utf8.encode('$Authusername:$Authpassword'))}'};
           
       final response = await http.get(url, headers: headers);
 
@@ -106,7 +106,7 @@ Future<List<DateTime>> pushPreLunchDetail(int id, List<DateTime> dateList) async
     final url = Uri.parse('${Baseurl.toString()}/api/User/GetPreLunchDetail');
     final headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + base64Encode(utf8.encode('${Authusername}:${Authpassword}')),
+      'Authorization': 'Basic ${base64Encode(utf8.encode('$Authusername:$Authpassword'))}',
     };
 
     final body = jsonEncode({

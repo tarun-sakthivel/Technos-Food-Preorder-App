@@ -307,7 +307,7 @@ class _DynamicCalendarState extends State<DynamicCalendar> {
                 return Container(
                   decoration: BoxDecoration(
                     border:Border.all(color: Kivawhite,width:2),
-                    color: isAfter9AM()?Kgrey: Color.fromRGBO(196, 153, 108, 1),
+                    color: isAfter9AM()?Kgrey: const Color.fromRGBO(196, 153, 108, 1),
                     shape: BoxShape.circle,
                   ),
                   child: Center(

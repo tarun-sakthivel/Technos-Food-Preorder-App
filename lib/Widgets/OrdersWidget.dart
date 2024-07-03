@@ -28,7 +28,7 @@ class NumberOfOrders extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(14),
         child: GestureDetector(
-          onTap: (){
+          onTap: () {
             print("pressing");
             context.read<InfoBloc>().add(ShowInformation());
           },
@@ -78,12 +78,15 @@ class NumberOfOrders extends StatelessWidget {
                 ),
                 BlocBuilder<InfoBloc, InfoState>(
                   builder: (context, state) {
-                    if (state is ShowingInfo){
-                       return Center(
-                        child:Text("Orders completed this\n month",style:Ksecondarytext.copyWith(fontSize: 12),textAlign: TextAlign.center,)
-                      );
+                    if (state is ShowingInfo) {
+                      return Center(
+                          child: Text(
+                        "Orders completed this\n month",
+                        style: Ksecondarytext.copyWith(fontSize: 12),
+                        textAlign: TextAlign.center,
+                      ));
                     }
-                    
+
                     return Center(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -92,7 +95,7 @@ class NumberOfOrders extends StatelessWidget {
                           Text(
                             numberOfOrders.toString(),
                             //style: Kmaintext.copyWith(fontSize: 40,fontWeight: FontWeight.w400),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 45,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.black),

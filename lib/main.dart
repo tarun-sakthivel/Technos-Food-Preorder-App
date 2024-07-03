@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => InfoBloc()),
       ],
       child:
-          MaterialApp(debugShowCheckedModeBanner: false, home: Loginscreen()),
+          const MaterialApp(debugShowCheckedModeBanner: false, home: Loginscreen()),
     );
   }
 }

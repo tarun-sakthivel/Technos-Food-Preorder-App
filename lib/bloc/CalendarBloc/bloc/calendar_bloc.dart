@@ -101,7 +101,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
 bool isAfter9AM() {
   DateTime now = DateTime.now();
   //NOTE this time should be one hour lesser than your expected time
-  //if the contraint should be greater than nine then 
+  //if the contraint should be greater than nine then
   //while typing it should be  8
   //because "now.hour >8 " is true only if it gets  to 9 untill then even if it is 8:15 the return value will be false
   return now.hour > 8;
