@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:food_preorder_app/UserModel.dart';
-import 'package:intl/intl.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
@@ -12,11 +11,7 @@ class HistoryBlocBloc extends Bloc<HistoryBlocEvent, HistoryBlocState> {
     on<GetLogData>((event, emit) async {
       try {
         emit(dataLoading());
-        String dateSelected = "${event.selectedYear}" +
-            "-" +
-            "${event.selectedmonth.toString().substring(5, 7)}" +
-            "-" +
-            "01";
+        String dateSelected = "${event.selectedYear}-${event.selectedmonth.toString().substring(5, 7)}-01";
         DateTime history = DateTime(event.selectedYear,
             int.parse(event.selectedmonth.toString().substring(5, 7)), 26);
         print(int.parse(event.selectedmonth.toString().substring(5, 7)));
@@ -26,12 +21,12 @@ class HistoryBlocBloc extends Bloc<HistoryBlocEvent, HistoryBlocState> {
         final headers = {
           'Content-Type': 'application/json',
           'Authorization':
-              'Basic ' + base64Encode(utf8.encode('11184427:60-dayfreetrial'))
+              'Basic ${base64Encode(utf8.encode('11184427:60-dayfreetrial'))}'
         };
         print(history);
         final body = jsonEncode({
-          'id': '123',
-          'datetime': "${history.toIso8601String()}",
+          'id': '$Id',
+          'datetime': history.toIso8601String(),
         });
 
         final response = await http.post(url, headers: headers, body: body);
@@ -66,7 +61,7 @@ class HistoryBlocBloc extends Bloc<HistoryBlocEvent, HistoryBlocState> {
           emit(dataFailed(errorMessage: '${response.reasonPhrase} '));
           print(dateSelected);
         }
-      } on Exception catch (e) {
+      } on Exception {
         // TODO
         emit(dataFailed(errorMessage: "Data fetching failed"));
       }

@@ -30,14 +30,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               'http://lunchapi-001-site1.etempurl.com/api/User/Login?username=${event.userName}&password=${event.password}');
           final headers = {
             'Content-Type': 'application/json',
-            'Authorization': 'Basic ' +
-                base64Encode(utf8.encode('${Authusername}:${Authpassword}'))
+            'Authorization': 'Basic ${base64Encode(utf8.encode('$Authusername:$Authpassword'))}'
           };
 
           final response = await http.post(url, headers: headers);
 
           if (response.statusCode == 200) {
-            print(response.statusCode);
+            //print(response.statusCode);
             Map<String, dynamic> fulldata = jsonDecode(response.body);
             Map<String, dynamic> data = fulldata['data'];
             emit((GettingUserInfo()));
@@ -48,12 +47,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             emit(AuthSuccessfull(
                 successMessage: "You have Logged in Successfully!!"));
           } else {
-            print('Login failed: ${response.reasonPhrase}');
+            //print('Login failed: ${response.reasonPhrase}');
             emit(AuthFailed(errorMessage: "${response.reasonPhrase}"));
           }
         } catch (e) {
-          print("error in api");
-          emit(AuthFailed(errorMessage: "${e.toString()}"));
+          //print("error in api");
+          emit(AuthFailed(errorMessage: e.toString()));
         }
       }
     });

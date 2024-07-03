@@ -137,7 +137,7 @@ class _HistorryCalendarState extends State<HistorryCalendar> {
                     return Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: Kivawhite, width: 2),
-                        color: Kivagreen,
+                        color: Kgrey,
                         shape: BoxShape.circle,
                       ),
                       child: Center(
@@ -152,7 +152,7 @@ class _HistorryCalendarState extends State<HistorryCalendar> {
                     child: Text(
                       '${day.day}',
                       style: Kcalendartext.copyWith(
-                        color: Color.fromARGB(255, 0, 0, 0),
+                        color: const Color.fromARGB(255, 0, 0, 0),
                         fontSize: 12,
                       ),
                     ),

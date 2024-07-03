@@ -33,7 +33,7 @@ List<DateTime> getFutureDates(List<DateTime> dates) {
   for (DateTime date in dates) {
     DateTime dateWithoutTime = DateTime(date.year, date.month, date.day);
     if (!dateWithoutTime.isBefore(today)) {
-      print(date);
+      //print(date);
       future_dates.add(date);
     }
   }

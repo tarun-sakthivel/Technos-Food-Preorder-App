@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_preorder_app/Screens/LogPage/Historypage.dart';
 import 'package:food_preorder_app/Screens/Login/LoginScreen.dart';
 import 'package:food_preorder_app/bloc/AuthBloc/auth_bloc.dart';
 import 'package:food_preorder_app/bloc/CalendarBloc/bloc/calendar_bloc.dart';
 import 'package:food_preorder_app/bloc/HistoryBloc/history_bloc_bloc.dart';
 import 'package:food_preorder_app/bloc/bloc/user_log_bloc.dart';
+import 'package:food_preorder_app/bloc/infoBloc/info_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,10 +27,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AuthBloc()),
         BlocProvider(create: (context) => CalendarBloc()),
         BlocProvider(create: (context) => UserLogBloc()),
-        BlocProvider(create: (context) => HistoryBlocBloc())
+        BlocProvider(create: (context) => HistoryBlocBloc()),
+        BlocProvider(create: (context) => InfoBloc()),
       ],
       child:
-          MaterialApp(debugShowCheckedModeBanner: false, home: Loginscreen()),
+          const MaterialApp(debugShowCheckedModeBanner: false, home: Loginscreen()),
     );
   }
 }

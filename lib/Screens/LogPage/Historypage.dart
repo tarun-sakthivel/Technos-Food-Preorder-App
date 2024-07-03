@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
-import 'package:food_preorder_app/UserModel.dart';
 import 'package:food_preorder_app/Widgets/Calendars/HistoryCalendar.dart';
 
 class Historypage extends StatefulWidget {
