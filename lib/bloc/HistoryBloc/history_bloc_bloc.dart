@@ -61,7 +61,8 @@ class HistoryBlocBloc extends Bloc<HistoryBlocEvent, HistoryBlocState> {
         } else if (response.statusCode == 401) {
           emit(dataFailed(errorMessage: "Unauthorized"));
         } else {
-          print('Failed to get user lunch history: ${response.reasonPhrase}');
+          print(
+              'Failed to get user lunch history: API ${response.reasonPhrase}');
           emit(dataFailed(errorMessage: '${response.reasonPhrase} '));
           print(dateSelected);
         }
