@@ -27,10 +27,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         //LOGIN API call
         try {
           final url = Uri.parse(
-              'http://lunchapi-001-site1.etempurl.com/api/User/Login?username=${event.userName}&password=${event.password}');
+              '$Baseurl/api/User/Login?username=${event.userName}&password=${event.password}');
           final headers = {
             'Content-Type': 'application/json',
-            'Authorization': 'Basic ${base64Encode(utf8.encode('$Authusername:$Authpassword'))}'
+            'Authorization':
+                'Basic ${base64Encode(utf8.encode('$Authusername:$Authpassword'))}'
           };
 
           final response = await http.post(url, headers: headers);
