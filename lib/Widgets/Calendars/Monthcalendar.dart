@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
-import 'package:food_preorder_app/Screens/LogPage/Historypage.dart';
-import 'package:food_preorder_app/Screens/LogPage/UserLogPage.dart';
 import 'package:food_preorder_app/bloc/HistoryBloc/history_bloc_bloc.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -112,117 +110,130 @@ class _MonthPickerWidgetState extends State<MonthPickerWidget> {
   Widget build(BuildContext context) {
     final List<int> years =
         List<int>.generate(101, (int index) => 2000 + index);
-    return BlocListener<HistoryBlocBloc, HistoryBlocState>(
-      listener: (context, state) {
-        // if (state is dataSuccessfull) {
-        //   // Navigator.push(
-        //   //     context,
-        //   //     MaterialPageRoute(
-        //   //         builder: (context) =>
-        //   //             UserLogPage(initialDate: DateTime.now())));
-        //   Navigator.push(context,
-        //       MaterialPageRoute(builder: (context) =>  Historypage()));
-        // }
-        // TODO: implement listener
-      },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 20,
-              left: 38.0,
-            ),
-            child: DropdownButton<int>(
-              isExpanded: false,
-              isDense: true,
-              dropdownColor: Kivawhite,
-              menuMaxHeight: 240,
-              value: selectedYear,
-              onChanged: (int? newValue) {
-                setState(() {
-                  selectedYear = newValue!;
-                });
-              },
-              items: widget.years.map<DropdownMenuItem<int>>((int value) {
-                return DropdownMenuItem<int>(
-                  value: value,
-                  onTap: () {},
-                  child: Text(
-                    value.toString(),
-                    style: const TextStyle(fontSize: 11),
-                  ),
-                );
-              }).toList(),
-            ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 20,
+            left: 38.0,
           ),
-          GridView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 1),
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 5.0, // Adjust spacing between rows/columns
-              crossAxisSpacing: 5.0, // Adjust spacing between columns/rows
-              childAspectRatio: 2, // Adjust aspect ratio of each item
-            ),
-            itemCount: 12,
-            itemBuilder: (context, index) {
-              final month = index + 1;
-              final isSelected = month == _selectedDate.month;
-              return GestureDetector(
-                onTap: () => _onMonthSelected(month),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 22.0, vertical: 5.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
-                      color: isSelected ? Kivagreen : Kivawhite,
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      Months[index],
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: isSelected ? Colors.white : Colors.black,
-                        fontWeight: FontWeight.w500,
-                      ),
+          child: DropdownButton<int>(
+            isExpanded: false,
+            isDense: true,
+            dropdownColor: Kivawhite,
+            menuMaxHeight: 240,
+            value: selectedYear,
+            onChanged: (int? newValue) {
+              setState(() {
+                selectedYear = newValue!;
+              });
+            },
+            items: widget.years.map<DropdownMenuItem<int>>((int value) {
+              return DropdownMenuItem<int>(
+                value: value,
+                onTap: () {},
+                child: Text(
+                  value.toString(),
+                  style: const TextStyle(fontSize: 11),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+        GridView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 1),
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 5.0, // Adjust spacing between rows/columns
+            crossAxisSpacing: 5.0, // Adjust spacing between columns/rows
+            childAspectRatio: 2, // Adjust aspect ratio of each item
+          ),
+          itemCount: 12,
+          itemBuilder: (context, index) {
+            final month = index + 1;
+            final isSelected = month == _selectedDate.month;
+            return GestureDetector(
+              onTap: () => _onMonthSelected(month),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 22.0, vertical: 5.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    color: isSelected ? Kivagreen : Kivawhite,
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    Months[index],
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: isSelected ? Colors.white : Colors.black,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
-              );
-            },
+              ),
+            );
+          },
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 24.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              BlocBuilder<HistoryBlocBloc, HistoryBlocState>(
+                builder: (context, state) {
+                  if (state is dataLoading) {
+                    return const CircularProgressIndicator();
+                  } else if (state is dataSuccessfull) {
+                    return TextButton(
+                        onPressed: () {
+                          context.read<HistoryBlocBloc>().add(GetLogData(
+                              selectedmonth: _selectedDate,
+                              selectedYear: selectedYear));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => Historypage()));
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.only(top: 20.0, bottom: 8.0),
+                          child: Text('OK',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w800,
+                                  fontFamily: 'Poppins')),
+                        ));
+                  }
+                  return TextButton(
+                      onPressed: () {
+                        context.read<HistoryBlocBloc>().add(GetLogData(
+                            selectedmonth: _selectedDate,
+                            selectedYear: selectedYear));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => Historypage()));
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.only(top: 20.0, bottom: 8.0),
+                        child: Text('OK',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w800,
+                                fontFamily: 'Poppins')),
+                      ));
+                },
+              )
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 24.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                    onPressed: () {
-                      context.read<HistoryBlocBloc>().add(GetLogData(
-                          selectedmonth: _selectedDate,
-                          selectedYear: selectedYear));
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => Historypage()));
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.only(top: 20.0, bottom: 8.0),
-                      child: Text('OK',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w800,
-                              fontFamily: 'Poppins')),
-                    ))
-              ],
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }

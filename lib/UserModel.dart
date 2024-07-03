@@ -11,9 +11,12 @@
 // ];
 
 List<DateTime> dates = [];
-List<DateTime> dummydates = [];//used in the the dynamic calendar when choosing the dates
-List<DateTime> previous_dates = [];//it contains all the previouse dates this will be remove when apis is fully implemented
-List<DateTime> future_dates = [];//it will contain all the future dates of the retrived dates this will be removed whe apis are fully implemeneted
+List<DateTime> dummydates =
+    []; //used in the the dynamic calendar when choosing the dates
+List<DateTime> previous_dates =
+    []; //it contains all the previouse dates this will be remove when apis is fully implemented
+List<DateTime> future_dates =
+    []; //it will contain all the future dates of the retrived dates this will be removed whe apis are fully implemeneted
 //List<DateTime> modifieddate = {};
 
 List<DateTime> getFutureDates(List<DateTime> dates) {
@@ -57,7 +60,6 @@ List<DateTime> getPreviousDates(List<DateTime> dates) {
 
 DateTime _selectedDate = DateTime.now();
 
-
 //Here i have variable for storing the udser information
 late int Id;
 late String UserName;
@@ -66,28 +68,26 @@ late String LastName;
 late String Password;
 late String Company;
 late String Employeecode;
-late int Orders_completed ;
-
-
+late int Orders_completed;
 
 //adding the user infromation to the varibale when loggin in
-void Add_data(Map<String,dynamic> data){
-          Id = data['id'];
-         Employeecode = data['employeecode'];
-         FirstName = data['firstname'];
-         LastName = data['lastname'];
-         UserName = data['username'];
-         Company = data['company'];
-         print(Id);
-         print(Employeecode);
-         print(FirstName);
-         print(LastName);
-         print(UserName);
-         print(Company);
+void Add_data(Map<String, dynamic> data) {
+  Id = data['id'];
+  Employeecode = data['employeecode'];
+  FirstName = data['firstname'];
+  LastName = data['lastname'];
+  UserName = data['username'];
+  Company = data['company'];
+  print(Id);
+  print(Employeecode);
+  print(FirstName);
+  print(LastName);
+  print(UserName);
+  print(Company);
 }
 
 //clearing the user infromation when loggin out of the app
-void Clear_data(){
+void Clear_data() {
   Id = 0;
   Employeecode = "";
   FirstName = "";
@@ -95,5 +95,4 @@ void Clear_data(){
   UserName = "";
   Company = "";
   print("data cleared  from the app local storage");
-
 }

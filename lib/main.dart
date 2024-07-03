@@ -12,7 +12,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    runApp(MyApp());
+    runApp(const MyApp());
   });
 }
 
@@ -30,10 +30,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => HistoryBlocBloc()),
         BlocProvider(create: (context) => InfoBloc()),
       ],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Loginscreen(),
-      ),
+      child:
+          MaterialApp(debugShowCheckedModeBanner: false, home: Loginscreen()),
     );
   }
 }

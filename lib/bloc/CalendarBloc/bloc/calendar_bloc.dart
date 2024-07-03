@@ -17,10 +17,6 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       // await Future.delayed(Duration(seconds: 1));
       //CustomDialog(message: "Adding your orders");
 
-      
-      
-      
-      
       dates.clear();
       dates = List.from(dummydates);
       getFutureDates(dates);
@@ -78,36 +74,30 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
           message: "No changes Done", icon: Icons.close, color: Colors.red);
     });
 
-
-    on<AddOrdersToDatabase>((event,emit)async{
+    on<AddOrdersToDatabase>((event, emit) async {
       //TODO:use the api calls for the post function
-      try{
+      try {
         emit((AddingToDatabase()));
         //print("adding to database state is emmitted");
        
         //TODO: write the api for pushing function in the databse
         await pushPreLunchDetail(Id, dummydates);
-        
+
         add(ChangeCalendar(context: event.context));
-      } catch (e){
+      } catch (e) {
         print(e.toString());
 
         add(NoChangeInDynamicCalendar(context: event.context));
-
       }
       Navigator.pop(event.context);
-      
-      
     });
 
-
-
-
-    on<ShowDynamicCalendar>((event,emit){
+    on<ShowDynamicCalendar>((event, emit) {
       emit((ShowingDynamicCalendar()));
     });
   }
 }
+
 bool isAfter9AM() {
   DateTime now = DateTime.now();
   //NOTE this time should be one hour lesser than your expected time
@@ -117,7 +107,7 @@ bool isAfter9AM() {
   return now.hour > 8;
 }
 
-bool appConstraintSatsifsied(DateTime date){
+bool appConstraintSatsifsied(DateTime date) {
   DateTime now = DateTime.now();
   if (isSameDay(date, DateTime(now.year,now.month,now.day)) && isAfter9AM()){
       //print("more that 9 am");
@@ -125,6 +115,4 @@ bool appConstraintSatsifsied(DateTime date){
   }
   //print("less than 9 am");
   return false;
-  
-  
 }

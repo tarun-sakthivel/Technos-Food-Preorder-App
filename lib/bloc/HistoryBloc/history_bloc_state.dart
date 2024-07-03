@@ -9,8 +9,10 @@ final class dataSuccessfull extends HistoryBlocState {
   String successMessage;
   DateTime? selectedmonth;
   int yearSelected;
+  List<DateTime> data;
   dataSuccessfull(
       {required this.successMessage,
+      required this.data,
       required this.selectedmonth,
       required this.yearSelected});
 }

@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
-import 'package:food_preorder_app/Screens/Home/HomePage.dart';
 import 'package:food_preorder_app/Screens/LogPage/Historypage.dart';
 import 'package:food_preorder_app/Widgets/Calendars/Monthcalendar.dart';
+import 'package:food_preorder_app/Widgets/Popups/DialogeBox.dart';
+import 'package:food_preorder_app/Widgets/Popups/showErrorDialog.dart';
 import 'package:food_preorder_app/bloc/HistoryBloc/history_bloc_bloc.dart';
 
 class UserLogPage extends StatefulWidget {
@@ -89,9 +90,13 @@ class _UserLogPageState extends State<UserLogPage> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => Historypage(
+                          data: state.data,
                           selectedmonth: state.selectedmonth,
                           yearSelected: state.yearSelected)));
-            }
+            } else if (state is dataFailed) {
+              return showErrorDialog(
+                  context, state.errorMessage, 'Error Occured');
+            } else if (state is dataLoading) {}
           },
           child: Padding(
             padding: const EdgeInsets.all(16.0),

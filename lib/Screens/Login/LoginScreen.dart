@@ -32,7 +32,7 @@ class _LoginscreenState extends State<Loginscreen> {
       backgroundColor: Colors.white,
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is GettingUserInfo){
+          if (state is GettingUserInfo) {
             Navigator.pop(context);
             showDialog(
               context: context,
@@ -41,7 +41,6 @@ class _LoginscreenState extends State<Loginscreen> {
                 return CustomDialog(message: "Getting User info..");
               },
             );
-
           }
           if (state is AuthLoading) {
             
@@ -52,7 +51,8 @@ class _LoginscreenState extends State<Loginscreen> {
                 return CustomDialog(message: "Logging in...");
               },
             );
-          }  if (state is AuthSuccessfull) {
+          }
+          if (state is AuthSuccessfull) {
             // Close the loading dialog
             Navigator.pop(context);
             FocusScope.of(context).unfocus(); // Dismiss keyboard if open
@@ -62,7 +62,8 @@ class _LoginscreenState extends State<Loginscreen> {
               MaterialPageRoute(builder: (context) => const HomePage()),
               (Route) => false,
             );
-          }  if (state is AuthFailed) {
+          }
+          if (state is AuthFailed) {
             //remove all the loading widget or scaffold widget
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             Navigator.pop(context);
@@ -144,9 +145,9 @@ class _LoginscreenState extends State<Loginscreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Hero(
+                            const Hero(
                               tag: "mainlogo",
-                              child: const Image(
+                              child: Image(
                                 image: AssetImage('assets/Icons/IVA_Logo.png'),
                                 height: 100,
                                 width: 237,

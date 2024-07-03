@@ -14,7 +14,6 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
     on<AuthenticateUser>((event, emit) async {
-      
       if (event.userName.isEmpty) {
         emit(AuthFailed(errorMessage: "Please fill UserName"));
       } else if (event.password.isEmpty) {
@@ -24,18 +23,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             errorMessage: "UserName should be at less than 15 characters"));
       } else {
         emit(AuthLoading());
-       
-        
 
         //LOGIN API call
-        try{
-          
+        try {
+          final url = Uri.parse(
+              'http://lunchapi-001-site1.etempurl.com/api/User/Login?username=${event.userName}&password=${event.password}');
+          final headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic ' +
+                base64Encode(utf8.encode('${Authusername}:${Authpassword}'))
+          };
 
-          final url = Uri.parse('http://lunchapi-001-site1.etempurl.com/api/User/Login?username=${event.userName}&password=${event.password}');
-          final headers = {'Content-Type': 'application/json','Authorization' : 'Basic ' + base64Encode(utf8.encode('${Authusername}:${Authpassword}'))};
-          
-
-        final response = await http.post(url, headers: headers);
+          final response = await http.post(url, headers: headers);
 
         if (response.statusCode == 200) {
           //print(response.statusCode);
@@ -56,18 +55,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }catch(e){
           //print("error in api");
           emit(AuthFailed(errorMessage: "${e.toString()}"));
-          
         }
-        
-        
-
-
-
-        
       }
     });
   }
-  
-  
-  
 }
