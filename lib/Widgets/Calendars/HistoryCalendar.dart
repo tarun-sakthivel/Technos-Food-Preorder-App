@@ -52,7 +52,7 @@ class _HistorryCalendarState extends State<HistorryCalendar> {
           height: 60,
           width: double.infinity,
           decoration: const BoxDecoration(
-            color: Kgrey,
+            color: Kivagreen,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(14),
               topRight: Radius.circular(14),
@@ -137,7 +137,7 @@ class _HistorryCalendarState extends State<HistorryCalendar> {
                     return Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: Kivawhite, width: 2),
-                        color: Kivagreen,
+                        color: Kgrey,
                         shape: BoxShape.circle,
                       ),
                       child: Center(
