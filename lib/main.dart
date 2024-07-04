@@ -5,7 +5,7 @@ import 'package:food_preorder_app/Screens/Login/LoginScreen.dart';
 import 'package:food_preorder_app/bloc/AuthBloc/auth_bloc.dart';
 import 'package:food_preorder_app/bloc/CalendarBloc/bloc/calendar_bloc.dart';
 import 'package:food_preorder_app/bloc/HistoryBloc/history_bloc_bloc.dart';
-import 'package:food_preorder_app/bloc/bloc/user_log_bloc.dart';
+import 'package:food_preorder_app/bloc/UserLogbloc/user_log_bloc.dart';
 import 'package:food_preorder_app/bloc/infoBloc/info_bloc.dart';
 
 void main() {

@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -120,14 +121,20 @@ class _HomePageState extends State<HomePage> {
                     child: BlocBuilder<CalendarBloc, CalendarState>(
                       builder: (context, state) {
                         if (state is CalendarChanged) {
-                          return const StaticCalendar(
+                          print("calendar is being build again");
+                          return  StaticCalendar(
                               // highlightedDates: dates,
                               // isInteractive: false,
                               );
                         }
-
-                        return const StaticCalendar(
+                        if (state is CalendarInitial){
+                          return  StaticCalendar(
                             // highlightedDates: dates,
+                          );
+                        }
+
+                        return  StaticCalendar(
+                            //  highlightedDates: dates,
                             // isInteractive: false,
                             );
                       },
@@ -151,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                           size: const Size(150, 40),
                           customWidget: Text("Order/Modify",
                               style: Ksecondarytext.copyWith(
-                                  color: Colors.white))),
+                                  color: Colors.white),textAlign: TextAlign.center,)),
                     ],
                   ),
                 ],

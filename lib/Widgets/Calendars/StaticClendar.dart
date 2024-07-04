@@ -7,7 +7,7 @@ import 'package:food_preorder_app/bloc/CalendarBloc/bloc/calendar_bloc.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class StaticCalendar extends StatefulWidget {
-  // final Set<DateTime> highlightedDates;
+  //  final List<DateTime> highlightedDates;
   // final bool isInteractive;
 
   const StaticCalendar({
@@ -95,7 +95,7 @@ class _StaticCalendarState extends State<StaticCalendar> {
           calendarBuilders: CalendarBuilders(
             defaultBuilder: (context, day, focusedDay) {
               if (isSameDay(today, day) &&
-                  future_dates.any((d) => isSameDay(d, day))) {
+                  dates.any((d) => isSameDay(d, day))) {
                 return Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Kivawhite, width: 2),
@@ -110,7 +110,7 @@ class _StaticCalendarState extends State<StaticCalendar> {
                   ),
                 );
               }
-              if (future_dates.any((d) => isSameDay(d, day))) {
+              if (dates.any((d) => isSameDay(d, day))) {
                 return Container(
                     decoration: BoxDecoration(
                         border: Border.all(color: Kivawhite, width: 2),
@@ -122,7 +122,7 @@ class _StaticCalendarState extends State<StaticCalendar> {
                         style: Kcalendartext.copyWith(color: Colors.white),
                       ),
                     ));
-              } else if (day.isBefore(today)) {
+              } if (day.isBefore(today)) {
                 return Container(
                     decoration: const BoxDecoration(
                         //border:Border.all(color: Kivawhite,width:2),

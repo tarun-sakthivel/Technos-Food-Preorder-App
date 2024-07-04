@@ -93,15 +93,13 @@ void ShowSelectorCalendar(BuildContext context) {
               //modifieddate.clear();
               //calling the Bloc
               //context.read<CalendarBloc>().add(ChangeCalendar(context: context));
-
+              
               context
                   .read<CalendarBloc>()
                   .add(AddOrdersToDatabase(context: context));
-              // Navigator.pop(context);
+              //Navigator.pop(context);
 
-              // setState(context){
-
-              // } // Close the dialog
+               // Close the dialog
             },
             child: Container(
                 color: Colors.transparent,

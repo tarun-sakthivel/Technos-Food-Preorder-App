@@ -11,7 +11,7 @@ import 'package:food_preorder_app/Widgets/Popups/showErrorDialog.dart';
 import 'package:food_preorder_app/bloc/AuthBloc/auth_bloc.dart';
 
 import '../../Widgets/Button.dart';
-
+bool _isDialogShown = false;
 class Loginscreen extends StatefulWidget {
   const Loginscreen({super.key});
 
@@ -48,6 +48,7 @@ class _LoginscreenState extends State<Loginscreen> {
               context: context,
               barrierDismissible: false,
               builder: (BuildContext context) {
+                _isDialogShown  = true;
                 return CustomDialog(message: "Logging in...");
               },
             );
@@ -65,8 +66,11 @@ class _LoginscreenState extends State<Loginscreen> {
           }
           if (state is AuthFailed) {
             //remove all the loading widget or scaffold widget
+            if (_isDialogShown){
+              Navigator.pop(context);
+            }
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            Navigator.pop(context);
+            
             return showErrorDialog(context, state.errorMessage, "Login Error");
             //Navigator.push(context, MaterialPageRoute(builder: (context)=> ErrorDialog(title: "Error", content: "Can't able to Login check your email and password")));
 
@@ -350,7 +354,7 @@ class _LoginscreenState extends State<Loginscreen> {
 }
 
 class VarcharTextInputFormatter extends TextInputFormatter {
-  static final _varcharRegex = RegExp(r'^[\w\s\.,!?]*$');
+  static final _varcharRegex = RegExp(r'^[\w\s\.,]*$');
 
   @override
   TextEditingValue formatEditUpdate(
