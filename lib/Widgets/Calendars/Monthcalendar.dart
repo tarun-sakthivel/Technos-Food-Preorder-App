@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/bloc/HistoryBloc/history_bloc_bloc.dart';
-
+int currentYear = DateTime.now().year;
 class CalendarPage extends StatefulWidget {
-  final List<int> years = List<int>.generate(101, (int index) => 2000 + index);
+  final List<int> years = List<int>.generate(
+          currentYear - 2023, (int index) => currentYear - index, growable: true);
 
   CalendarPage({super.key});
   @override
@@ -14,7 +15,7 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   DateTime? selectedDate;
   int selectedYear = DateTime.now().year;
-  final List<int> years = List<int>.generate(101, (int index) => 2000 + index);
+  // final List<int> years = List<int>.generate(101, (int index) => 2000 + index);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,8 @@ class _CalendarPageState extends State<CalendarPage> {
 class MonthPickerWidget extends StatefulWidget {
   final DateTime selectedDate;
   final ValueChanged<DateTime> onChanged;
-  final List<int> years = List<int>.generate(101, (int index) => 2000 + index);
+ final List<int> years = List<int>.generate(
+          currentYear - 2023, (int index) => currentYear - index, growable: true);
   MonthPickerWidget({
     super.key,
     required this.selectedDate,
@@ -75,7 +77,9 @@ class MonthPickerWidget extends StatefulWidget {
 class _MonthPickerWidgetState extends State<MonthPickerWidget> {
   DateTime? selectedDate;
   int selectedYear = DateTime.now().year;
-  final List<int> years = List<int>.generate(101, (int index) => 2000 + index);
+  // final List<int> years = List<int>.generate(10, (int index) =>  DateTime.now().year  + index);
+  final List<int> years = List<int>.generate(
+          currentYear - 2023, (int index) => currentYear - index, growable: true);
   late DateTime _selectedDate;
   List<String> Months = [
     'Jan',
@@ -108,8 +112,16 @@ class _MonthPickerWidgetState extends State<MonthPickerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final List<int> years =
-        List<int>.generate(101, (int index) => 2000 + index);
+    List<int> years =
+       List<int>.generate(
+          currentYear - 2023, (int index) => currentYear - index, growable: true);
+
+    
+    // setState(() {
+    //   years = List<int>.generate(
+    //       currentYear - 2023, (int index) => currentYear - index, growable: true);
+    //   selectedYear = years.first;
+    // });
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,

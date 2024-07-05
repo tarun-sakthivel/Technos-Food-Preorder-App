@@ -6,6 +6,7 @@ import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Screens/LogPage/Historypage.dart';
 import 'package:food_preorder_app/Widgets/Calendars/Monthcalendar.dart';
 import 'package:food_preorder_app/Widgets/Popups/showErrorDialog.dart';
+import 'package:food_preorder_app/Widgets/bottomwidget.dart';
 import 'package:food_preorder_app/bloc/HistoryBloc/history_bloc_bloc.dart';
 
 class UserLogPage extends StatefulWidget {
@@ -19,12 +20,12 @@ class UserLogPage extends StatefulWidget {
 class _UserLogPageState extends State<UserLogPage> {
   DateTime? selectedDate;
   Set<DateTime?> selecteddates = {};
-  Set<DateTime> selecteddatees = {
-    DateTime(2023, 6, 5),
-    DateTime(2023, 6, 12),
-    DateTime(2023, 6, 18),
-    DateTime(2023, 6, 25),
-  };
+  // Set<DateTime> selecteddatees = {
+  //   DateTime(2023, 6, 5),
+  //   DateTime(2023, 6, 12),
+  //   DateTime(2023, 6, 18),
+  //   DateTime(2023, 6, 25),
+  // };
   @override
   void initState() {
     selectedDate = widget.initialDate;
@@ -57,6 +58,7 @@ class _UserLogPageState extends State<UserLogPage> {
       home: Scaffold(
         backgroundColor: Kivawhite,
         appBar: AppBar(
+          backgroundColor: Colors.white,
             leadingWidth: 26,
             automaticallyImplyLeading: false,
             title: Text(
@@ -81,6 +83,8 @@ class _UserLogPageState extends State<UserLogPage> {
                   size: 28,
                   color: Kivagreen,
                 ))),
+        bottomSheet:  Bottomannam(),
+        
         body: BlocListener<HistoryBlocBloc, HistoryBlocState>(
           listener: (context, state) {
             // TODO: implement listener

@@ -11,6 +11,7 @@ import 'package:food_preorder_app/Widgets/OrdersWidget.dart';
 import 'package:food_preorder_app/Widgets/Popups/DialogeBox.dart';
 import 'package:food_preorder_app/Widgets/Popups/SnackBarWidget.dart';
 import 'package:food_preorder_app/Widgets/UserlogButton.dart';
+import 'package:food_preorder_app/Widgets/bottomwidget.dart';
 import 'package:food_preorder_app/bloc/CalendarBloc/bloc/calendar_bloc.dart';
 
 int no_of_orders = 0;
@@ -35,7 +36,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     
     return Scaffold(
+      backgroundColor: Colors.white,
         appBar: AppBar(
+          backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
           title: Hero(
             tag: "mainlogo",
@@ -74,6 +77,7 @@ class _HomePageState extends State<HomePage> {
                 icon: const Icon(Icons.logout_outlined, color: Kivawhite)),
           ],
         ),
+         bottomSheet:  Bottomannam(),
         body: BlocListener<CalendarBloc, CalendarState>(
           listener: (context, state) {
             if (state is CalendarChanged) {
@@ -161,6 +165,19 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.white),textAlign: TextAlign.center,)),
                     ],
                   ),
+                  
+                  
+
+                  // Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.center,
+                  //     mainAxisAlignment: MainAxisAlignment.end,
+                  //     children: [
+                  //       Image.asset("assets/bottomImage/annamImage.png",scale: 3,),
+                  //     ],
+                  //   ),
+                
+            // The element that should stick to the bottom
+                
                 ],
               ),
             ),
@@ -168,3 +185,4 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 }
+

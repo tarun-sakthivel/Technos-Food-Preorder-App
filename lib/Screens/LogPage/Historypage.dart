@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_preorder_app/Constants/Color.dart';
 import 'package:food_preorder_app/Constants/Text.dart';
 import 'package:food_preorder_app/Widgets/Calendars/HistoryCalendar.dart';
+import 'package:food_preorder_app/Widgets/bottomwidget.dart';
 
 class Historypage extends StatefulWidget {
   List<DateTime> data;
@@ -77,6 +78,7 @@ class _HistorypageState extends State<Historypage> {
         ],
         home: Scaffold(
           appBar: AppBar(
+            backgroundColor: Colors.white,
               leadingWidth: 26,
               automaticallyImplyLeading: false,
               title: Text(
@@ -103,6 +105,7 @@ class _HistorypageState extends State<Historypage> {
                     size: 28,
                     color: Kivagreen,
                   ))),
+         bottomSheet:  Bottomannam(),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(

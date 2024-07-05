@@ -29,6 +29,7 @@ class _LoginscreenState extends State<Loginscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // 
       backgroundColor: Colors.white,
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -58,6 +59,7 @@ class _LoginscreenState extends State<Loginscreen> {
             Navigator.pop(context);
             FocusScope.of(context).unfocus(); // Dismiss keyboard if open
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            _isDialogShown = false;
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const HomePage()),
@@ -70,7 +72,7 @@ class _LoginscreenState extends State<Loginscreen> {
               Navigator.pop(context);
             }
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            
+            _isDialogShown = false;
             return showErrorDialog(context, state.errorMessage, "Login Error");
             //Navigator.push(context, MaterialPageRoute(builder: (context)=> ErrorDialog(title: "Error", content: "Can't able to Login check your email and password")));
 
@@ -112,6 +114,7 @@ class _LoginscreenState extends State<Loginscreen> {
         },
         child: Stack(
           children: [
+            
             Positioned(
               top: -3,
               left: 0,
@@ -149,6 +152,7 @@ class _LoginscreenState extends State<Loginscreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                            
                             const Hero(
                               tag: "mainlogo",
                               child: Image(
