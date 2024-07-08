@@ -14,6 +14,7 @@ class Bottomannam extends StatelessWidget {
      child: Image.asset(
        "assets/bottomImage/annamImage.png",
        scale: 3,
+       
      ),
             );
   }
