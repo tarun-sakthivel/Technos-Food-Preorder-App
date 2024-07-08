@@ -109,20 +109,7 @@ class _StaticCalendarState extends State<StaticCalendar> {
                     ),
                   ),
                 );
-              }
-              if (dates.any((d) => isSameDay(d, day))) {
-                return Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Kivawhite, width: 2),
-                        color: Kivagreen,
-                        shape: BoxShape.circle),
-                    child: Center(
-                      child: Text(
-                        '${day.day}',
-                        style: Kcalendartext.copyWith(color: Colors.white),
-                      ),
-                    ));
-              } if (day.isBefore(today)) {
+              }else if (day.isBefore(today)) {
                 return Container(
                     decoration: const BoxDecoration(
                         //border:Border.all(color: Kivawhite,width:2),
@@ -132,6 +119,19 @@ class _StaticCalendarState extends State<StaticCalendar> {
                         '${day.day}',
                         style: Kcalendartext.copyWith(
                             color: const Color.fromARGB(255, 201, 201, 201)),
+                      ),
+                    ));
+              }
+              else if (dates.any((d) => isSameDay(d, day))) {
+                return Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Kivawhite, width: 2),
+                        color: Kivagreen,
+                        shape: BoxShape.circle),
+                    child: Center(
+                      child: Text(
+                        '${day.day}',
+                        style: Kcalendartext.copyWith(color: Colors.white),
                       ),
                     ));
               } else if (day.weekday == DateTime.sunday) {
