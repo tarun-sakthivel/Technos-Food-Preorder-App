@@ -27,7 +27,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         //LOGIN API call
         try {
           final url = Uri.parse(
-              '${Baseurl}/api/User/Login?username=${event.userName}&password=${event.password}');
+              '$Baseurl/api/User/Login?username=${event.userName}&password=${event.password}');
           final headers = {
             'Content-Type': 'application/json',
             'Authorization':
@@ -53,7 +53,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           }
         } catch (e) {
           //print("error in api");
-          emit(AuthFailed(errorMessage: "${e.toString()}"));
+          emit(AuthFailed(errorMessage: e.toString()));
         }
       }
     });

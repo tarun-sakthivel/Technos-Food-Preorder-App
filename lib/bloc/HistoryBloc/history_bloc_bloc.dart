@@ -20,11 +20,11 @@ class HistoryBlocBloc extends Bloc<HistoryBlocEvent, HistoryBlocState> {
             int.parse(event.selectedmonth.toString().substring(5, 7)), 26);
         print(int.parse(event.selectedmonth.toString().substring(5, 7)));
 
-        final url = Uri.parse('${Baseurl}/api/User/UserLunchHistory');
+        final url = Uri.parse('$Baseurl/api/User/UserLunchHistory');
         final headers = {
           'Content-Type': 'application/json',
           'Authorization':
-              'Basic ${base64Encode(utf8.encode('${Authusername}:${Authpassword}'))}'
+              'Basic ${base64Encode(utf8.encode('$Authusername:$Authpassword'))}'
         };
         print(history);
         final body = jsonEncode({

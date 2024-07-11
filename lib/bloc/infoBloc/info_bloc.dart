@@ -9,7 +9,7 @@ class InfoBloc extends Bloc<InfoEvent, InfoState> {
     on<ShowInformation>((event, emit)async {
       // TODO: implement event handler
       emit((ShowingInfo()));
-      await Future.delayed(Duration(seconds:2));
+      await Future.delayed(const Duration(seconds:2));
       emit(InfoInitial());
     });
   }

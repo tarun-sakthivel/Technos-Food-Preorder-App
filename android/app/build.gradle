@@ -24,6 +24,12 @@ if (flutterVersionName == null) {
 }
 
 android {
+     buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+        }
+    }
     namespace = "com.example.food_preorder_app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
