@@ -50,8 +50,7 @@ class _ButtonState extends State<Button> {
         onPressed:
             Navigation, //This is the place for navigating when pressed this button
         style: ElevatedButton.styleFrom(
-            maximumSize: size,
-            minimumSize: size,
+            fixedSize: size,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),

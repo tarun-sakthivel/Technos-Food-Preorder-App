@@ -81,7 +81,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         //print("adding to database state is emmitted");
        
         //TODO: write the api for pushing function in the databse
-        await pushPreLunchDetail(Id, dummydates);
+        dummydates = await pushPreLunchDetail(Id, dummydates);
 
         add(ChangeCalendar(context: event.context));
       } catch (e) {
